@@ -12,4 +12,12 @@ angular
   .module('unbOportunidade', [
     'ui.router',
     'ui.bootstrap'
-  ]);
+  ])
+  .config(['$stateProvider', '$httpProvider']);
+
+function appConfig($stateProvider, $httpProvider) {
+
+
+  $httpProvider.defaults.cache = true;
+
+}
