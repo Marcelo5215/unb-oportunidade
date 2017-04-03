@@ -1,5 +1,5 @@
 # UnB Oportunidade
-- UnB Oportunidade é um sistema de busca para estágios para alunos da UnB
+- UnB Oportunidade é um sistema de busca de estágios para alunos da UnB
 
 ## Como inicializar o projeto
 
