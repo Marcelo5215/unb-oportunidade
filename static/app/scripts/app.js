@@ -9,4 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('staticApp', []);
+  .module('unbOportunidade', [
+    'ui.router',
+    'ui.bootstrap'
+  ]);
