@@ -4,6 +4,9 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="icon" href="http://www.unb.br/templates/unb/favicon.ico" type="image/x-icon">
+    <meta name="keywords" content="">
+    <meta name="description" content="Procurando vagas de estágio na UnB? O DAIA e os coordenadores publicam as vagas diretamente no UnB Oportunidades. Encontre sua vaga gratuitamente!">
     <title>UnB Oportunidade</title>
 
     <script type="text/javascript" src="{% static 'bower_components/angular/angular.js' %}">
@@ -12,6 +15,41 @@
     {% include 'stylesheet.html'%}
   </head>
   <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="logo__text navbar-brand" href="index.html">
+            <img src="http://cifmc.fis.unb.br/iiiefras/logounb.png">
+          </a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">Page 1</a></li>
+          <li><a href="#">Page 2</a></li>
+          <li><a href="#">Page 3</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="initial-block">
+      <div class="container">
+        <div class="jumbotron">
+          <h1>Temos&nbsp;<span style="color: #ffffff;">155</span>&nbsp;vaga(s) em aberto</h1>
+          <p>Encontre sua vaga de estágio na UnB, amém.</p>
+
+          <div class="row">
+            <form class="busca-interesse col-sm-6 col-sm-offset-3">
+              <div class="input-group">
+                <input type="text" class="form-control" size="50" placeholder="Area de interesse" required>
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-primary">Buscar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
     {% include 'javascript.html' %}
