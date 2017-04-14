@@ -1,0 +1,73 @@
+
+/* sobrescrevendo estilos nativos do bootstrap */
+.logo__text img {
+  max-width: 80px;
+}
+.navbar-brand {
+    padding: 8px 8px;
+}
+.navbar-default {
+    background-color: #fff;
+    border-color: #fff;
+}
+.navbar {
+    position: relative;
+    min-height: 80px;
+    margin-bottom: 0px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border: 1px solid transparent;
+}
+.container-fluid {
+    width: 40%;
+}
+
+.form-control {
+  box-shadow: 0px;
+  border: 1px solid #eee;
+}
+
+footer {
+  background-color: #7e7e7e;
+}
+
+/* Estilos dos componentes do initial block, ou bloco de apresentação */
+.initial-block{
+  margin-bottom: 32px;
+}
+.initial-block .container {
+  width: 100%;
+  padding: 0px;
+}
+.initial-block .container .jumbotron {
+  background: url("http://fd.unb.br/images/Eventos/Concurso-UnB.png") no-repeat;
+  padding-bottom: 50px;
+  border-radius: 0px;
+  margin-bottom: 0px;
+}
+.initial-block .container .jumbotron h1 {
+  font-family: "Arial Black", Gadget, sans-serif;
+}
+.initial-block .container .jumbotron h1, .initial-block .container .jumbotron p {
+  color: white;
+  text-align: center;
+}
+.busca-interesse {
+  padding: 16px;
+  background-color: white;
+  border-radius: 5px;
+  b-webkit-box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
+  -moz-box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
+  box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
+}
+
+
+/* Lista de vagas */
+.img_empresa{
+    width: 90px;
+    margin-top: 30%;
+}
+
+.email_contato {
+  margin-top: 50%;
+}

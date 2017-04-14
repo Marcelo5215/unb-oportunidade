@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from unb_oportunidade_src.views import IndexView
+from unb_oportunidade_src.views import Vagas
 
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^vagas/', Vagas.as_view(), name='listagem'),
     url(r'^admin/', admin.site.urls),
 ]
