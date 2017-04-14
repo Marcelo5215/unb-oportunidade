@@ -7,9 +7,3 @@ class IndexView(TemplateView):
 
     def dispatch(self, *args, **kwargs):
         return super(IndexView, self).dispatch(*args, **kwargs)
-
-class Vagas(TemplateView):
-    template_name = "listagem.html"
-
-    def dispatch(self, *args, **kwargs):
-        return super(Vagas, self).dispatch(*args, **kwargs)

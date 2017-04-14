@@ -1,14 +1,20 @@
-'use strict';
-
-angular
-  .module('unbOportunidade', [
+angular.module('unbOportunidade', [
     'ui.router',
     'ui.bootstrap'
   ])
-  .config(['$stateProvider', '$httpProvider', appConfig]);
+  .config(['$httpProvider', '$urlRouterProvider', '$stateProvider', appConfig]);
 
-function appConfig($stateProvider, $httpProvider) {
+function appConfig($httpProvider, $urlRouterProvider, $stateProvider) {
 
+  $urlRouterProvider.otherwise('/');
+
+  $stateProvider.state('joao', {
+    url: '/joao',
+    template: '<span> oi </span>',
+    controller: function($scope) {
+
+    }
+  });
 
   $httpProvider.defaults.cache = true;
 }
