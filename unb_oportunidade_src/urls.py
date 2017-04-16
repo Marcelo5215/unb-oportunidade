@@ -20,4 +20,5 @@ from unb_oportunidade_src.views import IndexView
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^admin/', admin.site.urls),
+    url(r'^(?P<path>.*)/$', IndexView.as_view()),
 ]
