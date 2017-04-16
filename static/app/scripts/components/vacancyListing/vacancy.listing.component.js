@@ -8,6 +8,7 @@
 
   function VacancyListingController($scope) {
 
+    /* This will be retrieved from an api */
     $scope.vacancies = [
       {
         area: "Administração",
