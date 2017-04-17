@@ -14,15 +14,9 @@
           <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
           Áreas de interesse
         </h4>
-        <div id="group-1" class="list-group collapse in">
-          <a class="list-group-item" href="#">
-            <span class="badge">3</span> Administração
-          </a>
-          <a class="list-group-item" href="#">
-            <span class="badge">3</span> Biblioteconomia
-          </a>
-          <a class="list-group-item" href="#">
-            <span class="badge">3</span> Ciência da Computação
+        <div class="list-group collapse in">
+          <a class="list-group-item" href="#" ng-repeat="area in areas">
+            <span class="badge">{{area.numOffers}}</span> {{area.course}}
           </a>
         </div>
       </div>
@@ -36,7 +30,7 @@
                 <tr>
                   <td><img class="img-responsive" src ="http://www.belasartes.br/images/destaques/novo/1451.jpg"></td>
                   <td>
-                    <h3><a href="">{{vacancy.area}}</a></h3>
+                    <h3><a href="">{{vacancy.course}}</a></h3>
                     <p>
                       Vaga: {{vacancy.numVacancies}} /
                       {{vacancy.localization}} /

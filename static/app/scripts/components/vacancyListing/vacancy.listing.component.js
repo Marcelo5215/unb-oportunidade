@@ -11,7 +11,7 @@
     /* This will be retrieved from an api */
     $scope.vacancies = [
       {
-        area: "Administração",
+        course: "Administração",
         date: "22/03/2017",
         numVacancies: 1,
         localization: "TAGUATINGA",
@@ -21,7 +21,7 @@
         requirements: "Carteira de Habilitação, Windows, Word Excel e Intenet."
       },
       {
-        area: "Ciência da Computação",
+        course: "Ciência da Computação",
         date: "17/04/2017",
         numVacancies: 1,
         localization: "ASA NORTE",
@@ -31,7 +31,7 @@
         requirements: "Java, Spring, AngularJS e Hibernate."
       },
       {
-        area: "Biblioteconomia",
+        course: "Biblioteconomia",
         date: "17/04/2017",
         numVacancies: 3,
         localization: "ÁGUAS CLARAS",
@@ -41,7 +41,7 @@
         requirements: "Windows, Word e Excel."
       },
       {
-        area: "Ciência da Computação",
+        course: "Ciência da Computação",
         date: "20/04/2017",
         numVacancies: 2,
         localization: "ASA SUL",
@@ -51,6 +51,26 @@
         requirements: "GraphQL, React, Redux e ES6."
       }
     ];
+    
+    /* This will be retrieved from an api */
+    $scope.areas = [
+      {
+        id: 1,
+        course: "Administração",
+        numOffers: 1
+      },
+      {
+        id: 2,
+        course: "Biblioteconomia",
+        numOffers: 1
+      },
+      {
+        id: 3,
+        course: "Ciência da Computação",
+        numOffers: 2
+      }
+    ];
+
   }
 
 })();
