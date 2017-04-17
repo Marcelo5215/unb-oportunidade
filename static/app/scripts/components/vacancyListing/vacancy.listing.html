@@ -1,0 +1,55 @@
+<section id="lista_vagas">
+  <div class="container">
+    <!-- Title -->
+    <div class="text-center">
+      <h2>Vagas</h2>
+      <h4>Encontre aquela vaga de estágio dos sonhos</h4>
+    </div>
+
+    <!-- Filter - Interest area -->
+    <div class="row">
+      <div id="filter-sidebar" class="col-xs-3">
+        <h4 data-toggle="collapse" data-target="#group-1">
+          <i class="fa fa-fw fa-caret-down parent-expanded"></i>
+          <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
+          Áreas de interesse
+        </h4>
+        <div class="list-group collapse in">
+          <a class="list-group-item" href="#" ng-repeat="area in areas">
+            <span class="badge">{{area.numOffers}}</span> {{area.course}}
+          </a>
+        </div>
+      </div>
+
+      <!-- Vacancy Listing -->
+      <div class="col-xs-9">
+        <div class="row" ng-repeat="vacancy in vacancies">
+          <div class="panel panel-default">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td><img class="img-responsive" src ="http://www.belasartes.br/images/destaques/novo/1451.jpg"></td>
+                  <td>
+                    <h3><a href="">{{vacancy.course}}</a></h3>
+                    <p>
+                      Vaga: {{vacancy.numVacancies}} /
+                      {{vacancy.localization}} /
+                      Sem.: {{vacancy.semester}} /
+                      Bolsa: {{vacancy.payment}} /
+                      Período: {{vacancy.period}} /
+                      Requisitos: {{vacancy.requirements}}
+                    </p>
+                  </td>
+                  <td class="col_contato">
+                    <p class="email_contato">{{vacancy.date}}</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
