@@ -4,19 +4,31 @@ angular.module('unbOportunidade')
     $stateProvider
       .state('templateHome', {
         url: '/template/home',
-        templateUrl: 'static/app/scripts/templates/home.html'
+        views: {
+          'content@': {
+              templateUrl: 'static/app/scripts/templates/home.html'
+          }
+        }
       });
 
     $stateProvider
       .state('templateListagem', {
         url: '/template/listagem',
-        templateUrl: 'static/app/scripts/templates/listagem.html'
+        views: {
+          'content@': {
+            templateUrl: 'static/app/scripts/templates/listagem.html'
+          }
+        }
       });
 
     $stateProvider
       .state('templateCarrousel', {
         url: '/template/carrousel',
-        templateUrl: 'static/app/scripts/templates/2carrossel.html'
+        views: {
+          'content@': {
+            templateUrl: 'static/app/scripts/templates/2carrossel.html'
+          }
+        }
       });
 
   });
