@@ -8,21 +8,21 @@
 
     <!-- Filter - Interest area -->
     <div class="row">
-      <div id="filter-sidebar" class="col-xs-3">
+      <div class="col-xs-3" ng-init="getAreas()">
         <h4 data-toggle="collapse" data-target="#group-1">
           <i class="fa fa-fw fa-caret-down parent-expanded"></i>
           <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
           Áreas de interesse
         </h4>
         <div class="list-group collapse in">
-          <a class="list-group-item" href="#" ng-repeat="area in areas">
+          <a class="list-group-item" href="" ng-repeat="area in areas">
             <span class="badge">{{area.numOffers}}</span> {{area.course}}
           </a>
         </div>
       </div>
 
       <!-- Vacancy Listing -->
-      <div class="col-xs-9">
+      <div class="col-xs-9" ng-init="getVacancies()">
         <div class="row" ng-repeat="vacancy in vacancies">
           <div class="panel panel-default">
             <table class="table">
