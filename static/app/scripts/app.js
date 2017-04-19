@@ -1,6 +1,7 @@
 angular.module('unbOportunidade', [
     'ui.router',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'angularDjangoRegistrationAuthApp'
   ])
   .config(['$httpProvider', '$urlRouterProvider', '$stateProvider', appConfig]);
 
@@ -12,7 +13,6 @@ function appConfig($httpProvider, $urlRouterProvider, $stateProvider) {
     url: '/joao',
     template: '<span> oi </span>',
     controller: function($scope) {
-
     }
   });
 

@@ -6,7 +6,8 @@ angular.module('unbOportunidade')
         url: '/template/home',
         views: {
           'content@': {
-              templateUrl: 'static/app/scripts/templates/home.html'
+              templateUrl: 'static/app/scripts/templates/home.html',
+              controller: 'controllerTemp'
           }
         }
       });
@@ -16,7 +17,8 @@ angular.module('unbOportunidade')
         url: '/template/listagem',
         views: {
           'content@': {
-            templateUrl: 'static/app/scripts/templates/listagem.html'
+            templateUrl: 'static/app/scripts/templates/listagem.html',
+            controller: 'controllerTemp'
           }
         }
       });
@@ -26,7 +28,8 @@ angular.module('unbOportunidade')
         url: '/template/carrousel',
         views: {
           'content@': {
-            templateUrl: 'static/app/scripts/templates/2carrossel.html'
+            templateUrl: 'static/app/scripts/templates/2carrossel.html',
+            controller: 'controllerTemp'
           }
         }
       });
