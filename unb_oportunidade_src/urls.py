@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^(?P<path>.*)/$', IndexView.as_view()),
-    url(r'^api/exemplo$', ExempleView.as_view(), name='get'), # TODO ARRUMAR ISSO
+    url(r'^api/exemplo$', ExempleView.as_view(), name='get'),
 ]
