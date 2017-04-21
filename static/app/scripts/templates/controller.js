@@ -1,12 +1,12 @@
 (function () {
 
   angular.module('unbOportunidade')
-    .controller('controllerTemp', [
-      '$scope', 'djangoAuth', function ($scope, djangoAuth) {
+    .controller('controllerTemp', ['$scope', function ($scope) {
 
-        $scope.opa = { tudo: 'bom' };
+        $scope.opa = {
+          tudo: 'bom' 
+        };
 
-        console.log('oi');
 
       }]);
 
