@@ -14,8 +14,16 @@ from rest_framework.response import Response
 
 class ExempleView(APIView):
 
+    permission_classes = (IsAuthenticated, )
+
     renderer_classes = (JSONRenderer, )
 
     def get(self, request, format=None):
         content = {'nome': 'mateus'}
         return Response(content)
+
+    # LOGOUT
+    # def get(self, request, format=None):
+    #     # simply delete the token to force a login
+    #     request.user.auth_token.delete()
+    #     return Response(status=status.HTTP_200_OK)
