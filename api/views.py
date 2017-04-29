@@ -14,17 +14,13 @@ from rest_framework.response import Response
 
 class ExempleView(APIView):
 
-    # permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, )
 
-    # renderer_classes = (JSONRenderer, )
+    renderer_classes = (JSONRenderer, )
 
     def get(self, request, format=None):
         content = {'nome': 'mateus'}
         return Response(content)
-
-    def post(self, request, format=None):
-        print(request.data)
-        return Response({'teste':'teste'})
 
     # LOGOUT
     # def get(self, request, format=None):
