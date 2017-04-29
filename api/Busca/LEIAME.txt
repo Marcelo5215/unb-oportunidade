@@ -1,0 +1,1 @@
+	Os códigos em python atuais são apenas um esboço. Para criar o banco de dados de teste usado pelo Initial_search.py, navegue até esta pasta no terminal e digite make. Para executar o Initial_search.py por linha comando, pode-se digitar python Initial_search.py
