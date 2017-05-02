@@ -2,9 +2,9 @@ angular.module('unbOportunidade')
   .config(function($stateProvider) {
 
     $stateProvider
-      .state('exemploState', {
-        url: '/exemplo',
-        template: '<exemplo-comp> </exemplo-comp>'
+      .state('bannerState', {
+        url: '/vagas',
+        template: '<banner-comp> </banner-comp>'
       });
 
   });

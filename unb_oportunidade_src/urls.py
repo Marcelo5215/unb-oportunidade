@@ -16,9 +16,14 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from unb_oportunidade_src.views import IndexView
+from api.views import ExempleView
+# from api.views import api
+
+# exemple = ExempleView()
 
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^(?P<path>.*)/$', IndexView.as_view()),
+    url(r'^api/exemplo$', ExempleView.as_view(), name='get'), # TODO ARRUMAR ISSO
 ]
