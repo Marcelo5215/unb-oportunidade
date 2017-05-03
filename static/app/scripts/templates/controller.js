@@ -13,8 +13,9 @@
               })
               .then(function (response) {
                 $scope.logged = true;
-                $scope.jwt = response.token;
-                console.log(response.token);
+                $scope.jwt = response.data.token;
+                console.log(response);
+                console.log(response.data.token);
                 store.set('token', response.token);
               },function (response) {
                 $scope.logged = false;
