@@ -34,4 +34,37 @@ angular.module('unbOportunidade')
         }
       });
 
+    $stateProvider
+      .state('templateListaAlunos', {
+        url: '/template/lista-alunos',
+        views: {
+          'content@': {
+            templateUrl: 'static/app/scripts/templates/lista-alunos.html',
+            controller: 'controllerTemp'
+          }
+        }
+      });
+
+    $stateProvider
+      .state('templateLogin', {
+        url: '/template/login',
+        views: {
+          'content@': {
+            templateUrl: 'static/app/scripts/templates/login.html',
+            controller: 'controllerTemp'
+          }
+        }
+      });
+
+    $stateProvider
+      .state('templateCurriculo', {
+        url: '/template/curriculo',
+        views: {
+          'content@': {
+            templateUrl: 'static/app/scripts/templates/curriculo.html',
+            controller: 'controllerTemp'
+          }
+        }
+      });
+
   });

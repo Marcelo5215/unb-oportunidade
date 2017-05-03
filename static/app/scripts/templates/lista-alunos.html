@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>UnB oportunidade</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="includes/AdminLTE.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  .navbar {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+        font-size: 12px;
+        letter-spacing: 5px;
+    }
+
+    .navbar-brand img {
+      width: 80px;
+    }
+
+    .navbar-nav li a:hover {
+        color: #1abc9c !important;
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Webysther_20160322_-_Logo_UnB_%28sem_texto%29.svg/1200px-Webysther_20160322_-_Logo_UnB_%28sem_texto%29.svg.png"/></a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Cadastro</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="jumbotron">
+    <div class="container">
+      <div class="page-header">
+        <h1>Nome da empresa</h1>
+      </div>
+      <p>Filtre os alunos por disponibilidade.</p>
+    </div>
+  </section>
+
+  <section class="invoice">
+      <!-- Table row -->
+      <div class="row">
+        <!-- filter sidebar -->
+        <div id="filter-sidebar" class="col-xs-2 col-sm-2 visible-sm visible-md visible-lg collapse sliding-sidebar">
+
+          <div>
+            <h4 data-toggle="collapse" data-target="#group-1">
+              <i class="fa fa-fw fa-caret-down parent-expanded"></i>
+              <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
+              Curso
+            </h4>
+            <div id="group-1" class="list-group collapse in">
+              <a class="list-group-item" href="#">
+                <span class="badge">1</span> Administração
+              </a>
+              <a class="list-group-item" href="#">
+                <span class="badge">1</span> Artes Cênicas
+              </a>
+              <a class="list-group-item" href="#">
+                <span class="badge">1</span> Ciência da Computação
+              </a>
+              <a class="list-group-item" href="#">
+                <span class="badge">1</span> Gestão Publica
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 data-toggle="collapse" data-target="#group-2">
+              <i class="fa fa-fw fa-caret-down parent-expanded"></i>
+              <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
+              Carga Horaria
+            </h4>
+            <div id="group-2" class="list-group collapse in">
+              <a class="list-group-item" href="#">
+                <span class="badge">2</span> 30 hrs
+              </a>
+              <a class="list-group-item" href="#">
+                <span class="badge">2</span> 20 hrs
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 data-toggle="collapse" data-target="#group-3">
+              <i class="fa fa-fw fa-caret-down parent-expanded"></i>
+              <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
+              Turno
+            </h4>
+            <div id="group-3" class="list-group collapse in">
+              <a class="list-group-item" href="#">
+                <span class="badge">1</span> Matutino
+              </a>
+              <a class="list-group-item" href="#">
+                <span class="badge">1</span> Vespertino
+              </a>
+              <a class="list-group-item" href="#">
+                <span class="badge">2</span> Noturno
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-10 table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Aluno</th>
+              <th>Curso</th>
+              <th>Matricula</th>
+              <th>Carga Horaria</th>
+              <th>Turno</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Marcos Vinicius</td>
+              <td>Ciência da Computação</td>
+              <td>14/0071989</td>
+              <td>30</td>
+              <td>Matutino</td>
+            </tr>
+            <tr>
+              <td>Aninha</td>
+              <td>Administração</td>
+              <td>17/0019384</td>
+              <td>20</td>
+              <td>Noturno</td>
+            </tr>
+            <tr>
+              <td>Jack Nicholson</td>
+              <td>Artes Cênicas</td>
+              <td>14/0098374</td>
+              <td>30</td>
+              <td>Noturno</td>
+            </tr>
+            <tr>
+              <td>Fora Temer</td>
+              <td>Gestão Publica</td>
+              <td>13/0000666</td>
+              <td>20</td>
+              <td>Vespertino</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+
+</body>
+</html>
