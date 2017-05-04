@@ -5,8 +5,9 @@
 
 0. Baixe o Python e o Django;
 1. Clone o projeto;
-2. Para rodar entre na pasta e inicialize com o comando: 'python manage.py runserver';
-3. Pronto!! Easy!
+2. Instale pelo pip o rest_framework e o rest_framework_jwt
+4. Para rodar entre na pasta e inicialize com o comando: 'python manage.py runserver';
+5. Pronto!! Easy!
 
 ## QUEM FOR DO FRONT, SEGUIR ESSES PASSOS!
 
