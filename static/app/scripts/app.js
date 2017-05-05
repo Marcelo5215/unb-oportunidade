@@ -12,15 +12,16 @@ function appConfig(
   $httpProvider, $urlRouterProvider, $stateProvider, jwtInterceptorProvider) {
 
   $urlRouterProvider.otherwise('/');
+
   $stateProvider
     .state('home', {
       url: '/',
       views: {
-        '@content': {
+        'content@': {
             templateUrl: 'static/app/scripts/index.html'
         }
       }
-    })
+    });
 
   jwtInterceptorProvider.tokenGetter = function (store) {
     return store.get('token');
