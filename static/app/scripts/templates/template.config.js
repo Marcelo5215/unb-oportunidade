@@ -66,15 +66,4 @@ angular.module('unbOportunidade')
         }
       });
 
-    $stateProvider
-      .state('loginTeste', {
-        url: '/template/login-teste',
-        views: {
-          'content@': {
-            templateUrl: 'static/app/scripts/templates/login-teste.html',
-            controller: 'controllerTemp'
-          }
-        }
-      });
-
   });
