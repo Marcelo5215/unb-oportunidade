@@ -1,9 +1,11 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="icon" href="http://www.unb.br/templates/unb/favicon.ico" type="image/x-icon">
+    <meta name="keywords" content="">
+    <meta name="description" content="Procurando vagas de estágio na UnB? O DAIA e os coordenadores publicam as vagas diretamente no UnB Oportunidades. Encontre sua vaga gratuitamente!">
     <title>UnB Oportunidade</title>
 
     <script type="text/javascript" src="{% static 'bower_components/angular/angular.js' %}">
@@ -11,10 +13,13 @@
 
     {% include 'stylesheet.html'%}
   </head>
-  <body>
+  <body ng-app="unbOportunidade" ng-cloak>
 
+    <navbar></navbar>
 
+    <div ui-view="content"></div>
 
+    <footer-base></footer-base>
 
     {% include 'javascript.html' %}
   </body>
