@@ -9,7 +9,6 @@ angular.module('unbOportunidade')
         });
 
         element.bind('click', function () {
-          console.log('entrei');
           scope.$broadcast('toggleLoginModal');
         });
 

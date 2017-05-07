@@ -15,8 +15,12 @@ angular.module('unbOportunidade')
         function modalInitialization(){
           $uibModal.open({
             templateUrl: 'static/app/scripts/directives/registerButton/register-modal.html',
-            controller: function ($scope) {
+            controller: function ($scope, $uibModalInstance) {
+              $scope.closeModal = closeModal;
 
+              function closeModal() {
+                $uibModalInstance.close();
+              }
             }
           });
         }
