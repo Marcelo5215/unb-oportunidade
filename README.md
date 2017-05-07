@@ -1,12 +1,13 @@
 # UnB Oportunidade
-- UnB Oportunidade é um sistema de busca para estágios para alunos da UnB
+- UnB Oportunidade é um sistema de busca de estágios para alunos da UnB
 
 ## Como inicializar o projeto
 
 0. Baixe o Python e o Django;
 1. Clone o projeto;
-2. Para rodar entre na pasta e inicialize com o comando: 'python manage.py runserver';
-3. Pronto!! Easy!
+2. Instale pelo pip o rdjangorestframework e o djangorestframework-jwt
+4. Para rodar entre na pasta e inicialize com o comando: 'python manage.py runserver';
+5. Pronto!! Easy!
 
 ## QUEM FOR DO FRONT, SEGUIR ESSES PASSOS!
 
