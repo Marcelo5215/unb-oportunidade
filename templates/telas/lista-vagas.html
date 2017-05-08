@@ -1,33 +1,95 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <title>UnB oportunidade</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="includes/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="includes/ui-bootstrap-csp.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-  .navbar {
-        padding-top: 15px;
-        padding-bottom: 15px;
-        border: 0;
-        border-radius: 0;
-        margin-bottom: 0;
-        font-size: 12px;
-        letter-spacing: 5px;
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="http://www.unb.br/templates/unb/favicon.ico" type="image/x-icon">
+    <meta name="keywords" content="">
+    <meta name="description" content="Procurando vagas de estágio na UnB? O DAIA e os coordenadores publicam as vagas diretamente no UnB Oportunidades. Encontre sua vaga gratuitamente!">
+    <title>UnB Oportunidade</title>
+
+    <link rel="stylesheet" type="text/css" href="includes/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="includes/ui-bootstrap-csp.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+
+    /* sobrescrevendo estilos nativos do bootstrap */
+    .navbar {
+          padding-top: 15px;
+          padding-bottom: 15px;
+          border: 0;
+          border-radius: 0;
+          margin-bottom: 0;
+          font-size: 12px;
+          letter-spacing: 5px;
+      }
+
+      .navbar-brand img {
+        width: 80px;
+      }
+
+      .navbar-nav li a:hover {
+          color: #1abc9c !important;
+      }
+
+    .container-fluid {
+        width: 40%;
     }
 
-    .navbar-brand img {
-      width: 80px;
+    .form-control {
+      box-shadow: 0px;
+      border: 1px solid #eee;
     }
 
-    .navbar-nav li a:hover {
-        color: #1abc9c !important;
+    footer {
+      background-color: #7e7e7e;
     }
 
+    /* Estilos dos componentes do initial block, ou bloco de apresentação */
+    .initial-block{
+      margin-bottom: 32px;
+    }
+    .initial-block .container {
+      width: 100%;
+      padding: 0px;
+    }
+    .initial-block .container .jumbotron {
+      background: url("http://fd.unb.br/images/Eventos/Concurso-UnB.png") no-repeat;
+      padding-bottom: 50px;
+      border-radius: 0px;
+      margin-bottom: 0px;
+    }
+    .initial-block .container .jumbotron h1 {
+      font-family: "Arial Black", Gadget, sans-serif;
+    }
+    .initial-block .container .jumbotron h1, .initial-block .container .jumbotron p {
+      color: white;
+      text-align: center;
+    }
+    .busca-interesse {
+      padding: 16px;
+      background-color: white;
+      border-radius: 5px;
+      b-webkit-box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
+      -moz-box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
+      box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
+    }
+
+
+    /* Lista de vagas */
+    .img_empresa{
+        width: 90px;
+        margin-top: 30%;
+    }
+
+    .email_contato {
+      margin-top: 50%;
+    }
+
+
+
+    </style>
+    <style>
     .initial-block .container .jumbotron {
       background: url(http://fd.unb.br/images/Eventos/Concurso-UnB.png) no-repeat;
       background-position-y: 70%;
@@ -36,8 +98,13 @@
       border-radius: 0px;
       margin-bottom: 0px;
     }
-  </style>
-</head>
+
+
+
+
+
+    </style>
+  </head>
 <body>
 
   <nav class="navbar navbar-default">
