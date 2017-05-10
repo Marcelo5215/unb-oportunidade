@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="http://www.unb.br/templates/unb/favicon.ico" type="image/x-icon">
+    <meta name="keywords" content="">
+    <meta name="description" content="Procurando vagas de estágio na UnB? O DAIA e os coordenadores publicam as vagas diretamente no UnB Oportunidades. Encontre sua vaga gratuitamente!">
+    <title>UnB Oportunidade</title>
+
+    <link rel="stylesheet" type="text/css" href="includes/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="includes/ui-bootstrap-csp.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+
+    /* sobrescrevendo estilos nativos do bootstrap */
+    .navbar {
+          padding-top: 15px;
+          padding-bottom: 15px;
+          border: 0;
+          border-radius: 0;
+          margin-bottom: 0;
+          font-size: 12px;
+          letter-spacing: 5px;
+      }
+
+      .navbar-brand img {
+        width: 80px;
+      }
+
+      .navbar-nav li a:hover {
+          color: #1abc9c !important;
+      }
+
+    .container-fluid {
+        width: 40%;
+    }
+
+    .form-control {
+      box-shadow: 0px;
+      border: 1px solid #eee;
+    }
+
+    footer {
+      background-color: #7e7e7e;
+    }
+
+    /* Estilos dos componentes do initial block, ou bloco de apresentação */
+    .initial-block{
+      margin-bottom: 32px;
+    }
+    .initial-block .container {
+      width: 100%;
+      padding: 0px;
+    }
+    .initial-block .container .jumbotron {
+      background: url("http://fd.unb.br/images/Eventos/Concurso-UnB.png") no-repeat;
+      padding-bottom: 50px;
+      border-radius: 0px;
+      margin-bottom: 0px;
+    }
+    .initial-block .container .jumbotron h1 {
+      font-family: "Arial Black", Gadget, sans-serif;
+    }
+    .initial-block .container .jumbotron h1, .initial-block .container .jumbotron p {
+      color: white;
+      text-align: center;
+    }
+    .busca-interesse {
+      padding: 16px;
+      background-color: white;
+      border-radius: 5px;
+      b-webkit-box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
+      -moz-box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
+      box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
+    }
+
+
+    /* Lista de vagas */
+    .img_empresa{
+        width: 90px;
+        margin-top: 30%;
+    }
+
+    .email_contato {
+      margin-top: 50%;
+    }
+
+
+
+    </style>
+    <style>
+    .initial-block .container .jumbotron {
+      background: url(http://fd.unb.br/images/Eventos/Concurso-UnB.png) no-repeat;
+      background-position-y: 70%;
+      padding-bottom: 8px;
+      padding-top: 8px;
+      border-radius: 0px;
+      margin-bottom: 0px;
+    }
+
+
+
+
+
+    </style>
+  </head>
+<body>
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Webysther_20160322_-_Logo_UnB_%28sem_texto%29.svg/1200px-Webysther_20160322_-_Logo_UnB_%28sem_texto%29.svg.png"/></a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Cadastro</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="initial-block">
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Temos&nbsp;<span style="color: #ffffff;">155</span>&nbsp;vaga(s) em aberto</h1>
+        <p>Encontre sua vaga de estágio na UnB, amém.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="lista_vagas">
+    <div class="container">
+      <div class="text-center">
+        <h2>Vagas</h2>
+        <h4>Encontre aquela vaga de estágio dos sonhos</h4>
+      </div>
+      <div class="row">
+        <div id="filter-sidebar" class="col-sm-3 col-xs-3">
+          <div>
+            <h4 data-toggle="collapse" data-target="#group-1">
+              <i class="fa fa-fw fa-caret-down parent-expanded"></i>
+              <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
+              Áreas de interesse
+            </h4>
+            <div id="group-1" class="list-group collapse in">
+              <a class="list-group-item" href="#">
+                <span class="badge">3</span> Administração
+              </a>
+              <a class="list-group-item" href="#">
+                <span class="badge">3</span> Biblioteconomia
+              </a>
+              <a class="list-group-item" href="#">
+                <span class="badge">3</span> Ciência da Computação
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="listagem_linha col-sm-9 col-xs-9">
+          <div class="row slideanim">
+            <div class="col-sm-12 col-xs-12">
+              <div class="panel panel-default">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="col_empresa"><img class="img_empresa" src ="http://www.belasartes.br/images/destaques/novo/1451.jpg"></td>
+                      <td class="col_descricao">
+                        <h3><a href="">Administração</a></h3>
+                        <p>
+                          Vaga: 1 /TAGUATINGA/ Sem.: 4º ao 6° / Bolsa: R$ 800,00+benefícios / Período: 09:00 12:00 13:00 16:00 /
+                          Requisitos: Carteira de Habilitação, Windows, Word, Excel e internet.
+                        </p>
+                      </td>
+                      <td class="col_contato">
+                        <p class="email_contato">
+                          20/06/2017
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row slideanim">
+            <div class="col-sm-12 col-xs-12">
+              <div class="panel panel-default">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="col_empresa"><img class="img_empresa" src ="http://www.belasartes.br/images/destaques/novo/1451.jpg"></td>
+                      <td class="col_descricao">
+                        <h3><a href="">Administração</a></h3>
+                        <p>
+                          Vaga: 1 /TAGUATINGA/ Sem.: 4º ao 6° / Bolsa: R$ 800,00+benefícios / Período: 09:00 12:00 13:00 16:00 /
+                          Requisitos: Carteira de Habilitação, Windows, Word, Excel e internet.
+                        </p>
+                      </td>
+                      <td class="col_contato">
+                        <p class="email_contato">
+                          20/06/2017
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+      <span class="glyphicon glyphicon-chevron-up"></span>
+    </a><br><br>
+    <p>Orgulhosamente criado pela turma A de Linguagens de Programação 01/2017 <a href="https://github.com/mateusluizfb/unb-oportunidade" data-toggle="tooltip" title="">Veja no GitHub</a></p>
+  </footer>
+
+</body>
+</html>
