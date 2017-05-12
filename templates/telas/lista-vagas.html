@@ -7,88 +7,12 @@
     <meta name="description" content="Procurando vagas de estágio na UnB? O DAIA e os coordenadores publicam as vagas diretamente no UnB Oportunidades. Encontre sua vaga gratuitamente!">
     <title>UnB Oportunidade</title>
 
+    <link rel="stylesheet" type="text/css" href="includes/main.css">
     <link rel="stylesheet" type="text/css" href="includes/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="includes/ui-bootstrap-csp.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
 
-    /* sobrescrevendo estilos nativos do bootstrap */
-    .navbar {
-          padding-top: 15px;
-          padding-bottom: 15px;
-          border: 0;
-          border-radius: 0;
-          margin-bottom: 0;
-          font-size: 12px;
-          letter-spacing: 5px;
-      }
-
-      .navbar-brand img {
-        width: 80px;
-      }
-
-      .navbar-nav li a:hover {
-          color: #1abc9c !important;
-      }
-
-    .container-fluid {
-        width: 40%;
-    }
-
-    .form-control {
-      box-shadow: 0px;
-      border: 1px solid #eee;
-    }
-
-    footer {
-      background-color: #7e7e7e;
-    }
-
-    /* Estilos dos componentes do initial block, ou bloco de apresentação */
-    .initial-block{
-      margin-bottom: 32px;
-    }
-    .initial-block .container {
-      width: 100%;
-      padding: 0px;
-    }
-    .initial-block .container .jumbotron {
-      background: url("http://fd.unb.br/images/Eventos/Concurso-UnB.png") no-repeat;
-      padding-bottom: 50px;
-      border-radius: 0px;
-      margin-bottom: 0px;
-    }
-    .initial-block .container .jumbotron h1 {
-      font-family: "Arial Black", Gadget, sans-serif;
-    }
-    .initial-block .container .jumbotron h1, .initial-block .container .jumbotron p {
-      color: white;
-      text-align: center;
-    }
-    .busca-interesse {
-      padding: 16px;
-      background-color: white;
-      border-radius: 5px;
-      b-webkit-box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
-      -moz-box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
-      box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
-    }
-
-
-    /* Lista de vagas */
-    .img_empresa{
-        width: 90px;
-        margin-top: 30%;
-    }
-
-    .email_contato {
-      margin-top: 50%;
-    }
-
-
-
-    </style>
     <style>
     .initial-block .container .jumbotron {
       background: url(http://fd.unb.br/images/Eventos/Concurso-UnB.png) no-repeat;
@@ -98,11 +22,6 @@
       border-radius: 0px;
       margin-bottom: 0px;
     }
-
-
-
-
-
     </style>
   </head>
 <body>
@@ -221,12 +140,37 @@
   </section>
 
   <!-- Footer -->
-  <footer class="text-center">
-    <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
-      <span class="glyphicon glyphicon-chevron-up"></span>
-    </a><br><br>
-    <p>Orgulhosamente criado pela turma A de Linguagens de Programação 01/2017 <a href="https://github.com/mateusluizfb/unb-oportunidade" data-toggle="tooltip" title="">Veja no GitHub</a></p>
-  </footer>
+
+  <footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="footer-block">
+					<ul class="list-inline footer-menu">
+						<li><a href="">Termos de Uso</a></li>
+						<li><a href="">Politicas de privacidade</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="footer-block text-center">
+					<p class="copyright">
+						© Orgulhosamente criado pela turma A de Linguagens de Programação 01/2017 <a href="https://github.com/mateusluizfb/unb-oportunidade" data-toggle="tooltip" title="">Veja no GitHub</a>
+					</p>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="footer-block">
+					<ul class="list-inline pull-right social-icon">
+						<li><a href=""><i class="fa fa-facebook"></i></a></li>
+						<li><a href=""><i class="fa fa-twitter"></i></a></li>
+						<li><a href=""><i class="fa fa-linkedin"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
 
 </body>
 </html>
