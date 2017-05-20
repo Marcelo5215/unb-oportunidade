@@ -22,6 +22,7 @@ angular.module('unbOportunidade')
               $scope.closeModal = closeModal;
 
               function login(user) {
+                jwtService.auth(user.username, user.password);
               }
 
               function closeModal() {

@@ -4,14 +4,21 @@ angular.module('unbOportunidade')
 function JWTService($http) {
 
   this.auth = function(username, password) {
-    return $http.post('/api/api-token-auth/', { username: username, password: password });
+    $http.post('api/api-token-auth/', { username: username, password: password })
+      .then(function(data) {
+        store.set('token', data.token);
+        // $state.go('somewhere')
+      })
+      .catch(function(fallback) {
+        // Msg de falha de login para usuário
+      });
   };
 
   this.verifyAuth = function(token) {
-    return $http.post('/api/api-token-verify/', { token: token });
+    return $http.post('api/api-token-verify/', { token: token });
   };
 
   this.refreshAuth = function(token) {
-    return $http.post('/api/api-token-refresh/', { token: token });
+    return $http.post('api/api-token-refresh/', { token: token });
   };
 }
