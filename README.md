@@ -1,5 +1,5 @@
 # UnB Oportunidade
-- UnB Oportunidade é um sistema de busca para estágios par alunos da UnB
+- UnB Oportunidade é um sistema de busca de estágios para alunos da UnB
 
 ## Como inicializar o projeto
 
@@ -8,7 +8,7 @@
 2. Para rodar entre na pasta e inicialize com o comando: 'python manage.py runserver';
 3. Pronto!! Easy!
 
-## QUEM FOR DO FRONT SEGUIR ESSES PASSOS!
+## QUEM FOR DO FRONT, SEGUIR ESSES PASSOS!
 
 0. Instale o npm;
 1. Entre na pasta '/static';
@@ -23,6 +23,6 @@
 - test -> Teste
 - develop -> Desenvolvimento
 
-Qualquer dúvida falar com Mateus Luiz.
+* Qualquer dúvida falar com Mateus Luiz.
 
 ### Link do Github: https://github.com/mateusluizfb/unb-oportunidade
