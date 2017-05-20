@@ -4,8 +4,12 @@
     .config(function($stateProvider) {
 
       $stateProvider.state('vacancyListing', {
-          url: '/listagem', /* Temporary URL just for simplicity */
-          template: '<vacancy-listing> </vacancy-listing>'
+          url: '/listing',
+          views: {
+            'content@': {
+              template:'<vacancy-listing> </vacancy-listing>'
+            }
+          }
         });
 
     });

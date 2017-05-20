@@ -62,7 +62,6 @@ angular.module('unbOportunidade')
         views: {
           'content@': {
             templateUrl: 'static/app/scripts/templates/curriculo.html',
-            controller: 'controllerTemp'
           }
         }
       });
