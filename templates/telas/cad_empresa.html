@@ -1,0 +1,84 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+  <style>
+    .title__bordered {
+        border-bottom: 1px solid rgba(216, 216, 216, 0.7);
+        padding-bottom: 25px;
+        margin-bottom: 45px;
+    }
+    .title__centered {
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .title__primary-small {
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .title__primary {
+        color: #000;
+        font-weight: bold;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .btn_txt {
+      color: #000!important;
+      font-weight: bold!important;
+
+    }
+
+    .h1, h1 {
+        font-size: 36px;
+    }
+    .h1, .h2, .h3, h1, h2, h3 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .form .form-group__half {
+        width: 50%;
+    }
+    .btn {
+      background: PaleGreen!important;
+    }
+  </style>
+
+</head>
+
+
+<body>
+  <div class="container">
+    <h1 class="title__primary title__primary-small title__centered title__bordered">Criar conta de empresa</h1>
+
+    <form class="form" action="/action_page.php">
+      <div class="form-group">
+        <label for="email">Nome:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Nome  Corporativo:</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+      </div>
+      <div class="form-group">
+        <label for="email">CNPJ:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      </div>
+      <div class="form-group">
+        <label for="email">Telefone:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      </div>
+      <div class="form-group">
+        <label for="email">Cidade:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      </div>
+      <center><button type="submit" class="btn btn-default btn_txt">CADASTRAR</button></center>
+    </form>
+  </div>
+</body>
+</html>
