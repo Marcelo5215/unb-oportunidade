@@ -1,1 +1,5 @@
-	Os códigos em python atuais são apenas um esboço. Para popular o banco de dados descrito no models.py, navegue até a pasta principal do projeto e faça a migracao dos dados para criar as tabelas do models.py (migrations). Para popular o banco de dados, abra um editor bd e execute os comandos presentes no arquivo comandos_sql.txt. Para executar o Initial_search.py por linha comando, pode-se digitar python3 Initial_search.py
+	Para criar a tabela vacant_job_has_course, copie o arquivo models.py presente nesta pasta e cole-o na pasta api.
+	OBSERVACAO: quando forem atualizar os .py da busca no github, nao atualizem o models.py na pasta api para nao correr o risco de sobrescrever o models do projeto e prjudicar algum outro grupo.	
+	Para popular o banco de dados descrito no models.py, navegue até a pasta principal do projeto e faça a migracao dos dados para criar as tabelas do models.py (migrations). 
+	Para popular o banco de dados, abra um editor bd e execute os comandos presentes no arquivo comandos_sql.txt. A seguir, salve as insercoes feitas.
+	Para executar o Initial_search.py por linha comando, pode-se digitar python2 Initial_search.py
