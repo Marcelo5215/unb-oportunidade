@@ -1,0 +1,9 @@
+INSERT INTO students VALUES ("00000000000","Pedro", "Almeida","KKK","0000",1,123);
+INSERT INTO students VALUES ("00000000001","Pedro", "Almeid","KKKK","0001",1,124);
+INSERT INTO students VALUES ("00000000002","Maria", "Almeida","KKKKK","0002",1,125);
+INSERT INTO Courses VALUES (0,"Engenharia da Computacao", "Eng. Comp.");
+INSERT INTO Courses VALUES (1,"Engneharia Eletrica", "ENE");
+INSERT INTO Courses VALUES (2,"Ciencia da Computacao", "CIC");
+INSERT INTO Curriculum VALUES ("00000000000",1,"Vespertino","UnB","nada adicional",6,0,1);
+INSERT INTO Curriculum VALUES ("00000000001",2,"Vespertino","UnB","nada adicional",5,0,1);
+INSERT INTO Curriculum VALUES ("00000000002",3,"Vespertino","UnB","nada adicional",7,1,1);
