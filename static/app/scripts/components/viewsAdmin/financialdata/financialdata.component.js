@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
   angular.module('unbOportunidade')
     .component('enterprisedata', {
@@ -6,8 +6,10 @@
       controller: FinancialController
     });
 
-    .controller("FinancialController", ["$scope", function($scope) {
-      $scope.pj_id = 1;
-      $scope.pf_id = 2;
+  .controller("FinancialController", ["$scope", function($scope) {
+    $scope.pj_id = 1;
+    $scope.pf_id = 2;
 
-    }]);
+  }]);
+
+})();
