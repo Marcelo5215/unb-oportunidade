@@ -4,7 +4,7 @@
     .component('vacancyList', {
       templateUrl: 'static/app/scripts/components/viewsAdmin/candidate/vacancyList.html',
       controller: VacancyListController
-    })
+    });
 
     function VacancyListController($scope) {
       $scope.student = {
@@ -85,8 +85,6 @@
       };
 
       $scope.line = {
-        position,
-
         line_position: [{
             position: 1
           },

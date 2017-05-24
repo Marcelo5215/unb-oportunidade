@@ -85,8 +85,6 @@
       };
 
       $scope.line = {
-        position,
-
         line_position: [{
             position: 1
           },

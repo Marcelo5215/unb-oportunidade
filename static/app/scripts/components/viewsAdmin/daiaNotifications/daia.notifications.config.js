@@ -1,14 +1,14 @@
 angular.module('unbOportunidade')
   .config(function ($stateProvider) {
 
-    // $stateProvider
-    //   .state('candidateList', {
-    //     url: '/candidateList',
-    //     views: {
-    //       'content@' : {
-    //         template: '<candidate-list><candidate-list>'
-    //       }
-    //     }
-    //   });
+    $stateProvider
+      .state('virtualQueue', {
+        url: '/admin/queue',
+        views: {
+          'content@' : {
+            template: '<virtual-queue></virtual-queue>'
+          }
+        }
+      });
 
   });
