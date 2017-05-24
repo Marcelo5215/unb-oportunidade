@@ -7,14 +7,20 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-
+from api.models import Company
+from api.models import Course
 
 # Create your views here.
 
 class ListCompany(APIView):
     def get(self, request, format=None):
-        company = [Company.name for Company in Company.objects.all()]
-        return Response(company)
+        companies = [Company.name for Company in Company.objects.all()]
+        return Response(companies)
+
+class ListCourses(APIView):
+    def get(self, request, format=None):
+        course = [Course.name for Course in Course.objects.all()]
+        return Response(course)
 
 class ExempleView(APIView):
 
