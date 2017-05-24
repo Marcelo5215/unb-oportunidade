@@ -11,6 +11,11 @@ from rest_framework.response import Response
 
 # Create your views here.
 
+class ListCompany(APIView):
+    def get(self, request, format=None):
+        company = [Company.name for Company in Company.objects.all()]
+        return Response(company)
+
 class ExempleView(APIView):
 
     permission_classes = (IsAuthenticated, )
