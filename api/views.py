@@ -9,6 +9,7 @@ from rest_framework.response import Response
 
 from api.models import Company
 from api.models import Course
+from api.models import Vacant_job
 
 # Create your views here.
 
@@ -21,6 +22,11 @@ class ListCourses(APIView):
     def get(self, request, format=None):
         course = [Course.name for Course in Course.objects.all()]
         return Response(course)
+
+class ListVacants(APIView):
+    def get(self, request, format=None):
+        vacant = [Vacant_job.role for Vacant_job in Vacant_job.objects.all()]
+        return Response(vacant)
 
 class ExempleView(APIView):
 
