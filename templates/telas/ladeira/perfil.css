@@ -1,0 +1,29 @@
+#tudo {
+	font-family: "Sans Serif";
+}
+h1{
+	position: absolute;
+	top:10px;
+	background-color: rgb(150, 0, 0);
+	color: white;
+	width: 50%;
+	margin: 0px;
+}
+img, figure {
+	margin: 0;
+}
+
+figcaption {
+	background-color: rgb(100, 100, 100);
+	color: white;
+	text-align: center;
+}
+
+dt {
+	padding: 5px 10px;	
+	background-color: rgb(150, 0, 0);
+	width: 50%;
+	min-width: 500px;
+	color: white;
+	font-size: 20px;
+}

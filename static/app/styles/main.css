@@ -1,0 +1,104 @@
+.navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+
+  .navbar-brand img {
+    width: 64px;
+  }
+
+  .navbar-nav li a:hover {
+      color: #1abc9c !important;
+  }
+
+.container-fluid {
+    width: 40%;
+}
+
+.form-control {
+  box-shadow: 0px;
+  border: 1px solid #eee;
+}
+
+
+footer{
+  background: #f7f7f7;
+  padding: 60px 20px;
+}
+footer ul, footer p{
+  margin-bottom: 0;
+}
+footer .footer-block{
+  margin-bottom: 30px;
+}
+footer a{
+  color: #188b87;
+}
+footer .footer-menu a{
+  text-transform: uppercase;
+}
+footer .social-icon a{
+  display: block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border:1px solid #ddd;
+}
+@media (max-width: 767px){
+  footer .footer-menu{
+    text-align: center;
+  }
+  footer .social-icon{
+    float: none !important;
+    text-align: center;
+  }
+}
+
+/* Estilos dos componentes do initial block, ou bloco de apresentação */
+.initial-block{
+  margin-bottom: 32px;
+}
+.initial-block .container {
+  width: 100%;
+  padding: 0px;
+}
+.initial-block .container .jumbotron {
+  background: url(http://fd.unb.br/images/Eventos/Concurso-UnB.png) no-repeat;
+  background-position-y: 70%;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  border-radius: 0px;
+  margin-bottom: 0px;
+}
+.initial-block .container .jumbotron h1 {
+  font-family: "Arial Black", Gadget, sans-serif;
+}
+.initial-block .container .jumbotron h1, .initial-block .container .jumbotron p {
+  color: white;
+  text-align: center;
+}
+.busca-interesse {
+  padding: 16px;
+  background-color: white;
+  border-radius: 5px;
+  b-webkit-box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
+  -moz-box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
+  box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
+}
+
+
+/* Lista de vagas */
+.img_empresa{
+    width: 90px;
+    margin-top: 30%;
+}
+
+.email_contato {
+  margin-top: 50%;
+}

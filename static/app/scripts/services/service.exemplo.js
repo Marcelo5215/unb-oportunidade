@@ -5,7 +5,7 @@ function serviceExemplo($http) {
 
   this.getExemplo = $http({
     method: 'GET',
-    url: 'url/do/get'
+    url: '/api/api-token-auth/'
   });
 
 }

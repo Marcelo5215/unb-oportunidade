@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>UnB oportunidade</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  .navbar {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+        font-size: 12px;
+        letter-spacing: 5px;
+    }
+
+    .navbar-brand img {
+      width: 80px;
+    }
+
+    .navbar-nav li a:hover {
+        color: #1abc9c !important;
+    }
+
+    body > .container {
+        padding-top: 90px;
+    }
+
+    .diretorio{
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 8px;
+        width: 100%;
+    }
+
+    .inputfile {
+    	width: 0.1px;
+    	height: 0.1px;
+    	opacity: 0;
+    	overflow: hidden;
+    	position: absolute;
+    	z-index: -1;
+    }
+
+    .label_curriculo{
+      display: block;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 8px;
+      box-shadow: 3px;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    }
+  </style>
+</head>
+<body>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading" style="background: #404040">
+				<h1>CADASTRO</h1>
+			</div>
+			<div class="panel-body">
+				<form>
+					<div id = "register1">
+						<input type="radio" id="physical" name="person">
+						<label for="physical">Pessoa Física</label>
+						<br>
+						<input type="radio" id="legal" placeholder="Pessoa Jurídica" name="person">
+						<label for="legal">Pessoa Jurídica</label>
+					</div>
+
+					<h2>Dados de Usuário</h2><br>
+					<div id = "register2">
+						<input type="text" class="form-control" id="user_name" placeholder="Nome de usuário" name="user_name">
+						<br>
+						<input type="email" class="form-control" id="email" placeholder="Email" name="email">
+						<br>
+						<input type="password" class="form-control" id="password" placeholder="Senha" name="password">
+						<br>
+						<input type="password" class="form-control" id="comfirmpassword" placeholder="Comfirme sua Senha" name="comfirmpassword">
+						<br>
+					</div>
+
+					<h2>Dados Pessoais</h2><br>
+					<div id = "register3">
+						<input type="text" class="form-control" id="full_name" placeholder="Nome Completo" name="full_name">
+						<br>
+						<input type="number" class="form-control" id="cpf" placeholder="CPF" name="cpf">
+						<br>
+						<input type="tel" class="form-control" id="phone_1" placeholder="Telefone 1" name="phone_1">
+						<br>
+						<input type="tel" class="form-control" id="phone_2" placeholder="Telefone 2" name="phone_2">
+						<br>
+						<input type="text" class="form-control" id="university" placeholder="Universidade" name="university">
+						<br>
+						<input type="text" class="form-control" id="course" placeholder="Curso" name="course">
+						<br>
+						<input type="text" class="form-control" id="abbreviation" placeholder="Abreviação do curso" name="abbreviation">
+						<br>
+						<input type="number" class="form-control" id="semester" placeholder="Semestre" name="semester">
+						<br>
+						<input type="text" class="form-control" id="work_shift" placeholder="Disponibilidade de Horário" name="work_shift">
+						<br>
+					</div>
+
+					<h2>Endereço</h2><br>
+					<div id = "register4">
+						<input type="text" class="form-control" id="city" placeholder="Cidade" name="city">
+						<br>
+						<input type="text" class="form-control" id="neighborhood" placeholder="Bairro" name="neighborhood">
+						<br>
+						<input type="text" class="form-control" id="public_plaxe" placeholder="Estado" name="public_plaxe">
+						<br>
+						<input type="number" class="form-control" id="number" placeholder="Número" name="number">
+						<br>
+						<input type="text" class="form-control" id="complement" placeholder="Complemento" name="complement">
+						<br>
+						<input type="number" class="form-control" id="cep" placeholder="CEP" name="cep">
+						<br>
+					</div>
+
+					<h2>Conta do Banco</h2><br>
+					<div id = "register5">
+						<input type="text" class="form-control" id="bank_name" placeholder="Nome do Banco" name="bank_name">
+						<br>
+						<input type="number" class="form-control" id="account_number" placeholder="Número da Conta" name="account_number">
+						<br>
+						<input type="number" class="form-control" id="agency_number" placeholder="Número da Agência" name="agency_number">
+						<br>
+					</div>
+
+					<h2>Empresa</h2><br>
+					<div id = "register6">
+						<input type="text" class="form-control" id="company_name" placeholder="Nome da Empresa" name="company_name">
+						<br>
+						<input type="text" class="form-control" id="corporate_name" placeholder="Nome Corporativo" name="corporate_name">
+						<br>
+						<input type="number" class="form-control" id="cnpj" placeholder="CNPJ" name="cnpj">
+						<br>
+					</div>
+
+					<h2>Currículo</h2><br>
+					<div id = "register7">
+						<br><br>
+						<input type="file" id="curriculum" name="curriculum" >
+						<br><br><br>
+					</div>
+
+					<div id = "register8">
+						<button type="submit" class="btn btn-primary btn-lg btn-block">Enviar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+  <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="footer-block">
+          <ul class="list-inline footer-menu">
+            <li><a href="">Termos de Uso</a></li>
+            <li><a href="">Politicas de privacidade</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="footer-block text-center">
+          <p class="copyright">
+            © Orgulhosamente criado pela turma A de Linguagens de Programação 01/2017 <a href="https://github.com/mateusluizfb/unb-oportunidade" data-toggle="tooltip" title="">Veja no GitHub</a>
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="footer-block">
+          <ul class="list-inline pull-right social-icon">
+            <li><a href=""><i class="fa fa-facebook"></i></a></li>
+            <li><a href=""><i class="fa fa-twitter"></i></a></li>
+            <li><a href=""><i class="fa fa-linkedin"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

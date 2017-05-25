@@ -1,0 +1,35 @@
+
+#tudo {
+	margin: 30px auto;
+	background-color: white;
+	font-family: "Sans Serif";
+	text-align: center;
+}
+
+#tudo img {
+	border-radius: 50%;
+}
+#anterior {
+	float: left;
+	background-color: white;
+	position: absolute;
+	left: 5%;
+	top: 40%;
+}
+#proximo {
+	float: right;
+	background-color: white;
+	position: absolute;
+	right: 5%;
+	top: 40%;
+}
+#perfil a {
+	border-radius: 10%;
+	background-color: rgb(255, 0, 0);
+	color: white;
+	padding: 5px 10px;
+	text-decoration: none;
+}
+#perfil a:hover {
+	background-color: rgb(165, 0, 0);
+}
