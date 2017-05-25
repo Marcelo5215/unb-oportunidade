@@ -1,0 +1,10 @@
+Para que a listagem de empresas, cursos e vagas não de erro quando for rodar a aplicação no servidor local.
+
+Passo1: Execute os seguintes passsos:
+	Digite no terminal:
+				python manage.py makemigrations api
+				python manage.py sqlmigrate api 0001
+				python manage.py migrate
+
+Os comandos cima servem para criar as tabelas do banco.
+Para popular o banco de dados, abra um editor bd e execute os comandos presentes no arquivo api/Busca/comandos_sql.txt e salve as insercoes feitas.
