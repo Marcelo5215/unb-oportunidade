@@ -29,18 +29,32 @@ class SearchVacancy(APIView):
     def get(self, request, format=None):
         vacancy = Vacant_job.objects.all()
 
-        if 'created' in request.GET:
+        #Parametro icreated: data de insercao minima (deve ser passada no formato YYYYMM)
+        if 'icreated' in request.GET:
             try:
-                creationDate = datetime.datetime.strptime(request.GET.get('created'), '%Y%m%d')
+                #Transforma parametro em objeto datetime para ser usado no filtro
+                creationDate = datetime.datetime.strptime(request.GET.get('icreated'), '%Y%m')
             except ValueError:
-                return Response("Parametro 'created' nao eh uma data valida no formato YYYYMMDD")
+                return Response("Parametro 'created' nao eh uma data valida no formato YYYYMM")
 
             vacancy = vacancy.filter(created_at__date__gte = creationDate)
 
+        #Parametro fcreated: data de insercao maxima (deve ser passada no formato YYYYMM)
+        if 'fcreated' in request.GET:
+            try:
+                #Transforma parametro em objeto datetime para ser usado no filtro
+                creationDate = datetime.datetime.strptime(request.GET.get('fcreated'), '%Y%m')
+            except ValueError:
+                return Response("Parametro 'created' nao eh uma data valida no formato YYYYMM")
+
+            vacancy = vacancy.filter(created_at__date__lte = creationDate)
+
+        #Parametro course: Curso da vaga (deve ser passada abreviacao do curso)
         if 'course' in request.GET:
             courses = [Vacant_job_has_course.vacant_job_id_id  for Vacant_job_has_course in Vacant_job_has_course.objects.all().filter(course_id__abbreviation = request.GET.get('course'))]
             vacancy = vacancy.filter(id_vacancy__in = courses)
 
+        #Parametro company: Nome da empresa que oferece a vaga
         if 'company' in request.GET:
             companies = [Hiring.id_vacancy_id  for Hiring in Hiring.objects.filter(id_company__name__icontains = request.GET.get('company'))]
             vacancy = vacancy.filter(id_vacancy__in = companies)
@@ -48,6 +62,7 @@ class SearchVacancy(APIView):
         vacancy = [Vacant_job.role for Vacant_job in vacancy]
 
         return Response(vacancy)
+
 
 class SearchCompany(APIView):
     def get(self, request, format=None):
