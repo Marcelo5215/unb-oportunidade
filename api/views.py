@@ -15,6 +15,8 @@ from api.models import Curriculum
 from api.models import Vacant_job_has_course
 from api.models import Hiring
 
+import datetime
+
 # Create your views here.
 
 class ListCompany(APIView):
@@ -35,6 +37,14 @@ class ListVacants(APIView):
 class SearchVacancy(APIView):
     def get(self, request, format=None):
         vacancy = Vacant_job.objects.all()
+
+        if 'created' in request.GET:
+            try:
+                creationDate = datetime.datetime.strptime(request.GET.get('created'), '%Y%m%d')
+            except ValueError:
+                return Response("Parametro 'created' nao eh uma data valida no formato YYYYMMDD")
+
+            vacancy = vacancy.filter(created_at__date__gte = creationDate)
 
         if 'course' in request.GET:
             courses = [Vacant_job_has_course.vacant_job_id_id  for Vacant_job_has_course in Vacant_job_has_course.objects.all().filter(course_id__abbreviation = request.GET.get('course'))]
