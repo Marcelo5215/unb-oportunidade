@@ -96,6 +96,34 @@ class SearchCompany(APIView):
 
         return Response(companies_name)
 
+class SearchOportunity(APIView):
+    def get(self, request, id=None):
+
+        cpf = list(Student.objects.filter(id_user=id))
+        if not cpf:
+            raise Http404("Not exist this user.")
+
+        try:
+            curriculum_info = [Curriculum.course_id_id for Curriculum in Curriculum.objects.filter(cpf_id=cpf[0])]
+        except Curriculum.DoesNotExist:
+            curriculum_info = None
+
+        try:
+            vacant_job_info = [Vacant_job_has_course.vacant_job_id_id  for Vacant_job_has_course in Vacant_job_has_course.objects.all().filter(course_id_id=curriculum_info[0])]
+        except Curriculum.DoesNotExist:
+            vacant_job_info = None
+
+        oportunity_name = []
+        for vacant_job in vacant_job_info:
+            try:
+                oportunity = [Vacant_job.role  for Vacant_job in Vacant_job.objects.filter(id_vacancy=vacant_job)]
+                for name in oportunity: 
+                    oportunity_name.append(oportunity)
+            except Curriculum.DoesNotExist:
+                oportunity = None
+
+        return Response(oportunity_name)
+
 class FilterCompanies(APIView):
     def get(self, request, name=None):
         company_name = list(Company.objects.filter(name=name))

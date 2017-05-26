@@ -22,3 +22,6 @@ para visualizar a Busca das empresas que oferecem vagas de acordo com o curso do
 
 para visualizar a Busca por uma empresa especifica: 	
 								digite no navegador por exemplo:			127.0.0.1:8000/api/busca/FilterCompanies/Microsoft/
+
+para visualizar a Busca das vagas com relação ao curso do aluno(usuario), onde o parametro passado é o id_user: 	
+								digite no navegador	por exemplo:			http://127.0.0.1:8000/api/busca/SearchOportunity/123/
