@@ -37,7 +37,7 @@ urlpatterns = [
     url(r'^api/busca/company/$', ListCompany.as_view()),
     url(r'^api/busca/course/$', ListCourses.as_view()),
     url(r'^api/busca/vacants/$', ListVacants.as_view()),
-    url(r'^api/busca/FilterCompany/$', ExempleFilterCompany.as_view()),
+    url(r'^api/busca/FilterCompany/(\d+)/$', ExempleFilterCompany.as_view()),
     url(r'^api/busca/SearchVacancy/$', SearchVacancy.as_view()),
     url(r'^api/api-token-auth/', obtain_jwt_token),
     url(r'^api/api-token-verify/', verify_jwt_token),
