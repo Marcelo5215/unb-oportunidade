@@ -26,3 +26,36 @@ para visualizar a Busca por uma empresa especifica:
 para visualizar a Busca das vagas com relação ao curso do aluno(usuario), onde o parametro passado é o id_user: 	
 								digite no navegador	por exemplo:			127.0.0.1:8000/api/busca/SearchOportunity/?id=123
 
+Para buscar vagas de acordo com o curso, nome da empresa ou data de inserção:
+
+Digite no navegador: 127.0.0.1:8000/api/busca/SearchOportunity/?course=&company=&icreated=&fcreated=
+
+Onde, na query string,
+    course recebe a abreviação do curso
+    company recebe o nome da empresa
+    icreated recebe a data inicial de filtragem (no formato YYYYMM)
+    fcreated recebe a data final de filtragem (no formato YYYYMM)
+
+A ordem que os parametros sao passados na query string nao importa
+Alguns exemplos,
+    127.0.0.1:8000/api/busca/SearchOportunity/?course=ADM
+    - mostra todas as vagas do curso cuja abreviacao eh ADM
+    - o filtro nao diferencia maiusculas de minusculas, tanto ADM quanto devem adm funcionar igualmente
+
+    127.0.0.1:8000/api/busca/SearchOportunity/?company=Exemplo
+    - mostras todas as vagas ofertadas pela empresa Exemplo
+    - assim como acima, nao diferencia maiusculas e minusculas
+
+    127.0.0.1:8000/api/busca/SearchOportunity/?icreated=201705
+    - mostra todas as vagas criadas desde maio de 2017 (incluindo maio)
+    - o formato deve ser YYYYMM
+
+    127.0.0.1:8000/api/busca/SearchOportunity/?fcreated=201705
+    - mostra todas as vagas criadas antes de maio de 2017 (incluindo maio)
+    - o formato deve ser YYYYMM
+
+    127.0.0.1:8000/api/busca/SearchOportunity/?fcreated=201705&icreated=201701
+    - mostra todas as vagas criadas entre janeiro e maio de 2017 (incluindo janeiro e maio)
+
+    127.0.0.1:8000/api/busca/SearchOportunity/?course=ADM&company=Exemplo
+    -mostra todas as vagas ofertadas pela empresa Exemplo para o curso cuja abreviação é ADM
