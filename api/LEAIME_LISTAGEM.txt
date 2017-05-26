@@ -11,9 +11,13 @@ Para popular o banco de dados, abra um editor bd e execute os comandos presentes
 
 Para rodar entre na pasta e inicialize com o comando: 	python manage.py runserver
 
-para visualizar a listagem geral das empresas:		digite no vavegador	127.0.0.1:8000/api/busca/company/
-para visualizar a listagem geral das vagas:		digite no vavegador	127.0.0.1:8000/api/busca/vacants/
-para visualizar a listagem geral dos cursos:		digite no vavegador	127.0.0.1:8000/api/busca/course/
-para visualizar a filtragem da lista das empresas: 	digite no vavegador	127.0.0.1:8000/api/busca/FilterCompany/
+para visualizar a listagem geral das empresas:		digite no navegador		127.0.0.1:8000/api/busca/company/
+
+para visualizar a listagem geral das vagas:			digite no navegador		127.0.0.1:8000/api/busca/vacants/
+
+para visualizar a listagem geral dos cursos:		digite no navegador		127.0.0.1:8000/api/busca/course/
+
+para visualizar a Busca das empresas que oferecem vagas de acordo com o curso do aluno: 	
+													digite no navegador		127.0.0.1:8000/api/busca/SearchCompany/123/
 
 

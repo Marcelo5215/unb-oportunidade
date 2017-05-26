@@ -59,7 +59,7 @@ class SearchVacancy(APIView):
 
         return Response(vacancy)
 
-class ExempleFilterCompany(APIView):
+class SearchCompany(APIView):
     def get(self, request, id=None):
 
         cpf = list(Student.objects.filter(id_user=id))
