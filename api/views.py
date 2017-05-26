@@ -96,6 +96,15 @@ class SearchCompany(APIView):
 
         return Response(companies_name)
 
+class FilterCompanies(APIView):
+    def get(self, request, name=None):
+        company_name = list(Company.objects.filter(name=name))
+        if not  company_name:
+            raise Http404("This company don't exist.")
+        
+        company = [Company.name for Company in Company.objects.filter(name=name)]
+        return Response(company)
+
 class ExempleView(APIView):
 
     permission_classes = (IsAuthenticated, )

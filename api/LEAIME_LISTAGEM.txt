@@ -20,4 +20,5 @@ para visualizar a listagem geral dos cursos:		digite no navegador		127.0.0.1:800
 para visualizar a Busca das empresas que oferecem vagas de acordo com o curso do aluno: 	
 													digite no navegador		127.0.0.1:8000/api/busca/SearchCompany/123/
 
-
+para visualizar a Busca por uma empresa especifica: 	
+								digite no navegador por exemplo:			127.0.0.1:8000/api/busca/FilterCompanies/Microsoft/
