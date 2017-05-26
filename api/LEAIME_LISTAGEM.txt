@@ -18,10 +18,13 @@ para visualizar a listagem geral das vagas:			digite no navegador		127.0.0.1:800
 para visualizar a listagem geral dos cursos:		digite no navegador		127.0.0.1:8000/api/busca/course/
 
 para visualizar a Busca das empresas que oferecem vagas de acordo com o curso do aluno: 	
-													digite no navegador		127.0.0.1:8000/api/busca/SearchCompany/123/
+													digite no navegador		127.0.0.1:8000/api/busca/SearchCompany/?id=123
 
 para visualizar a Busca por uma empresa especifica: 	
 								digite no navegador por exemplo:			127.0.0.1:8000/api/busca/FilterCompanies/Microsoft/
 
 para visualizar a Busca das vagas com relação ao curso do aluno(usuario), onde o parametro passado é o id_user: 	
+								digite no navegador	por exemplo:			http://127.0.0.1:8000/api/busca/SearchOportunity/123/
+
+para listar as vagas com relação ao nome do curso, onde o parametro passado é uma string: 	
 								digite no navegador	por exemplo:			http://127.0.0.1:8000/api/busca/SearchOportunity/123/
