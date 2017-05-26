@@ -32,6 +32,18 @@ class ListVacants(APIView):
         vacant = [Vacant_job.role for Vacant_job in Vacant_job.objects.all()]
         return Response(vacant)
 
+class SearchVacancy(APIView):
+    def get(self, request, format=None):
+        vacancy = Vacant_job.objects.all()
+
+        if 'course' in request.GET:
+            courses = [Vacant_job_has_course.vacant_job_id_id  for Vacant_job_has_course in Vacant_job_has_course.objects.all().filter(course_id__abbreviation = request.GET.get('course'))]
+            vacancy = vacancy.filter(id_vacancy__in = courses)
+
+        vacancy = [Vacant_job.role for Vacant_job in vacancy]
+
+        return Response(vacancy)
+
 class ExempleFilterCompany(APIView):
     def get(self, request, format=None):
         id = 123
