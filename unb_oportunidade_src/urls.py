@@ -23,6 +23,7 @@ from api.views import ListVacants
 from api.views import SearchCompany
 from api.views import SearchVacancy
 from api.views import FilterCompanies
+from api.views import SearchOportunity
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
 from rest_framework_jwt.views import verify_jwt_token
@@ -41,6 +42,7 @@ urlpatterns = [
     url(r'^api/busca/SearchCompany/(\d+)/$', SearchCompany.as_view()),
     url(r'^api/busca/SearchVacancy/$', SearchVacancy.as_view()),
     url(r'^api/busca/FilterCompanies/(?P<name>[^\d+]*)/$', FilterCompanies.as_view()),
+    url(r'^api/busca/SearchOportunity/(\d+)/$', SearchOportunity.as_view()),
     url(r'^api/api-token-auth/', obtain_jwt_token),
     url(r'^api/api-token-verify/', verify_jwt_token),
     url(r'^api/api-token-refresh/', refresh_jwt_token),
