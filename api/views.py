@@ -40,6 +40,10 @@ class SearchVacancy(APIView):
             courses = [Vacant_job_has_course.vacant_job_id_id  for Vacant_job_has_course in Vacant_job_has_course.objects.all().filter(course_id__abbreviation = request.GET.get('course'))]
             vacancy = vacancy.filter(id_vacancy__in = courses)
 
+        if 'company' in request.GET:
+            companies = [Hiring.id_vacancy_id  for Hiring in Hiring.objects.filter(id_company__name__icontains = request.GET.get('company'))]
+            vacancy = vacancy.filter(id_vacancy__in = companies)
+
         vacancy = [Vacant_job.role for Vacant_job in vacancy]
 
         return Response(vacancy)
