@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import Http404
 from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated
 
@@ -60,10 +61,10 @@ class SearchVacancy(APIView):
 
 class ExempleFilterCompany(APIView):
     def get(self, request, id=None):
-        try:
-            cpf = [Student.cpf for Student in Student.objects.filter(id_user=id)]
-        except Student.DoesNotExist:
-            cpf = None
+
+        cpf = list(Student.objects.filter(id_user=id))
+        if not cpf:
+            raise Http404("Not exist this user.")
 
         try:
             curriculum_info = [Curriculum.course_id_id for Curriculum in Curriculum.objects.filter(cpf_id=cpf[0])]
