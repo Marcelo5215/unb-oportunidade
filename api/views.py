@@ -59,8 +59,7 @@ class SearchVacancy(APIView):
         return Response(vacancy)
 
 class ExempleFilterCompany(APIView):
-    def get(self, request, format=None):
-        id = 123
+    def get(self, request, id=None):
         try:
             cpf = [Student.cpf for Student in Student.objects.filter(id_user=id)]
         except Student.DoesNotExist:
