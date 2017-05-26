@@ -50,7 +50,7 @@ class SearchVacancy(APIView):
         return Response(vacancy)
 
 class SearchCompany(APIView):
-    def get(self, request, id=None):
+    def get(self, request, format=None):
 
         if 'id' in request.GET:
             cpf = list(Student.objects.filter(id_user= request.GET.get('id')))
@@ -86,73 +86,48 @@ class SearchCompany(APIView):
                     sql_companies_name = None
 
             return Response(companies_name)
+
+        elif 'name' in request.GET:
+                company_name = list(Company.objects.filter(name=request.GET.get('name')))
+                if not  company_name:
+                    raise Http404("This company don't exist.")
+                
+                company = [Company.name for Company in Company.objects.filter(name=request.GET.get('name'))]
+                return Response(company)
         else:
                 companies = [Company.name for Company in Company.objects.all()]
                 return Response(companies)
 
 class SearchOportunity(APIView):
     def get(self, request, id=None):
-        cpf = list(Student.objects.filter(id_user=id))
-        if not cpf:
-            raise Http404("Not exist this user.")
 
-        try:
-            curriculum_info = [Curriculum.course_id_id for Curriculum in Curriculum.objects.filter(cpf_id=cpf[0])]
-        except Curriculum.DoesNotExist:
-            curriculum_info = None
+        if 'id' in request.GET:
 
-        try:
-            vacant_job_info = [Vacant_job_has_course.vacant_job_id_id  for Vacant_job_has_course in Vacant_job_has_course.objects.all().filter(course_id_id=curriculum_info[0])]
-        except Curriculum.DoesNotExist:
-            vacant_job_info = None
+            cpf = list(Student.objects.filter(id_user= request.GET.get('id')))
+            if not cpf:
+                raise Http404("Not exist this user.")
 
-        oportunity_name = []
-        for vacant_job in vacant_job_info:
             try:
-                oportunity = [Vacant_job.role  for Vacant_job in Vacant_job.objects.filter(id_vacancy=vacant_job)]
-                for name in oportunity: 
-                    oportunity_name.append(oportunity)
+                curriculum_info = [Curriculum.course_id_id for Curriculum in Curriculum.objects.filter(cpf_id=cpf[0])]
             except Curriculum.DoesNotExist:
-                oportunity = None
+                curriculum_info = None
 
-        return Response(oportunity_name)
-
-class ListOportunity(APIView):
-    def get(self, request, name=None):
-
-        course = list(Course.objects.filter(name=name))
-        if not course:
-            raise Http404("Not exist this user.")
-
-        try:
-            info = [Course.id_course for Course in Course.objects.filter(name=name)]
-        except Curriculum.DoesNotExist:
-            info = None
-
-        try:
-            vacant_job_info = [Vacant_job_has_course.vacant_job_id_id  for Vacant_job_has_course in Vacant_job_has_course.objects.all().filter(course_id_id=info[0])]
-        except Curriculum.DoesNotExist:
-            vacant_job_info = None
-
-        oportunity_name = []
-        for vacant_job in vacant_job_info:
             try:
-                oportunity = [Vacant_job.role  for Vacant_job in Vacant_job.objects.filter(id_vacancy=vacant_job)]
-                for name in oportunity: 
-                    oportunity_name.append(oportunity)
+                vacant_job_info = [Vacant_job_has_course.vacant_job_id_id  for Vacant_job_has_course in Vacant_job_has_course.objects.all().filter(course_id_id=curriculum_info[0])]
             except Curriculum.DoesNotExist:
-                oportunity = None
+                vacant_job_info = None
 
-        return Response(oportunity_name)
+            oportunity_name = []
+            for vacant_job in vacant_job_info:
+                try:
+                    oportunity = [Vacant_job.role  for Vacant_job in Vacant_job.objects.filter(id_vacancy=vacant_job)]
+                    for name in oportunity: 
+                        oportunity_name.append(oportunity)
+                except Curriculum.DoesNotExist:
+                    oportunity = None
 
-class FilterCompanies(APIView):
-    def get(self, request, name=None):
-        company_name = list(Company.objects.filter(name=name))
-        if not  company_name:
-            raise Http404("This company don't exist.")
+            return Response(oportunity_name)
         
-        company = [Company.name for Company in Company.objects.filter(name=name)]
-        return Response(company)
 
 class ExempleView(APIView):
 
