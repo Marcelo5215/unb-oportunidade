@@ -17,9 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from unb_oportunidade_src.views import IndexView
 from api.views import ExempleView
-from api.views import ListCompany
 from api.views import ListCourses
-from api.views import ListVacants
 from api.views import ListOportunity
 from api.views import SearchCompany
 from api.views import SearchVacancy
@@ -37,9 +35,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^/$', IndexView.as_view()),
     url(r'^api/exemplo/get/$', ExempleView.as_view()),
-    url(r'^api/busca/company/$', ListCompany.as_view()),
     url(r'^api/busca/course/$', ListCourses.as_view()),
-    url(r'^api/busca/vacants/$', ListVacants.as_view()),
     url(r'^api/busca/SearchCompany/$', SearchCompany.as_view()),
     url(r'^api/busca/SearchVacancy/$', SearchVacancy.as_view()),
     url(r'^api/busca/FilterCompanies/(?P<name>[^\d+]*)/$', FilterCompanies.as_view()),
