@@ -9,24 +9,21 @@ from api.models import Phone
 
 
 class UserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
-        fields = ('id','username','email','password')
+        fields = ('id', 'username', 'email', 'password')
 
 
 class AddressSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Address
-        fields = ('city','neighborhood','number','complement','zip_code','public_place')
+        fields = ('city', 'neighborhood', 'number', 'complement', 'zip_code', 'public_place')
 
 
 class PhoneSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Phone
-        fields = ('phone_number')
+        fields = 'phone'
 
 
 class CompanySerializer(serializers.ModelSerializer):
@@ -39,5 +36,3 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = ('company_user', 'cnpj', 'name',
                   'corporate_name', 'phone_number', 'company_address', 'company_phone')
         read_only_fields = ('created_at', 'updated_at')
-
-

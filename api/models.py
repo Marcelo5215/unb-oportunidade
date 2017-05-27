@@ -6,24 +6,8 @@ from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 
 
-class Student(models.Model):
-    cpf = models.CharField(primary_key=True, max_length=11, validators=[RegexValidator(r'^\d{11}$')])
-    first_name = models.CharField(max_length=45)
-    last_name = models.CharField(max_length=45)
-    email = models.EmailField()
-    id_user = models.ForeignKey(User, unique=True)
-    phone_number = models.CharField(max_length=45)
-    regular_student = models.BooleanField()
-
-    class Meta:
-        db_table = 'students'
-
-    def __unicode__(self):
-        return '[{}] {}'.format(self.id_user, self.cpf)
-
-
 class Address(models.Model):
-    id_adress = models.AutoField(primary_key=True)
+    id_address = models.AutoField(primary_key=True)
     city = models.CharField(max_length=45)
     neighborhood = models.CharField(max_length=45)
     number = models.CharField(max_length=4)
@@ -35,7 +19,32 @@ class Address(models.Model):
         db_table = 'Address'
 
     def __unicode__(self):
-        return '{}'.format(self.id_adress)
+        return '{}'.format(self.id_address)
+
+
+class BankAccounts(models.Model):
+    id_bank_accounts = models.AutoField(primary_key=True)
+    account_number = models.CharField(max_length=20)
+    agency_number = models.CharField(max_length=10)
+    bank_names_bank_number = models.ForeignKey(BankNames)
+    student_cpf = models.ForeignKey(Student)
+
+    class Meta:
+        db_table = 'Bank_accounts'
+
+    def __unicode__(self):
+        return '{} [{}] [{}]'.format(self.id_bank_accounts, self.bank_names_bank_number, self.student_cpf)
+
+
+class BankNames(models.Model):
+    bank_number = models.IntegerField(primary_key=True)
+    bank_name = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'Bank_names'
+
+    def __unicode__(self):
+        return self.bank_number
 
 
 class Company(models.Model):
@@ -54,11 +63,6 @@ class Company(models.Model):
 
     def __unicode__(self):
         return '{} [{}]'.format(self.cnpj, self.address_id)
-
-
-class File(models.Model):
-    file_name = models.CharField(max_length=500)
-    file_path = models.CharField(max_length=500)
 
 
 class Course(models.Model):
@@ -90,28 +94,9 @@ class Curriculum(models.Model):
         return '[{}] [{}] {}'.format(self.cpf, self.course_id, self.file_id)
 
 
-class VacantJob(models.Model):
-    id_vacancy = models.AutoField(primary_key=True)
-    role = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
-
-    class Meta:
-        db_table = 'Vacant_jobs'
-
-    def __unicode__(self):
-        return '{}'.format(self.id_vacancy)
-
-
-class VacantJobHasCourse(models.Model):
-    vacant_job_id = models.ForeignKey(Student, primary_key=True)
-    course_id = models.ForeignKey(Course)
-
-    class Meta:
-        db_table = 'Vacant_job_has_course'
-
-    def __unicode__(self):
-        return '[{}] [{}]'.format(self.vacant_job_id, self.course_id)
+class File(models.Model):
+    file_name = models.CharField(max_length=500)
+    file_path = models.CharField(max_length=500)
 
 
 class Hiring(models.Model):
@@ -128,6 +113,17 @@ class Hiring(models.Model):
 
     def __unicode__(self):
         return '[{}] [{}] [{}] {}'.format(self.id_student, self.id_company, self.id_vacancy, self.id_hiring)
+
+
+class Phone(models.Model):
+    id_phone = models.AutoField(primary_key=True)
+    phone = models.CharField(max_length=15)
+
+    class Meta:
+        db_table = 'Phone'
+
+    def __unicode__(self):
+        return '{}'.format(self.phone)
 
 
 class Requirements(models.Model):
@@ -159,26 +155,41 @@ class Review(models.Model):
         return '{} [{}] [{}]'.format(self.id_review, self.cnpj_company, self.hiring_id)
 
 
-class BankNames(models.Model):
-    bank_number = models.IntegerField(primary_key=True)
-    bank_name = models.CharField(max_length=100)
+class Student(models.Model):
+    cpf = models.CharField(primary_key=True, max_length=11, validators=[RegexValidator(r'^\d{11}$')])
+    first_name = models.CharField(max_length=45)
+    last_name = models.CharField(max_length=45)
+    email = models.EmailField()
+    id_user = models.ForeignKey(User, unique=True)
+    phone_number = models.CharField(max_length=45)
+    regular_student = models.BooleanField()
 
     class Meta:
-        db_table = 'Bank_names'
+        db_table = 'students'
 
     def __unicode__(self):
-        return self.bank_number
+        return '[{}] {}'.format(self.id_user, self.cpf)
 
 
-class BankAccounts(models.Model):
-    id_bank_accounts = models.AutoField(primary_key=True)
-    account_number = models.CharField(max_length=20)
-    agency_number = models.CharField(max_length=10)
-    bank_names_bank_number = models.ForeignKey(BankNames)
-    student_cpf = models.ForeignKey(Student)
+class VacantJob(models.Model):
+    id_vacancy = models.AutoField(primary_key=True)
+    role = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     class Meta:
-        db_table = 'Bank_accounts'
+        db_table = 'Vacant_jobs'
 
     def __unicode__(self):
-        return '{} [{}] [{}]'.format(self.id_bank_accounts, self.bank_names_bank_number, self.student_cpf)
+        return '{}'.format(self.id_vacancy)
+
+
+class VacantJobHasCourse(models.Model):
+    vacant_job_id = models.ForeignKey(Student, primary_key=True)
+    course_id = models.ForeignKey(Course)
+
+    class Meta:
+        db_table = 'Vacant_job_has_course'
+
+    def __unicode__(self):
+        return '[{}] [{}]'.format(self.vacant_job_id, self.course_id)
