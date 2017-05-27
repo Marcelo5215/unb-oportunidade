@@ -10,4 +10,7 @@ local_settings.py
 db.sqlite3
 media
 
+### PyCharm / JetBrains ###
+.idea/
+
 # End of https://www.gitignore.io/api/django

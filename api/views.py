@@ -10,10 +10,10 @@ from rest_framework.response import Response
 
 from api.models import Company
 from api.models import Course
-from api.models import Vacant_job
+from api.models import VacantJob
 from api.models import Student
 from api.models import Curriculum
-from api.models import Vacant_job_has_course
+from api.models import VacantJobHasCourse
 from api.models import Hiring
 
 import datetime
