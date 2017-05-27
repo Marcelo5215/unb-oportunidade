@@ -11,4 +11,14 @@ angular.module('unbOportunidade')
         }
       });
 
+    // $stateProvider
+    //   .state('financialData', {
+    //     url: '/admin/financial',
+    //     views: {
+    //       'content@' : {
+    //         template: '<enterprise-data></enterprise-data>'
+    //       }
+    //     }
+    //   });
+
   });

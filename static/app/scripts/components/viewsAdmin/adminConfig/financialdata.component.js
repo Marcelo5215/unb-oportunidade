@@ -2,14 +2,16 @@
 
   angular.module('unbOportunidade')
     .component('enterprisedata', {
-      templateUrl: 'static/app/scripts/components/adminconfig/financialdata/financialdata.html',
+      templateUrl: 'static/app/scripts/components/viewsAdmin/adminConfig/financialdata.html',
       controller: FinancialController
     });
 
-  .controller("FinancialController", ["$scope", function($scope) {
+  function FinancialController($scope) {
     $scope.pj_id = 1;
     $scope.pf_id = 2;
 
-  }]);
+  }
+
+
 
 })();
