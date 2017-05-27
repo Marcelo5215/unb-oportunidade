@@ -11,19 +11,22 @@ from api.models import Phone
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password')
+        fields = '__all__'
+        # fields = ('id', 'email', 'password')
 
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
-        fields = ('city', 'neighborhood', 'number', 'complement', 'zip_code', 'public_place')
+        fields = '__all__'
+        # fields = ('city', 'neighborhood', 'number', 'complement', 'zip_code', 'public_place')
 
 
 class PhoneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Phone
-        fields = 'phone'
+        fields = '__all__'
+        # fields = 'phone'
 
 
 class CompanySerializer(serializers.ModelSerializer):

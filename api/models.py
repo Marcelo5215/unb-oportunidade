@@ -1,3 +1,10 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
+#   * Remove `` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from __future__ import unicode_literals
 
 from django.db import models
@@ -7,181 +14,221 @@ from django.core.validators import RegexValidator
 
 
 class Address(models.Model):
-    id_address = models.AutoField(primary_key=True)
-    city = models.CharField(max_length=45)
-    neighborhood = models.CharField(max_length=45)
-    number = models.CharField(max_length=4)
-    complement = models.CharField(max_length=45)
-    zip_code = models.CharField(max_length=8)
-    public_place = models.CharField(max_length=45)
+    id = models.IntegerField(primary_key=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
+    neighborhood = models.CharField(max_length=100, blank=True, null=True)
+    public_place = models.CharField(db_column='public place', max_length=45, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    number = models.CharField(max_length=4, blank=True, null=True)
+    complement = models.CharField(max_length=100, blank=True, null=True)
+    cep = models.CharField(max_length=8, blank=True, null=True)
 
-    class Meta:
-        db_table = 'Address'
+    class Meta:        
+        db_table = 'address'
 
-    def __unicode__(self):
-        return '{}'.format(self.id_address)
 
-class Student(models.Model):
-    cpf = models.CharField(primary_key=True, max_length=11, validators=[RegexValidator(r'^\d{11}$')])
-    first_name = models.CharField(max_length=45)
-    last_name = models.CharField(max_length=45)
-    email = models.EmailField()
-    id_user = models.ForeignKey(User, unique=True)
-    phone_number = models.CharField(max_length=45)
-    regular_student = models.BooleanField()
+class Advisor(models.Model):
+    advisor_id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=200)
+    curso = models.ForeignKey('Course', db_column='curso', blank=True, null=True)
 
-    class Meta:
-        db_table = 'students'
+    class Meta:        
+        db_table = 'advisor'
 
-    def __unicode__(self):
-        return '[{}] {}'.format(self.id_user, self.cpf)
+
+class BankAccounts(models.Model):
+    idbank_accounts = models.IntegerField(primary_key=True)
+    account_number = models.CharField(max_length=20, blank=True, null=True)
+    agency_number = models.CharField(max_length=10, blank=True, null=True)
+    bank_names_bank_number = models.ForeignKey('BankNames', db_column='bank_names_bank_number')
+    student_cpf = models.ForeignKey('Student', db_column='student_cpf')
+
+    class Meta:        
+        db_table = 'bank_accounts'
+
 
 class BankNames(models.Model):
     bank_number = models.IntegerField(primary_key=True)
-    bank_name = models.CharField(max_length=100)
+    bank_name = models.CharField(max_length=100, blank=True, null=True)
 
-    class Meta:
-        db_table = 'Bank_names'
-
-    def __unicode__(self):
-        return self.bank_number
-
-class BankAccounts(models.Model):
-    id_bank_accounts = models.AutoField(primary_key=True)
-    account_number = models.CharField(max_length=20)
-    agency_number = models.CharField(max_length=10)
-    bank_names_bank_number = models.ForeignKey(BankNames)
-    student_cpf = models.ForeignKey(Student)
-
-    class Meta:
-        db_table = 'Bank_accounts'
-
-    def __unicode__(self):
-        return '{} [{}] [{}]'.format(self.id_bank_accounts, self.bank_names_bank_number, self.student_cpf)
+    class Meta:        
+        db_table = 'bank_names'
 
 
 class Company(models.Model):
-    cnpj = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=45)
-    corporate_name = models.CharField(max_length=45)
-    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
-    address_id = models.ForeignKey(Address)
-    id_user = models.ForeignKey(User, unique=True)
-    phone_number = models.CharField(max_length=45)
-    agreement = models.BooleanField()
+    name = models.CharField(max_length=45, blank=True, null=True)
+    cnpj = models.IntegerField(primary_key=True, max_length=14, validators=[RegexValidator(r'^\d{14}$')])
+    corporate_name = models.CharField(max_length=45, blank=True, null=True)
+    createdat = models.DateTimeField(db_column='createdAt', blank=True, null=True)  # Field name made lowercase.
+    updateat = models.DateTimeField(db_column='updateAt', blank=True, null=True)  # Field name made lowercase.
+    address = models.ForeignKey(Address, db_column='address', blank=True, null=True)
+    iduser = models.ForeignKey('User', db_column='idUser', blank=True, null=True)  # Field name made lowercase.
+    agreement = models.IntegerField(blank=True, null=True)
+    intermediate = models.CharField(max_length=100, blank=True, null=True)
 
-    class Meta:
-        db_table = 'Companies'
+    class Meta:        
+        db_table = 'company'
 
-    def __unicode__(self):
-        return '{} [{}]'.format(self.cnpj, self.address_id)
+
+class CompanyHasPhone(models.Model):
+    company_cnpj = models.ForeignKey(Company, db_column='company_cnpj', primary_key=True)
+    phone = models.ForeignKey('Phone')
+
+    class Meta:        
+        db_table = 'company_has_phone'
+        unique_together = (('company_cnpj', 'phone'),)
 
 
 class Course(models.Model):
-    id_course = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    abbreviation = models.CharField(max_length=10)
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    abbreviation = models.CharField(max_length=10, blank=True, null=True)
 
-    class Meta:
-        db_table = 'Courses'
+    class Meta:        
+        db_table = 'course'
 
-    def __unicode__(self):
-        return '{}'.format(self.id_course)
-
-class File(models.Model):
-    file_name = models.CharField(max_length=500)
-    file_path = models.CharField(max_length=500)
 
 class Curriculum(models.Model):
-    cpf = models.ForeignKey(Student, primary_key=True)
-    time_desired = models.IntegerField()
-    work_shift = models.CharField(max_length=20)
-    file_id = models.ForeignKey(File)
-    university = models.CharField(max_length=45)
-    additional_info = models.CharField(max_length=900)
-    semester = models.IntegerField()
-    course_id = models.ForeignKey(Course)
+    cpf = models.ForeignKey('Student', db_column='cpf', primary_key=True)
+    time_desired = models.IntegerField(blank=True, null=True)
+    work_shift = models.CharField(max_length=20, blank=True, null=True)
+    file = models.ForeignKey('File', blank=True, null=True)
+    university = models.CharField(max_length=45, blank=True, null=True)
+    aditional_info = models.CharField(max_length=900, blank=True, null=True)
+    semester = models.IntegerField(blank=True, null=True)
+    course = models.ForeignKey(Course, blank=True, null=True)
 
-    class Meta:
-        db_table = 'Curriculum'
-
-    def __unicode__(self):
-        return '[{}] [{}] {}'.format(self.cpf, self.course_id, self.file_id)
-
-class VacantJob(models.Model):
-    id_vacancy = models.AutoField(primary_key=True)
-    role = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
-
-    class Meta:
-        db_table = 'Vacant_jobs'
-
-    def __unicode__(self):
-        return '{}'.format(self.id_vacancy)
+    class Meta:        
+        db_table = 'curriculum'
 
 
-class VacantJobHasCourse(models.Model):
-    vacant_job_id = models.ForeignKey(Student, primary_key=True)
-    course_id = models.ForeignKey(Course)
+class File(models.Model):
+    id = models.IntegerField(primary_key=True)
+    filename = models.CharField(max_length=500, blank=True, null=True)
+    filepath = models.CharField(max_length=500, blank=True, null=True)
 
-    class Meta:
-        db_table = 'Vacant_job_has_course'
+    class Meta:        
+        db_table = 'file'
 
-    def __unicode__(self):
-        return '[{}] [{}]'.format(self.vacant_job_id, self.course_id)
 
 class Hiring(models.Model):
-    id_hiring = models.AutoField(primary_key=True, )
-    contracted_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    contract_end = models.DateTimeField(auto_now_add=True, auto_now=False)
-    active = models.BooleanField()
-    id_student = models.ForeignKey(Student)
-    id_company = models.ForeignKey(Company)
-    id_vacancy = models.ForeignKey(VacantJob)
+    id_hiring = models.IntegerField(primary_key=True)
+    contractedat = models.DateTimeField(db_column='contractedAt', blank=True, null=True)  # Field name made lowercase.
+    contratactend = models.DateTimeField(db_column='contratactEnd', blank=True, null=True)  # Field name made lowercase.
+    active = models.IntegerField(blank=True, null=True)
+    id_student = models.ForeignKey('Student', db_column='id_student', blank=True, null=True)
+    id_company = models.ForeignKey(Company, db_column='id_company', blank=True, null=True)
+    id_vacant_job = models.ForeignKey('VacantJob', db_column='id_vacant_job', blank=True, null=True)
+    additive_first = models.DateTimeField(blank=True, null=True)
+    additive_second = models.DateTimeField(blank=True, null=True)
+    additive_third = models.DateTimeField(blank=True, null=True)
+    additive_fourth = models.DateTimeField(blank=True, null=True)
+    document_enter = models.DateTimeField(blank=True, null=True)
+    advisor_first = models.ForeignKey(Advisor, db_column='advisor_first', blank=True, null=True, related_name='advisor_first')
+    advisor_second = models.ForeignKey(Advisor, db_column='advisor_second', blank=True, null=True)
+    broken_contract = models.DateTimeField(blank=True, null=True)
+    document_left = models.DateTimeField(blank=True, null=True)
+    comments = models.CharField(max_length=1000, blank=True, null=True)
 
-    class Meta:
-        db_table = 'Hiring'
+    class Meta:        
+        db_table = 'hiring'
 
-    def __unicode__(self):
-        return '[{}] [{}] [{}] {}'.format(self.id_student, self.id_company, self.id_vacancy, self.id_hiring)
 
 class Phone(models.Model):
-    id_phone = models.AutoField(primary_key=True)
-    phone = models.CharField(max_length=15)
+    id = models.IntegerField(primary_key=True)
+    phone = models.CharField(max_length=15, blank=True, null=True)
 
-    class Meta:
-        db_table = 'Phone'
-
-    def __unicode__(self):
-        return '{}'.format(self.phone)
+    class Meta:        
+        db_table = 'phone'
 
 
-class Requirements(models.Model):
-    id_requirements = models.AutoField(primary_key=True)
-    work_shift = models.CharField(max_length=20)
-    workload = models.IntegerField()
-    additional_info = models.CharField(max_length=500)
-    minimum_period = models.IntegerField()
+class Requirement(models.Model):
+    id = models.IntegerField(primary_key=True)
+    workload = models.IntegerField(blank=True, null=True)
+    work_shift = models.CharField(max_length=20, blank=True, null=True)
+    additional_information = models.CharField(max_length=500, blank=True, null=True)
+    minimun_period = models.IntegerField(blank=True, null=True)
 
-    class Meta:
-        db_table = 'Requirements'
-
-    def __unicode__(self):
-        return '{}'.format(self.id_requirements)
+    class Meta:        
+        db_table = 'requirement'
 
 
 class Review(models.Model):
-    id_review = models.AutoField(primary_key=True)
-    destiny = models.IntegerField()
-    stars = models.IntegerField()
-    feedback = models.CharField(max_length=500)
-    cnpj_company = models.ForeignKey(Company)
-    hiring_id = models.ForeignKey(Hiring)
+    id = models.IntegerField(primary_key=True)
+    destiny = models.IntegerField(blank=True, null=True)
+    stars = models.IntegerField(blank=True, null=True)
+    feedback = models.CharField(max_length=500, blank=True, null=True)
+    company_cnpj = models.ForeignKey(Company, db_column='company_cnpj', blank=True, null=True)
+    hiring = models.ForeignKey(Hiring, blank=True, null=True)
 
-    class Meta:
-        db_table = 'Reviews'
+    class Meta:        
+        db_table = 'review'
 
-    def __unicode__(self):
-        return '{} [{}] [{}]'.format(self.id_review, self.cnpj_company, self.hiring_id)
+
+class Role(models.Model):
+    id = models.IntegerField(primary_key=True)
+    label = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:        
+        db_table = 'role'
+
+
+class Student(models.Model):
+    cpf = models.IntegerField(primary_key=True, max_length=11, validators=[RegexValidator(r'^\d{11}$')])
+    first_name = models.CharField(max_length=45, blank=True, null=True)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    full_name = models.CharField(max_length=200, blank=True, null=True)
+    regular_student = models.IntegerField(blank=True, null=True)
+    address = models.ForeignKey(Address, blank=True, null=True)
+    registration_number = models.CharField(max_length=20, blank=True, null=True)
+    course = models.ForeignKey(Course, db_column='course', blank=True, null=True)
+
+    class Meta:        
+        db_table = 'student'
+
+
+class StudentHasPhone(models.Model):
+    student = models.ForeignKey(Student, primary_key=True)
+    phone = models.ForeignKey(Phone)
+
+    class Meta:        
+        db_table = 'student_has_phone'
+        unique_together = (('student', 'phone'),)
+
+
+class User(models.Model):
+    id = models.IntegerField(primary_key=True)
+    email = models.CharField(max_length=45, blank=True, null=True)
+    password = models.CharField(max_length=45, blank=True, null=True)
+    tp_user = models.ForeignKey(Role, db_column='tp_user', blank=True, null=True)
+    student_cpf = models.ForeignKey(Student, db_column='student_cpf')
+
+    class Meta:        
+        db_table = 'user'
+
+
+class VacantJob(models.Model):
+    id = models.IntegerField(primary_key=True)
+    role = models.CharField(max_length=200, blank=True, null=True)
+    createdat = models.DateTimeField(db_column='createdAt', blank=True, null=True)  # Field name made lowercase.
+    updateat = models.DateTimeField(db_column='updateAt', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:        
+        db_table = 'vacant_job'
+
+
+class VacantJobHasCourse(models.Model):
+    vacant_job = models.ForeignKey(VacantJob, primary_key=True)
+    course = models.ForeignKey(Course)
+
+    class Meta:        
+        db_table = 'vacant_job_has_course'
+        unique_together = (('vacant_job', 'course'),)
+
+
+class VacantJobHasRequirement(models.Model):
+    vacant_job = models.ForeignKey(VacantJob, primary_key=True)
+    requirement = models.ForeignKey(Requirement)
+
+    class Meta:        
+        db_table = 'vacant_job_has_requirement'
+        unique_together = (('vacant_job', 'requirement'),)
