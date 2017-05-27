@@ -16,6 +16,10 @@
 3. Baixe os componentes do bower com 'bower install';
 4. E por fim rode o gulp com 'gulp';
 
+## Back-End:
+- Instalar o driver mysqlclient:
+1. sudo apt-get install libmysqlclient-dev
+2. sudo pip3 install mysqlclient (caso não funcione, use pip)
 
 ### Branch's:
 
