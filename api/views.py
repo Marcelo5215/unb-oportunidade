@@ -27,7 +27,7 @@ class ListCourses(APIView):
 
 class SearchVacancy(APIView):
     def get(self, request, format=None):
-        vacancy = Vacant_job.objects.all()
+        vacancy = VacantJob.objects.all()
 
         #Parametro icreated: data de insercao minima (deve ser passada no formato YYYYMM)
         if 'icreated' in request.GET:
@@ -51,7 +51,7 @@ class SearchVacancy(APIView):
 
         #Parametro course: Curso da vaga (deve ser passada abreviacao do curso)
         if 'course' in request.GET:
-            courses = [Vacant_job_has_course.vacant_job_id_id  for Vacant_job_has_course in Vacant_job_has_course.objects.all().filter(course_id__abbreviation = request.GET.get('course'))]
+            courses = [VacantJobHasCourse.vacant_job_id_id  for VacantJobHasCourse in VacantJobHasCourse.objects.all().filter(course_id__abbreviation = request.GET.get('course'))]
             vacancy = vacancy.filter(id_vacancy__in = courses)
 
         #Parametro company: Nome da empresa que oferece a vaga
@@ -59,7 +59,7 @@ class SearchVacancy(APIView):
             companies = [Hiring.id_vacancy_id  for Hiring in Hiring.objects.filter(id_company__name__icontains = request.GET.get('company'))]
             vacancy = vacancy.filter(id_vacancy__in = companies)
 
-        vacancy = [Vacant_job.role for Vacant_job in vacancy]
+        vacancy = [VacantJob.role for VacantJob in vacancy]
 
         return Response(vacancy)
 
@@ -68,9 +68,14 @@ class SearchCompany(APIView):
     def get(self, request, format=None):
 
         if 'id' in request.GET:
-            cpf = list(Student.objects.filter(id_user= request.GET.get('id')))
-            if not cpf:
+            info = list(Student.objects.filter(id_user= request.GET.get('id')))
+            if not info:
                 raise Http404("Not exist this user.")
+
+            try:
+                cpf = [Student.cpf for Student in Student.objects.filter(id_user=request.GET.get('id'))]
+            except Student.DoesNotExist:
+                cpf = None
 
             try:
                 curriculum_info = [Curriculum.course_id_id for Curriculum in Curriculum.objects.filter(cpf_id=cpf[0])]
@@ -78,7 +83,7 @@ class SearchCompany(APIView):
                 curriculum_info = None
 
             try:
-                vacant_job_info = [Vacant_job_has_course.vacant_job_id_id  for Vacant_job_has_course in Vacant_job_has_course.objects.all().filter(course_id_id=curriculum_info[0])]
+                vacant_job_info = [VacantJobHasCourse.vacant_job_id_id  for VacantJobHasCourse in VacantJobHasCourse.objects.all().filter(course_id_id=curriculum_info[0])]
             except Curriculum.DoesNotExist:
                 vacant_job_info = None
 
@@ -100,7 +105,7 @@ class SearchCompany(APIView):
                 except Company.DoesNotExist:
                     sql_companies_name = None
 
-            return Response(companies_name)
+            return Response(cpf[0])
 
         elif 'name' in request.GET:
                 company_name = list(Company.objects.filter(name=request.GET.get('name')))
@@ -128,14 +133,14 @@ class SearchOportunity(APIView):
                 curriculum_info = None
 
             try:
-                vacant_job_info = [Vacant_job_has_course.vacant_job_id_id  for Vacant_job_has_course in Vacant_job_has_course.objects.all().filter(course_id_id=curriculum_info[0])]
+                vacant_job_info = [VacantJobHasCourse.vacant_job_id_id  for VacantJobHasCourse in VacantJobHasCourse.objects.all().filter(course_id_id=curriculum_info[0])]
             except Curriculum.DoesNotExist:
                 vacant_job_info = None
 
             oportunity_name = []
             for vacant_job in vacant_job_info:
                 try:
-                    oportunity = [Vacant_job.role  for Vacant_job in Vacant_job.objects.filter(id_vacancy=vacant_job)]
+                    oportunity = [VacantJob.role  for VacantJob in VacantJob.objects.filter(id_vacancy=vacant_job)]
                     for name in oportunity: 
                         oportunity_name.append(oportunity)
                 except Curriculum.DoesNotExist:

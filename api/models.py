@@ -21,6 +21,30 @@ class Address(models.Model):
     def __unicode__(self):
         return '{}'.format(self.id_address)
 
+class Student(models.Model):
+    cpf = models.CharField(primary_key=True, max_length=11, validators=[RegexValidator(r'^\d{11}$')])
+    first_name = models.CharField(max_length=45)
+    last_name = models.CharField(max_length=45)
+    email = models.EmailField()
+    id_user = models.ForeignKey(User, unique=True)
+    phone_number = models.CharField(max_length=45)
+    regular_student = models.BooleanField()
+
+    class Meta:
+        db_table = 'students'
+
+    def __unicode__(self):
+        return '[{}] {}'.format(self.id_user, self.cpf)
+
+class BankNames(models.Model):
+    bank_number = models.IntegerField(primary_key=True)
+    bank_name = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'Bank_names'
+
+    def __unicode__(self):
+        return self.bank_number
 
 class BankAccounts(models.Model):
     id_bank_accounts = models.AutoField(primary_key=True)
@@ -34,17 +58,6 @@ class BankAccounts(models.Model):
 
     def __unicode__(self):
         return '{} [{}] [{}]'.format(self.id_bank_accounts, self.bank_names_bank_number, self.student_cpf)
-
-
-class BankNames(models.Model):
-    bank_number = models.IntegerField(primary_key=True)
-    bank_name = models.CharField(max_length=100)
-
-    class Meta:
-        db_table = 'Bank_names'
-
-    def __unicode__(self):
-        return self.bank_number
 
 
 class Company(models.Model):
@@ -76,6 +89,9 @@ class Course(models.Model):
     def __unicode__(self):
         return '{}'.format(self.id_course)
 
+class File(models.Model):
+    file_name = models.CharField(max_length=500)
+    file_path = models.CharField(max_length=500)
 
 class Curriculum(models.Model):
     cpf = models.ForeignKey(Student, primary_key=True)
@@ -93,11 +109,28 @@ class Curriculum(models.Model):
     def __unicode__(self):
         return '[{}] [{}] {}'.format(self.cpf, self.course_id, self.file_id)
 
+class VacantJob(models.Model):
+    id_vacancy = models.AutoField(primary_key=True)
+    role = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
 
-class File(models.Model):
-    file_name = models.CharField(max_length=500)
-    file_path = models.CharField(max_length=500)
+    class Meta:
+        db_table = 'Vacant_jobs'
 
+    def __unicode__(self):
+        return '{}'.format(self.id_vacancy)
+
+
+class VacantJobHasCourse(models.Model):
+    vacant_job_id = models.ForeignKey(Student, primary_key=True)
+    course_id = models.ForeignKey(Course)
+
+    class Meta:
+        db_table = 'Vacant_job_has_course'
+
+    def __unicode__(self):
+        return '[{}] [{}]'.format(self.vacant_job_id, self.course_id)
 
 class Hiring(models.Model):
     id_hiring = models.AutoField(primary_key=True, )
@@ -113,7 +146,6 @@ class Hiring(models.Model):
 
     def __unicode__(self):
         return '[{}] [{}] [{}] {}'.format(self.id_student, self.id_company, self.id_vacancy, self.id_hiring)
-
 
 class Phone(models.Model):
     id_phone = models.AutoField(primary_key=True)
@@ -153,43 +185,3 @@ class Review(models.Model):
 
     def __unicode__(self):
         return '{} [{}] [{}]'.format(self.id_review, self.cnpj_company, self.hiring_id)
-
-
-class Student(models.Model):
-    cpf = models.CharField(primary_key=True, max_length=11, validators=[RegexValidator(r'^\d{11}$')])
-    first_name = models.CharField(max_length=45)
-    last_name = models.CharField(max_length=45)
-    email = models.EmailField()
-    id_user = models.ForeignKey(User, unique=True)
-    phone_number = models.CharField(max_length=45)
-    regular_student = models.BooleanField()
-
-    class Meta:
-        db_table = 'students'
-
-    def __unicode__(self):
-        return '[{}] {}'.format(self.id_user, self.cpf)
-
-
-class VacantJob(models.Model):
-    id_vacancy = models.AutoField(primary_key=True)
-    role = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
-
-    class Meta:
-        db_table = 'Vacant_jobs'
-
-    def __unicode__(self):
-        return '{}'.format(self.id_vacancy)
-
-
-class VacantJobHasCourse(models.Model):
-    vacant_job_id = models.ForeignKey(Student, primary_key=True)
-    course_id = models.ForeignKey(Course)
-
-    class Meta:
-        db_table = 'Vacant_job_has_course'
-
-    def __unicode__(self):
-        return '[{}] [{}]'.format(self.vacant_job_id, self.course_id)
