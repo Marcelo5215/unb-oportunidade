@@ -105,7 +105,7 @@ class SearchCompany(APIView):
                 except Company.DoesNotExist:
                     sql_companies_name = None
 
-            return Response(cpf[0])
+            return Response(companies_name)
 
         elif 'name' in request.GET:
                 company_name = list(Company.objects.filter(name=request.GET.get('name')))
