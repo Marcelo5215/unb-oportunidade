@@ -1,12 +1,12 @@
 (function() {
 
   angular.module('unbOportunidade')
-    .component('enterprisedata', {
+    .component('financialData', {
       templateUrl: 'static/app/scripts/components/viewsAdmin/adminConfig/financialdata.html',
-      controller: FinancialController
+      controller: FinancialDataController
     });
 
-  function FinancialController($scope) {
+  function FinancialDataController($scope) {
     $scope.pj_id = 1;
     $scope.pf_id = 2;
 
