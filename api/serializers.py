@@ -11,7 +11,7 @@ from api.models import Company, Address, Phone, Student
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        #fields = '__all__'
+        # fields = '__all__'
         fields = ('email', 'password', 'tp_user')
 
 
@@ -30,7 +30,7 @@ class PhoneSerializer(serializers.ModelSerializer):
 
 
 class CompanySerializer(serializers.ModelSerializer):
-    # # company_user = UserSerializer()
+    # company_user = UserSerializer()
     company_address = AddressSerializer()
     company_phone = PhoneSerializer()
 

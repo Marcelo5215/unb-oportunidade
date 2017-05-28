@@ -21,9 +21,12 @@ from api.views import ListCourses
 from api.views import SearchCompany
 from api.views import SearchVacancy
 from api.views import SearchOportunity
+<<<<<<< Updated upstream
 #from api.views import AddCompanyRegister
 #from api.views import AddStudentRegister
 
+=======
+>>>>>>> Stashed changes
 
 from api.views import StudentListAPIView, UserListAPIView, StudentCreateAPIView, StudentDetailAPIView, CompanyCreateAPIView, CompanyListAPIView
 
@@ -37,14 +40,12 @@ from rest_framework_jwt.views import verify_jwt_token
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^admin/', admin.site.urls),
-  # url(r'^/$', IndexView.as_view()),
-   # url(r'^api/user/create/$', UserCreateAPIView.as_view(), name='create'),
-    url(r'^api/users/$', UserListAPIView.as_view(), name='users'),
+    url(r'^/$', IndexView.as_view()),
     url(r'^api/students/create/$', StudentCreateAPIView.as_view(), name='create-student'),
     url(r'^api/company/create/$', CompanyCreateAPIView.as_view(), name='create-company'),
     url(r'^api/companies/$', CompanyListAPIView.as_view(), name='companies'),
     url(r'^api/students/$', StudentListAPIView.as_view(), name='students'),
-    url(r'^api/students/(?P<cpf>[\w-]+)/$', StudentDetailAPIView.as_view(), name='students'),
+    #url(r'^api/students/(?P<cpf>[\w-]+)/$', StudentDetailAPIView.as_view(), name='students'),
     url(r'^api/exemplo/get/$', ExempleView.as_view()),
     url(r'^api/busca/course/$', ListCourses.as_view()),
     url(r'^api/busca/SearchCompany/$', SearchCompany.as_view()),
