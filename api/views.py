@@ -68,12 +68,12 @@ class SearchCompany(APIView):
     def get(self, request, format=None):
 
         if 'id' in request.GET:
-            info = list(Student.objects.filter(id_user= request.GET.get('id')))
+            info = list(Student.objects.filter(user= request.GET.get('id')))
             if not info:
                 raise Http404("Not exist this user.")
 
             try:
-                cpf = [Student.cpf for Student in Student.objects.filter(id_user=request.GET.get('id'))]
+                cpf = [Student.cpf for Student in Student.objects.filter(user=request.GET.get('id'))]
             except Student.DoesNotExist:
                 cpf = None
 
@@ -123,7 +123,7 @@ class SearchOportunity(APIView):
 
         if 'id' in request.GET:
 
-            cpf = list(Student.objects.filter(id_user= request.GET.get('id')))
+            cpf = list(Student.objects.filter(user= request.GET.get('id')))
             if not cpf:
                 raise Http404("Not exist this user.")
 
