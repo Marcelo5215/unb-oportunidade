@@ -6,6 +6,8 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
+from .serializers import UserSerializer, StudentSerializer, CompanySerializer
 from django.views.decorators.csrf import csrf_exempt
 import json
 
@@ -21,7 +23,7 @@ from api.models import VacantJob
 from api.models import Student
 from api.models import Curriculum
 from api.models import VacantJobHasCourse
-from api.models import Hiring
+from api.models import Hiring,User
 
 import datetime
 
@@ -154,59 +156,40 @@ class SearchOportunity(APIView):
                     oportunity = None
 
             return Response(oportunity_name)
+            
+# User = get_user_model()
 
-class AddCompanyRegister(APIView):
-
-    authentication_classes = (SessionAuthentication, BasicAuthentication)
-    permission_classes = (IsAuthenticated,)
-
-    def post(self, request, format=None):
-        #if request.method == 'POST':
-        received = json.loads(request.body)
-        company = Company()
-
-        company.cnpj = received.get('cnpj', None)
-        company.name = received.get('name', None)
-        company.corporate_name = received.get('corporate_name', None)
-        company.address_id = received.get('address_id', None)
-        #company.id_user = received.get('id_user', None)
-        company.phone_number = received.get('phone_number', None)
-        company.agreement = received.get('agreement', None)
-    
-        company.save()
- 
-class AddStudentRegister(APIView):
-
-   # authentication_classes = (SessionAuthentication, BasicAuthentication)
-    #permission_classes = (IsAuthenticated,)
-    #permission_classes = (AllowAny,)
-    
-    def post(self, request, format=None):
-        #if request.method == 'POST':
-        received = json.load(request.body) 
-        student = Student()
-
-        student.cpf = received.get('cpf', None)
-        student.first_name = received.get('first_name', None)
-        student.last_name = received.get('last_name', None)
-        student.email = received.get('email', None)
-        #student.id_user = received.get('id_user', None)
-        student.phone_number = received.get('phone_number', None)
-        student.regular_student = received.get('regular_student', None)
-        
-        try:
-            validate_email(student.email)
-            valid_email = True
-        
-        except validate_email.ValidationError:
-                valid_email = False
+# class UserCreateAPIView(CreateAPIView):
+#     serializer_class = UserCreateSerializer
+#     queryset = User.objects.all()
+#     permissions_classes = [AllowAny]
 
 
-        if valid_email == True:
-            student.save()
+class CompanyCreateAPIView(CreateAPIView):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
 
-        else:
-            raise ValidationError("Email invalid.")
+class CompanyListAPIView(ListAPIView):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+
+class StudentCreateAPIView(CreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+class StudentListAPIView(ListAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+class StudentDetailAPIView(RetrieveAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+class UserListAPIView(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 
 
 class ExempleView(APIView):
