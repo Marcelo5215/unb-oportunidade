@@ -2,11 +2,18 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
 from django.http import JsonResponse
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
+from django.core.validators import validate_email
 
 from api.models import Company
 from api.models import Course
@@ -147,7 +154,60 @@ class SearchOportunity(APIView):
                     oportunity = None
 
             return Response(oportunity_name)
+
+class AddCompanyRegister(APIView):
+
+    authentication_classes = (SessionAuthentication, BasicAuthentication)
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, format=None):
+        #if request.method == 'POST':
+        received = json.loads(request.body)
+        company = Company()
+
+        company.cnpj = received.get('cnpj', None)
+        company.name = received.get('name', None)
+        company.corporate_name = received.get('corporate_name', None)
+        company.address_id = received.get('address_id', None)
+        #company.id_user = received.get('id_user', None)
+        company.phone_number = received.get('phone_number', None)
+        company.agreement = received.get('agreement', None)
+    
+        company.save()
+ 
+class AddStudentRegister(APIView):
+
+   # authentication_classes = (SessionAuthentication, BasicAuthentication)
+    #permission_classes = (IsAuthenticated,)
+    #permission_classes = (AllowAny,)
+    
+    def post(self, request, format=None):
+        #if request.method == 'POST':
+        received = json.load(request.body) 
+        student = Student()
+
+        student.cpf = received.get('cpf', None)
+        student.first_name = received.get('first_name', None)
+        student.last_name = received.get('last_name', None)
+        student.email = received.get('email', None)
+        #student.id_user = received.get('id_user', None)
+        student.phone_number = received.get('phone_number', None)
+        student.regular_student = received.get('regular_student', None)
         
+        try:
+            validate_email(student.email)
+            valid_email = True
+        
+        except validate_email.ValidationError:
+                valid_email = False
+
+
+        if valid_email == True:
+            student.save()
+
+        else:
+            raise ValidationError("Email invalid.")
+
 
 class ExempleView(APIView):
 
