@@ -2,11 +2,20 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
 from django.http import JsonResponse
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
+from .serializers import UserSerializer, StudentSerializer, CompanySerializer
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
+from django.core.validators import validate_email
 
 from api.models import Company
 from api.models import Course
@@ -14,7 +23,7 @@ from api.models import VacantJob
 from api.models import Student
 from api.models import Curriculum
 from api.models import VacantJobHasCourse
-from api.models import Hiring
+from api.models import Hiring,User
 
 import datetime
 
@@ -68,12 +77,12 @@ class SearchCompany(APIView):
     def get(self, request, format=None):
 
         if 'id' in request.GET:
-            info = list(Student.objects.filter(id_user= request.GET.get('id')))
+            info = list(Student.objects.filter(user= request.GET.get('id')))
             if not info:
                 raise Http404("Not exist this user.")
 
             try:
-                cpf = [Student.cpf for Student in Student.objects.filter(id_user=request.GET.get('id'))]
+                cpf = [Student.cpf for Student in Student.objects.filter(user=request.GET.get('id'))]
             except Student.DoesNotExist:
                 cpf = None
 
@@ -123,7 +132,7 @@ class SearchOportunity(APIView):
 
         if 'id' in request.GET:
 
-            cpf = list(Student.objects.filter(id_user= request.GET.get('id')))
+            cpf = list(Student.objects.filter(user= request.GET.get('id')))
             if not cpf:
                 raise Http404("Not exist this user.")
 
@@ -147,7 +156,41 @@ class SearchOportunity(APIView):
                     oportunity = None
 
             return Response(oportunity_name)
-        
+            
+# User = get_user_model()
+
+# class UserCreateAPIView(CreateAPIView):
+#     serializer_class = UserCreateSerializer
+#     queryset = User.objects.all()
+#     permissions_classes = [AllowAny]
+
+
+class CompanyCreateAPIView(CreateAPIView):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+
+class CompanyListAPIView(ListAPIView):
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+
+class StudentCreateAPIView(CreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+class StudentListAPIView(ListAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+class StudentDetailAPIView(RetrieveAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+class UserListAPIView(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
 
 class ExempleView(APIView):
 

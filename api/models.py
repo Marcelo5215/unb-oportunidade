@@ -15,7 +15,7 @@ class Address(models.Model):
     city = models.CharField(max_length=100, blank=True, null=True)
     neighborhood = models.CharField(max_length=100, blank=True, null=True)
     public_place = models.CharField(db_column='public place', max_length=45, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    number = models.CharField(max_length=4, blank=True, null=True)
+    number = models.CharField(max_length=4, blank=False, null=False)
     complement = models.CharField(max_length=100, blank=True, null=True)
     cep = models.CharField(max_length=8, blank=True, null=True)
 
@@ -296,7 +296,7 @@ class Role(models.Model):
 class Student(models.Model):
     cpf = models.IntegerField(primary_key=True)
     first_name = models.CharField(max_length=45, blank=True, null=True)
-    email = models.CharField(max_length=100, blank=True, null=True)
+    email = models.EmailField()  
     full_name = models.CharField(max_length=200, blank=True, null=True)
     regular_student = models.IntegerField(blank=True, null=True)
     address = models.ForeignKey(Address, models.DO_NOTHING, blank=True, null=True)
@@ -323,7 +323,7 @@ class User(models.Model):
     email = models.CharField(max_length=45, blank=True, null=True)
     password = models.CharField(max_length=45, blank=True, null=True)
     tp_user = models.ForeignKey(Role, models.DO_NOTHING, db_column='tp_user', blank=True, null=True)
-    student_cpf = models.ForeignKey(Student, models.DO_NOTHING, db_column='student_cpf')
+    #student_cpf = models.ForeignKey(Student, models.DO_NOTHING, db_column='student_cpf')
 
     class Meta:
         managed = False
