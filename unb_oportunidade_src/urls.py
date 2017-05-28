@@ -21,12 +21,6 @@ from api.views import ListCourses
 from api.views import SearchCompany
 from api.views import SearchVacancy
 from api.views import SearchOportunity
-<<<<<<< Updated upstream
-#from api.views import AddCompanyRegister
-#from api.views import AddStudentRegister
-
-=======
->>>>>>> Stashed changes
 
 from api.views import StudentListAPIView, UserListAPIView, StudentCreateAPIView, StudentDetailAPIView, CompanyCreateAPIView, CompanyListAPIView
 
