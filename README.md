@@ -17,7 +17,10 @@
 4. E por fim rode o gulp com 'gulp';
 
 ## Back-End:
-- Instalar o driver mysqlclient:
+[Instalar o MySQL no Ubuntu (Troque a versão de 0.8.3-1 para 0.8.6-1)](https://www.digitalocean.com/community/tutorials/how-to-install-the-latest-mysql-on-ubuntu-16-04)
+> Use a senha do 'root' que está no Canal de Anúncios do grupo, assim como as configurações extras descritas lá.
+
+Instalar o driver mysqlclient:
 1. sudo apt-get install libmysqlclient-dev
 2. sudo pip3 install mysqlclient (caso não funcione, use pip)
 
