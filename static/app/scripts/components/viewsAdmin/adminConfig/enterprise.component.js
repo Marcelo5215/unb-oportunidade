@@ -6,8 +6,34 @@
       controller: EnterpriseController
     });
 
-  function EnterpriseController($scope) {
-    console.log('opa');
+  function EnterpriseController($scope, $state) {
+
+    $scope.financialDataState = financialDataState;
+    $scope.virtualQueueState = virtualQueueState;
+    $scope.candidateListState = candidateListState;
+    $scope.vacancyListState = vacancyListState;
+    $scope.enterpriseDataState = enterpriseDataState;
+
+    function financialDataState() {
+        $state.go('financialData');
+    }
+
+    function virtualQueueState() {
+      $state.go('virtualQueue');
+    }
+
+    function candidateListState() {
+      $state.go('candidateList');
+    }
+
+    function vacancyListState() {
+      $state.go('vacancyList');
+    }
+
+    function enterpriseDataState() {
+      $state.go('enterpriseData');
+    }
+
     $scope.name = 'Nome da Empresa';
     $scope.corpname = 'Nome corporativo da empresa';
     $scope.cnpj = 'CNPJ da empresa'
