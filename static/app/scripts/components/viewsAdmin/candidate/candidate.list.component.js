@@ -8,6 +8,10 @@
 
     function CandidateListController($scope, $state) {
 
+      /* Atenção, isso está do jeito que está, pois foi tudo desenvolvido com muita pressa (LP),
+        então se der pra arrumar, arrume!
+      */
+
       $scope.financialDataState = financialDataState;
       $scope.virtualQueueState = virtualQueueState;
       $scope.candidateListState = candidateListState;

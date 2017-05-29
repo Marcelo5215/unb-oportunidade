@@ -7,6 +7,11 @@
     });
 
   function FinancialDataController($scope, $state) {
+
+    /* Atenção, isso está do jeito que está, pois foi tudo desenvolvido com muita pressa (LP),
+      então se der pra arrumar, arrume!
+    */
+
     $scope.pj_id = 1;
     $scope.pf_id = 2;
 
