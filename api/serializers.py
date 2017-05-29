@@ -1,11 +1,8 @@
-from rest_framework import models
+from api.models import Company, Address, Phone, Student
 
-from rest_framework import serializers
 from django.contrib.auth.models import User
 
-from rest_framework.serializers import SerializerMethodField
-
-from api.models import Company, Address, Phone, Student
+from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -39,6 +36,7 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = ('cnpj', 'name',
                   'corporate_name', 'company_address', 'company_phone')
         read_only_fields = ('created_at', 'updated_at')
+
 
 class StudentSerializer(serializers.ModelSerializer):
 
