@@ -3,7 +3,7 @@
 
 ## Como inicializar o projeto
 
-0. Baixe o Python e o Django;
+0. Baixe o Python 3 e o Django;
 1. Clone o projeto;
 2. Para rodar entre na pasta e inicialize com o comando: 'python manage.py runserver';
 3. Pronto!! Easy!
@@ -24,12 +24,12 @@ Instalar o driver mysqlclient:
 1. sudo apt-get install libmysqlclient-dev
 2. sudo pip3 install mysqlclient (caso não funcione, use pip)
 
-### Branch's:
+### Branches:
 
 - master -> Produção
 - test -> Teste
 - develop -> Desenvolvimento
 
-Qualquer dúvida falar com Mateus Luiz.
+Qualquer dúvida falar com Mateus Luiz ou Victor Machado.
 
 ### Link do Github: https://github.com/mateusluizfb/unb-oportunidade
