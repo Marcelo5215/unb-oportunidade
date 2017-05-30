@@ -65,47 +65,34 @@
       </div>
 
       <div class="col-xs-10 table-responsive">
-        <table class="table table-striped tabcontent" id="virtual_line">
-          <thead>
-            <tr>
-              <th>Posição</th>
-              <th>Aluno</th>
-              <th>Curso</th>
-              <th>Matricula</th>
-              <th>Vaga</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>01</td>
-              <td>Marcos Vinicius</td>
-              <td>Ciência da Computação</td>
-              <td>14/0071990</td>
-              <td>Programador</td>
-            </tr>
-            <tr>
-              <td>02</td>
-              <td>Johnny</td>
-              <td>Computação</td>
-              <td>17/0019391</td>
-              <td>Programador</td>
-            </tr>
-            <tr>
-              <td>03</td>
-              <td>Elvis</td>
-              <td>Computação</td>
-              <td>17/0019392</td>
-              <td>Programador</td>
-            </tr>
-            <tr>
-              <td>04</td>
-              <td>Bob</td>
-              <td>Computação</td>
-              <td>17/0019393</td>
-              <td>Programador</td>
-            </tr>
-          </tbody>
-        </table>
+        <form>
+          <div class="form-group">
+            <label>Nome:</label>
+            <input type="text" class="form-control">{{name}}</input>
+          </div>
+          <div class="form-group">
+            <label>Nome corporativo:</label>
+            <input type="text" class="form-control">{{corpname}}</input>
+          </div>
+          <div class="form-group">
+            <label>CNPJ:</label>
+            <input type="text" class="form-control">{{cnpj}}</input>
+          </div>
+          <div class="form-group">
+            <label>Selecione a área de atuação:</label>
+            <select ng-options="area.name for area in data.areas.availabeAreas track by area.id" ng-model="data.areas.selectedArea" class="form-control"></select>
+          </div>
+          <div class="form-group">
+            <label>CNPJ:</label>
+            <input type="text-area" class="form-control">{{biography}}</input>
+          </div>
+          <div class="form-group">
+            <label>Selecione as áreas de interesse:</label>
+            <p>Segure Ctrl para selecionar mais de 1</p>
+            <select ng-options="area.name for area in data.interest_areas.availabeAreas track by area.id" ng-model="data.interest_areas.selectedArea" multiple class="form-control"></select>
+          </div>
+        </form>
+
 
       </div>
     </div>

@@ -1,16 +1,19 @@
 (function() {
 
   angular.module('unbOportunidade')
-    .component('virtualQueue', {
-      templateUrl: 'static/app/scripts/components/viewsAdmin/daiaNotifications/virtualQueue.html',
-      controller: VirtualQueueController
+    .component('financialData', {
+      templateUrl: 'static/app/scripts/components/viewsAdmin/adminConfig/financialdata.html',
+      controller: FinancialDataController
     });
 
-  function VirtualQueueController($scope, $state) {
+  function FinancialDataController($scope, $state) {
 
     /* Atenção, isso está do jeito que está, pois foi tudo desenvolvido com muita pressa (LP),
       então se der pra arrumar, arrume!
     */
+
+    $scope.pj_id = 1;
+    $scope.pf_id = 2;
 
     $scope.financialDataState = financialDataState;
     $scope.virtualQueueState = virtualQueueState;
@@ -39,6 +42,7 @@
     }
 
   }
+
 
 
 })();
