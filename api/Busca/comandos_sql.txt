@@ -10,9 +10,9 @@ INSERT INTO Curriculum VALUES ("00000000000",1,"Vespertino","UnB","nada adiciona
 INSERT INTO Curriculum VALUES ("00000000001",2,"Vespertino","UnB","nada adicional",5,0,1);
 INSERT INTO Curriculum VALUES ("00000000002",3,"Vespertino","UnB","nada adicional",7,1,1);
 
-INSERT INTO Companies VALUES (20,"Empresa1","corp1",07/07/2000,08/07/2000,"12345678",1,0,10);
-INSERT INTO Companies VALUES (21,"Empresa2","corp2",07/07/2000,08/07/2000,"12345678",1,1,11);
-INSERT INTO Companies VALUES (22,"Empresa3","corp3",07/07/2000,08/07/2000,"12345678",1,2,12);
+INSERT INTO Companies VALUES (20,"IBM","corp1",07/07/2000,08/07/2000,"12345678",1,0,10);
+INSERT INTO Companies VALUES (21,"Microsoft","corp2",07/07/2000,08/07/2000,"12345678",1,1,11);
+INSERT INTO Companies VALUES (22,"Apple","corp3",07/07/2000,08/07/2000,"12345678",1,2,12);
 
 INSERT INTO Hiring VALUES (1,07/07/2000,08/07/2000,1,20,10,5);
 INSERT INTO Hiring VALUES (2,07/07/2000,08/07/2000,1,21,11,4);

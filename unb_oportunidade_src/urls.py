@@ -16,27 +16,40 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from unb_oportunidade_src.views import IndexView
-from api.views import ExempleView
-from api.views import ListCompany
-from api.views import ListCourses
-from api.views import ListVacants
-from api.views import ExempleFilterCompany
-from rest_framework_jwt.views import obtain_jwt_token
-from rest_framework_jwt.views import refresh_jwt_token
-from rest_framework_jwt.views import verify_jwt_token
-# from api.views import api
+from api.views import (
+    ExampleView,
+    ListCourses,
+    SearchCompany,
+    SearchVacancy,
+    SearchOpportunity
+)
 
-# exemple = ExempleView()
+from api.views import (
+    StudentListAPIView,
+    UserListAPIView,
+    StudentCreateAPIView,
+    StudentDetailAPIView,
+    CompanyCreateAPIView,
+    CompanyListAPIView
+)
+
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
+
 
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^/$', IndexView.as_view()),
-    url(r'^api/exemplo/get/$', ExempleView.as_view()),
-    url(r'^api/busca/company/$', ListCompany.as_view()),
+    url(r'^api/students/create/$', StudentCreateAPIView.as_view(), name='create-student'),
+    url(r'^api/companies/create/$', CompanyCreateAPIView.as_view(), name='create-company'),
+    url(r'^api/companies/$', CompanyListAPIView.as_view(), name='companies'),
+    url(r'^api/students/$', StudentListAPIView.as_view(), name='students'),
+    #url(r'^api/students/(?P<cpf>[\w-]+)/$', StudentDetailAPIView.as_view(), name='students'),
+    url(r'^api/exemplo/get/$', ExampleView.as_view()),
     url(r'^api/busca/course/$', ListCourses.as_view()),
-    url(r'^api/busca/vacants/$', ListVacants.as_view()),
-    url(r'^api/busca/FilterCompany/$', ExempleFilterCompany.as_view()),
+    url(r'^api/busca/SearchCompany/$', SearchCompany.as_view()),
+    url(r'^api/busca/SearchVacancy/$', SearchVacancy.as_view()),
+    url(r'^api/busca/SearchOportunity/$', SearchOpportunity.as_view()),
     url(r'^api/api-token-auth/', obtain_jwt_token),
     url(r'^api/api-token-verify/', verify_jwt_token),
     url(r'^api/api-token-refresh/', refresh_jwt_token),

@@ -20,180 +20,381 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Address',
             fields=[
-                ('id_adress', models.AutoField(primary_key=True, serialize=False)),
-                ('city', models.CharField(max_length=45)),
-                ('neighborhood', models.CharField(max_length=45)),
-                ('number', models.CharField(max_length=4)),
-                ('complement', models.CharField(max_length=45)),
-                ('zip_code', models.CharField(max_length=8)),
-                ('public_place', models.CharField(max_length=45)),
+                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('city', models.CharField(blank=True, max_length=100, null=True)),
+                ('neighborhood', models.CharField(blank=True, max_length=100, null=True)),
+                ('public_place', models.CharField(blank=True, db_column='public place', max_length=45, null=True)),
+                ('number', models.CharField(blank=True, max_length=4, null=True)),
+                ('complement', models.CharField(blank=True, max_length=100, null=True)),
+                ('cep', models.CharField(blank=True, max_length=8, null=True)),
             ],
             options={
-                'db_table': 'Address',
+                'db_table': 'address',
+                'managed': False,
             },
         ),
         migrations.CreateModel(
-            name='Bank_accounts',
+            name='Advisor',
             fields=[
-                ('id_bank_accounts', models.AutoField(primary_key=True, serialize=False)),
-                ('account_number', models.CharField(max_length=20)),
-                ('agency_number', models.CharField(max_length=10)),
+                ('advisor_id', models.IntegerField(primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=200)),
             ],
             options={
-                'db_table': 'Bank_accounts',
+                'db_table': 'advisor',
+                'managed': False,
             },
         ),
         migrations.CreateModel(
-            name='Bank_names',
+            name='AuthGroup',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=80, unique=True)),
+            ],
+            options={
+                'db_table': 'auth_group',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='AuthGroupPermissions',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+            ],
+            options={
+                'db_table': 'auth_group_permissions',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='AuthPermission',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=255)),
+                ('codename', models.CharField(max_length=100)),
+            ],
+            options={
+                'db_table': 'auth_permission',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='AuthUser',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('password', models.CharField(max_length=128)),
+                ('last_login', models.DateTimeField(blank=True, null=True)),
+                ('is_superuser', models.IntegerField()),
+                ('username', models.CharField(max_length=150, unique=True)),
+                ('first_name', models.CharField(max_length=30)),
+                ('last_name', models.CharField(max_length=30)),
+                ('email', models.CharField(max_length=254)),
+                ('is_staff', models.IntegerField()),
+                ('is_active', models.IntegerField()),
+                ('date_joined', models.DateTimeField()),
+            ],
+            options={
+                'db_table': 'auth_user',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='AuthUserGroups',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+            ],
+            options={
+                'db_table': 'auth_user_groups',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='AuthUserUserPermissions',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+            ],
+            options={
+                'db_table': 'auth_user_user_permissions',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='BankAccounts',
+            fields=[
+                ('idbank_accounts', models.IntegerField(primary_key=True, serialize=False)),
+                ('account_number', models.CharField(blank=True, max_length=20, null=True)),
+                ('agency_number', models.CharField(blank=True, max_length=10, null=True)),
+            ],
+            options={
+                'db_table': 'bank_accounts',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='BankNames',
             fields=[
                 ('bank_number', models.IntegerField(primary_key=True, serialize=False)),
-                ('bank_name', models.CharField(max_length=100)),
+                ('bank_name', models.CharField(blank=True, max_length=100, null=True)),
             ],
             options={
-                'db_table': 'Bank_names',
+                'db_table': 'bank_names',
+                'managed': False,
             },
         ),
         migrations.CreateModel(
             name='Company',
             fields=[
-                ('cnpj', models.AutoField(primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=45)),
-                ('corporate_name', models.CharField(max_length=45)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('phone_number', models.CharField(max_length=45)),
-                ('agreement', models.BooleanField()),
-                ('address_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Address')),
-                ('id_user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, unique=True)),
+                ('name', models.CharField(blank=True, max_length=45, null=True)),
+                ('cnpj', models.IntegerField(primary_key=True, serialize=False)),
+                ('corporate_name', models.CharField(blank=True, max_length=45, null=True)),
+                ('createdat', models.DateTimeField(blank=True, db_column='createdAt', null=True)),
+                ('updateat', models.DateTimeField(blank=True, db_column='updateAt', null=True)),
+                ('agreement', models.IntegerField(blank=True, null=True)),
+                ('intermediate', models.CharField(blank=True, max_length=100, null=True)),
             ],
             options={
-                'db_table': 'Companies',
+                'db_table': 'company',
+                'managed': False,
             },
         ),
         migrations.CreateModel(
             name='Course',
             fields=[
-                ('id_course', models.AutoField(primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=100)),
-                ('abbreviation', models.CharField(max_length=10)),
+                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('name', models.CharField(blank=True, max_length=100, null=True)),
+                ('abbreviation', models.CharField(blank=True, max_length=10, null=True)),
             ],
             options={
-                'db_table': 'Courses',
+                'db_table': 'course',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='DjangoAdminLog',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('action_time', models.DateTimeField()),
+                ('object_id', models.TextField(blank=True, null=True)),
+                ('object_repr', models.CharField(max_length=200)),
+                ('action_flag', models.SmallIntegerField()),
+                ('change_message', models.TextField()),
+            ],
+            options={
+                'db_table': 'django_admin_log',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='DjangoContentType',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('app_label', models.CharField(max_length=100)),
+                ('model', models.CharField(max_length=100)),
+            ],
+            options={
+                'db_table': 'django_content_type',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='DjangoMigrations',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('app', models.CharField(max_length=255)),
+                ('name', models.CharField(max_length=255)),
+                ('applied', models.DateTimeField()),
+            ],
+            options={
+                'db_table': 'django_migrations',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='DjangoSession',
+            fields=[
+                ('session_key', models.CharField(max_length=40, primary_key=True, serialize=False)),
+                ('session_data', models.TextField()),
+                ('expire_date', models.DateTimeField()),
+            ],
+            options={
+                'db_table': 'django_session',
+                'managed': False,
             },
         ),
         migrations.CreateModel(
             name='File',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('file_name', models.CharField(max_length=500)),
-                ('file_path', models.CharField(max_length=500)),
+                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('filename', models.CharField(blank=True, max_length=500, null=True)),
+                ('filepath', models.CharField(blank=True, max_length=500, null=True)),
             ],
+            options={
+                'db_table': 'file',
+                'managed': False,
+            },
         ),
         migrations.CreateModel(
             name='Hiring',
             fields=[
-                ('id_hiring', models.AutoField(primary_key=True, serialize=False)),
-                ('contracted_at', models.DateTimeField(auto_now_add=True)),
-                ('contract_end', models.DateTimeField(auto_now_add=True)),
-                ('active', models.BooleanField()),
-                ('id_company', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Company')),
+                ('id_hiring', models.IntegerField(primary_key=True, serialize=False)),
+                ('contractedat', models.DateTimeField(blank=True, db_column='contractedAt', null=True)),
+                ('contratactend', models.DateTimeField(blank=True, db_column='contratactEnd', null=True)),
+                ('active', models.IntegerField(blank=True, null=True)),
+                ('additive_first', models.DateTimeField(blank=True, null=True)),
+                ('additive_second', models.DateTimeField(blank=True, null=True)),
+                ('additive_third', models.DateTimeField(blank=True, null=True)),
+                ('additive_fourth', models.DateTimeField(blank=True, null=True)),
+                ('document_enter', models.DateTimeField(blank=True, null=True)),
+                ('broken_contract', models.DateTimeField(blank=True, null=True)),
+                ('document_left', models.DateTimeField(blank=True, null=True)),
+                ('comments', models.CharField(blank=True, max_length=1000, null=True)),
             ],
             options={
-                'db_table': 'Hiring',
+                'db_table': 'hiring',
+                'managed': False,
             },
         ),
         migrations.CreateModel(
-            name='Requirements',
+            name='Phone',
             fields=[
-                ('id_requirements', models.AutoField(primary_key=True, serialize=False)),
-                ('work_shift', models.CharField(max_length=20)),
-                ('workload', models.IntegerField()),
-                ('additional_info', models.CharField(max_length=500)),
-                ('minimun_period', models.IntegerField()),
+                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('phone', models.CharField(blank=True, max_length=15, null=True)),
             ],
             options={
-                'db_table': 'Requirements',
+                'db_table': 'phone',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='Requirement',
+            fields=[
+                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('workload', models.IntegerField(blank=True, null=True)),
+                ('work_shift', models.CharField(blank=True, max_length=20, null=True)),
+                ('additional_information', models.CharField(blank=True, max_length=500, null=True)),
+                ('minimun_period', models.IntegerField(blank=True, null=True)),
+            ],
+            options={
+                'db_table': 'requirement',
+                'managed': False,
             },
         ),
         migrations.CreateModel(
             name='Review',
             fields=[
-                ('id_review', models.AutoField(primary_key=True, serialize=False)),
-                ('destiny', models.IntegerField()),
-                ('stars', models.IntegerField()),
-                ('feedback', models.CharField(max_length=500)),
-                ('cnpj_company', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Company')),
-                ('hiring_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Hiring')),
+                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('destiny', models.IntegerField(blank=True, null=True)),
+                ('stars', models.IntegerField(blank=True, null=True)),
+                ('feedback', models.CharField(blank=True, max_length=500, null=True)),
             ],
             options={
-                'db_table': 'Reviews',
+                'db_table': 'review',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='Role',
+            fields=[
+                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('label', models.CharField(blank=True, max_length=45, null=True)),
+            ],
+            options={
+                'db_table': 'role',
+                'managed': False,
             },
         ),
         migrations.CreateModel(
             name='Student',
             fields=[
-                ('cpf', models.CharField(max_length=11, primary_key=True, serialize=False, validators=[django.core.validators.RegexValidator('^\\d{11}$')])),
-                ('first_name', models.CharField(max_length=45)),
-                ('last_name', models.CharField(max_length=45)),
-                ('email', models.EmailField(max_length=254)),
-                ('phone_number', models.CharField(max_length=45)),
-                ('regular_student', models.BooleanField()),
+                ('cpf', models.IntegerField(primary_key=True, serialize=False)),
+                ('first_name', models.CharField(blank=True, max_length=45, null=True)),
+                ('email', models.CharField(blank=True, max_length=100, null=True)),
+                ('full_name', models.CharField(blank=True, max_length=200, null=True)),
+                ('regular_student', models.IntegerField(blank=True, null=True)),
+                ('registration_number', models.CharField(blank=True, max_length=20, null=True)),
             ],
             options={
-                'db_table': 'students',
+                'db_table': 'student',
+                'managed': False,
             },
         ),
         migrations.CreateModel(
-            name='Vacant_job',
+            name='User',
             fields=[
-                ('id_vacancy', models.AutoField(primary_key=True, serialize=False)),
-                ('role', models.CharField(max_length=200)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('email', models.CharField(blank=True, max_length=45, null=True)),
+                ('password', models.CharField(blank=True, max_length=45, null=True)),
             ],
             options={
-                'db_table': 'Vacant_jobs',
+                'db_table': 'user',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='VacantJob',
+            fields=[
+                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('role', models.CharField(blank=True, max_length=200, null=True)),
+                ('createdat', models.DateTimeField(blank=True, db_column='createdAt', null=True)),
+                ('updateat', models.DateTimeField(blank=True, db_column='updateAt', null=True)),
+            ],
+            options={
+                'db_table': 'vacant_job',
+                'managed': False,
+            },
+        ),
+        migrations.CreateModel(
+            name='CompanyHasPhone',
+            fields=[
+                ('company_cnpj', models.ForeignKey(db_column='company_cnpj', on_delete=django.db.models.deletion.DO_NOTHING, primary_key=True, serialize=False, to='api.Company')),
+            ],
+            options={
+                'db_table': 'company_has_phone',
+                'managed': False,
             },
         ),
         migrations.CreateModel(
             name='Curriculum',
             fields=[
-                ('cpf', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='api.Student')),
-                ('time_desired', models.IntegerField()),
-                ('work_shift', models.CharField(max_length=20)),
-                ('university', models.CharField(max_length=45)),
-                ('additional_info', models.CharField(max_length=900)),
-                ('semester', models.IntegerField()),
-                ('course_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Course')),
-                ('file_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.File')),
+                ('cpf', models.ForeignKey(db_column='cpf', on_delete=django.db.models.deletion.DO_NOTHING, primary_key=True, serialize=False, to='api.Student')),
+                ('time_desired', models.IntegerField(blank=True, null=True)),
+                ('work_shift', models.CharField(blank=True, max_length=20, null=True)),
+                ('university', models.CharField(blank=True, max_length=45, null=True)),
+                ('aditional_info', models.CharField(blank=True, max_length=900, null=True)),
+                ('semester', models.IntegerField(blank=True, null=True)),
             ],
             options={
-                'db_table': 'Curriculum',
+                'db_table': 'curriculum',
+                'managed': False,
             },
         ),
-        migrations.AddField(
-            model_name='student',
-            name='id_user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, unique=True),
+        migrations.CreateModel(
+            name='StudentHasPhone',
+            fields=[
+                ('student', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, primary_key=True, serialize=False, to='api.Student')),
+            ],
+            options={
+                'db_table': 'student_has_phone',
+                'managed': False,
+            },
         ),
-        migrations.AddField(
-            model_name='hiring',
-            name='id_student',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Student'),
+        migrations.CreateModel(
+            name='VacantJobHasCourse',
+            fields=[
+                ('vacant_job', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, primary_key=True, serialize=False, to='api.VacantJob')),
+            ],
+            options={
+                'db_table': 'vacant_job_has_course',
+                'managed': False,
+            },
         ),
-        migrations.AddField(
-            model_name='hiring',
-            name='id_vacancy',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Vacant_job'),
-        ),
-        migrations.AddField(
-            model_name='bank_accounts',
-            name='bank_names_bank_number',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Bank_names'),
-        ),
-        migrations.AddField(
-            model_name='bank_accounts',
-            name='student_cpf',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Student'),
+        migrations.CreateModel(
+            name='VacantJobHasRequirement',
+            fields=[
+                ('vacant_job', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, primary_key=True, serialize=False, to='api.VacantJob')),
+            ],
+            options={
+                'db_table': 'vacant_job_has_requirement',
+                'managed': False,
+            },
         ),
     ]
