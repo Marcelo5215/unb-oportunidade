@@ -19,6 +19,7 @@ from unb_oportunidade_src.views import IndexView
 from api.views import (
     ExampleView,
     ListCourses,
+    ListCompanies,
     SearchCompany,
     SearchVacancy,
     SearchOpportunity
@@ -46,10 +47,11 @@ urlpatterns = [
     url(r'^api/students/$', StudentListAPIView.as_view(), name='students'),
     #url(r'^api/students/(?P<cpf>[\w-]+)/$', StudentDetailAPIView.as_view(), name='students'),
     url(r'^api/exemplo/get/$', ExampleView.as_view()),
-    url(r'^api/busca/course/$', ListCourses.as_view()),
-    url(r'^api/busca/SearchCompany/$', SearchCompany.as_view()),
+    url(r'^api/busca/ListCourses/$', ListCourses.as_view()),
+    url(r'^api/busca/ListCompanies/$', ListCompanies.as_view()),
+    url(r'^api/busca/SearchCompany/(?P<name>[\w\- ]+)/$', SearchCompany.as_view()),
     url(r'^api/busca/SearchVacancy/$', SearchVacancy.as_view()),
-    url(r'^api/busca/SearchOportunity/$', SearchOpportunity.as_view()),
+    url(r'^api/busca/SearchOpportunity/(\d+)/$', SearchOpportunity.as_view()),
     url(r'^api/api-token-auth/', obtain_jwt_token),
     url(r'^api/api-token-verify/', verify_jwt_token),
     url(r'^api/api-token-refresh/', refresh_jwt_token),
