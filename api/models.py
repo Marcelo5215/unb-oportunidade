@@ -415,6 +415,23 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'Usuários'
 
 
+class Vaga(models.Model):
+    titulo = models.CharField(max_length=100, blank=False)
+    descricao = models.TextField(max_length=500, blank=False)
+    criada_em = models.DateTimeField(auto_now_add=True)
+    atualizada_em = models.DateTimeField(auto_now=True)
+    carga_horaria = models.IntegerField()
+    semestre_minimo = models.IntegerField()
+    estudante = models.OneToOneField('Estudante', on_delete=models.DO_NOTHING)
+    empresa = models.ForeignKey('Empresa', on_delete=models.DO_NOTHING)
+    turno = models.OneToOneField('Turno', on_delete=models.DO_NOTHING)
+
+    class Meta:
+        db_table = 'vaga'
+        verbose_name = 'Vaga'
+        verbose_name_plural = 'Vagas'
+
+
 # class VacantJob(models.Model):
 #     id = models.IntegerField(primary_key=True)
 #     role = models.CharField(max_length=200, blank=True, null=True)
