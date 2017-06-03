@@ -126,7 +126,7 @@ from api import models, serializers, permissions
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()
     serializer_class = serializers.UsuarioSerializer
-    permission_classes = (permissions.UpdateOwnProfile,)
+    # permission_classes = (permissions.UpdateOwnProfile,)
     filter_backends = (filters.SearchFilter,)
     search_fields = ('email',)
 
