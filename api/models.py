@@ -8,7 +8,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MaxValueValidator, MinValueValidator
 from django.db import models
 
 
@@ -230,10 +230,10 @@ from django.db import models
 #         unique_together = (('student', 'phone'),)
 
 
-class Avaliaçao(models.Model):
-    nota = models.IntegerField(null=False)
+class Avaliacao(models.Model):
+    nota = models.IntegerField(null=False, validators=[MaxValueValidator(10), MinValueValidator(1)])
     feedback = models.CharField(max_length=500, blank=True)
-    empresa = models.ForeignKey('Empresa', on_delete=models.DO_NOTHING)
+    empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'avaliacao'
@@ -263,7 +263,7 @@ class Banco(models.Model):
 class ContaBancaria(models.Model):
     numero_conta = models.IntegerField(null=False)
     numero_agencia = models.IntegerField(null=False)
-    banco = models.ForeignKey('Banco', on_delete=models.DO_NOTHING)
+    banco = models.ForeignKey('Banco', on_delete=models.PROTECT)
 
     class Meta:
         db_table = 'conta_bancaria'
@@ -272,18 +272,18 @@ class ContaBancaria(models.Model):
 
 
 class ContratoInfo(models.Model):
-    inicio_contrato = models.DateTimeField(blank=False)
-    fim_contrato = models.DateTimeField(blank=False)
-    is_ativo = models.BooleanField(blank=False)
+    inicio_contrato = models.DateTimeField(null=False)
+    fim_contrato = models.DateTimeField(null=False)
+    is_ativo = models.BooleanField(verbose_name='está ativo?', null=False)
     aditivo_primeiro = models.DateTimeField()
     aditivo_segundo = models.DateTimeField()
     aditivo_terceiro = models.DateTimeField()
     aditivo_quarto = models.DateTimeField()
-    orientador_um = models.CharField(max_length=100, blank=True)
-    orientador_dois = models.CharField(max_length=100, blank=True)
-    vaga = models.ForeignKey('Vaga', on_delete=models.DO_NOTHING) 
+    orientador_um = models.CharField(max_length=100)
+    orientador_dois = models.CharField(max_length=100)
+    vaga = models.ForeignKey('Vaga', on_delete=models.CASCADE)
     criado_em = models.DateTimeField(auto_now_add=True)
-    atualizada_em = models.DateTimeField(auto_now_add=True)
+    atualizada_em = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'contrato_info'
@@ -303,8 +303,8 @@ class Curso(models.Model):
 
 class CV(models.Model):
     info_adicional = models.TextField(max_length=500)
-    arquivo = models.OneToOneField('Arquivo', on_delete=models.CASCADE)
-    turno = models.OneToOneField('Turno', on_delete=models.DO_NOTHING)
+    arquivo = models.OneToOneField('Arquivo', on_delete=models.PROTECT)
+    turno = models.OneToOneField('Turno', on_delete=models.PROTECT)
 
     class Meta:
         db_table = 'cv'
@@ -332,7 +332,7 @@ class Endereco(models.Model):
     complemento = models.CharField(max_length=25, blank=True)
     cidade = models.CharField(max_length=50, blank=False)
     cep = models.CharField(max_length=8, blank=False, validators=[RegexValidator(r'^\d{8}$')])
-    usuario = models.ForeignKey('Usuario', on_delete=models.DO_NOTHING)
+    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'endereco'
@@ -347,7 +347,7 @@ class Estudante(models.Model):
     matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^d{9}$')], blank=False)
     semestre = models.IntegerField(null=False)
     universidade = models.CharField(max_length=45, blank=False)
-    curso = models.ForeignKey('Curso', on_delete=models.DO_NOTHING)
+    curso = models.ForeignKey('Curso', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'estudante'
@@ -357,7 +357,7 @@ class Estudante(models.Model):
 
 class Telefone(models.Model):
     numero_telefone = models.CharField(max_length=9, blank=False)
-    usuario = models.ForeignKey('Usuario', on_delete=models.DO_NOTHING)
+    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'telefone'
@@ -414,8 +414,8 @@ class UsuarioManager(BaseUserManager):
 class Usuario(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(unique=True)
-    is_estudante = models.BooleanField(null=False)
-    is_empresa = models.BooleanField(null=False)
+    is_estudante = models.BooleanField(verbose_name='é aluno?', null=False)
+    is_empresa = models.BooleanField(verbose_name='é empresa?', null=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
@@ -453,9 +453,9 @@ class Vaga(models.Model):
     atualizada_em = models.DateTimeField(auto_now=True)
     carga_horaria = models.IntegerField(null=False)
     semestre_minimo = models.IntegerField(null=False)
-    estudante = models.OneToOneField('Estudante', on_delete=models.DO_NOTHING)
-    empresa = models.ForeignKey('Empresa', on_delete=models.DO_NOTHING)
-    turno = models.OneToOneField('Turno', on_delete=models.DO_NOTHING)
+    estudante = models.OneToOneField('Estudante', on_delete=models.PROTECT)
+    empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
+    turno = models.OneToOneField('Turno', on_delete=models.PROTECT)
     cursos = models.ManyToManyField('Curso', through='VagaTemCurso')
 
     class Meta:
