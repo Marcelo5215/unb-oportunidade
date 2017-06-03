@@ -234,9 +234,19 @@ class Arquivo(models.Model):
     nome_arquivo = models.CharField(max_length=255, unique=True, blank=False)
     path_arquivo = models.CharField(max_length=255, unique=True, blank=False)
 
+    class Meta:
+        db_table = 'arquivo'
+        verbose_name = 'Arquivo'
+        verbose_name_plural = 'Arquivos'
+
 
 class Banco(models.Model):
     nome = models.CharField(max_length=100, unique=True, blank=False)
+
+    class Meta:
+        db_table = 'banco'
+        verbose_name = 'Banco'
+        verbose_name_plural = 'Bancos'
 
 
 class ContaBancaria(models.Model):
@@ -254,6 +264,11 @@ class Curso(models.Model):
     nome = models.CharField(max_length=100, blank=False)
     sigla = models.CharField(max_length=10, blank=False)
 
+    class Meta:
+        db_table = 'curso'
+        verbose_name = 'Curso'
+        verbose_name_plural = 'Cursos'
+
 
 class CV(models.Model):
     info_adicional = models.TextField(max_length=500)
@@ -261,6 +276,7 @@ class CV(models.Model):
     turno = models.OneToOneField('Turno', on_delete=models.DO_NOTHING)
 
     class Meta:
+        db_table = 'cv'
         verbose_name = 'Currículo'
         verbose_name_plural = 'Currículos'
 
@@ -271,6 +287,11 @@ class Empresa(models.Model):
     nome_fantasia = models.CharField(max_length=100, blank=False)
     conveniada = models.BooleanField(default=True, null=False)
     usuario = models.OneToOneField('Usuario', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'empresa'
+        verbose_name = 'Empresa'
+        verbose_name_plural = 'Empresas'
 
 
 class Endereco(models.Model):
@@ -297,14 +318,29 @@ class Estudante(models.Model):
     universidade = models.CharField(max_length=45, blank=False)
     curso = models.ForeignKey('Curso', on_delete=models.DO_NOTHING)
 
+    class Meta:
+        db_table = 'estudante'
+        verbose_name = 'Estudante'
+        verbose_name_plural = 'Estudantes'
+
 
 class Telefone(models.Model):
     numero_telefone = models.CharField(max_length=9, blank=False)
     usuario = models.ForeignKey('Usuario', on_delete=models.DO_NOTHING)
 
+    class Meta:
+        db_table = 'telefone'
+        verbose_name = 'Telefone'
+        verbose_name_plural = 'Telefones'
+
 
 class Turno(models.Model):
     turno = models.CharField(max_length=20, blank=False)
+
+    class Meta:
+        db_table = 'turno'
+        verbose_name = 'Turno'
+        verbose_name_plural = 'Turnos'
 
 
 class UsuarioManager(BaseUserManager):
