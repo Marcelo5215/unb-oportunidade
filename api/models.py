@@ -230,6 +230,17 @@ from django.db import models
 #         unique_together = (('student', 'phone'),)
 
 
+class Avaliaçao(models.Model):
+    nota = models.IntegerField(null=False)
+    feedback = models.CharField(max_length=500, blank=True)
+    empresa = models.ForeignKey('Empresa', on_delete=models.DO_NOTHING)
+
+    class Meta:
+        db_table = 'avaliacao'
+        verbose_name = 'Avaliação'
+        verbose_name_plural = 'Avaliações'
+
+
 class Arquivo(models.Model):
     nome_arquivo = models.CharField(max_length=255, unique=True, blank=False)
     path_arquivo = models.CharField(max_length=255, unique=True, blank=False)
@@ -258,6 +269,26 @@ class ContaBancaria(models.Model):
         db_table = 'conta_bancaria'
         verbose_name = 'Conta Bancária'
         verbose_name_plural = 'Contas Bancárias'
+
+
+class ContratoInfo(models.Model):
+    inicio_contrato = models.DateTimeField(blank=False)
+    fim_contrato = models.DateTimeField(blank=False)
+    is_ativo = models.BooleanField(blank=False)
+    aditivo_primeiro = models.DateTimeField()
+    aditivo_segundo = models.DateTimeField()
+    aditivo_terceiro = models.DateTimeField()
+    aditivo_quarto = models.DateTimeField()
+    orientador_um = models.CharField(max_length=100, blank=True)
+    orientador_dois = models.CharField(max_length=100, blank=True)
+    vaga = models.ForeignKey('Vaga', on_delete=models.DO_NOTHING) 
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizada_em = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'contrato_info'
+        verbose_name = 'Contrato Info'
+        verbose_name_plural = 'Contrato Info'
 
 
 class Curso(models.Model):
