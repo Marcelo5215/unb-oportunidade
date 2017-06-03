@@ -8,6 +8,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.core.validators import RegexValidator
 from django.db import models
 
 
@@ -260,6 +261,21 @@ class Empresa(models.Model):
     nome_fantasia = models.CharField(max_length=100, blank=False)
     conveniada = models.BooleanField(default=True, null=False)
     usuario = models.OneToOneField('Usuario', on_delete=models.CASCADE)
+
+
+class Endereço(models.Model):
+    endereço = models.CharField(max_length=100, blank=False)
+    bairro = models.CharField(max_length=25, blank=False)
+    numero = models.CharField(max_length=5, blank=False, validators=[RegexValidator(r'^\d$')])
+    complemento = models.CharField(max_length=25, blank=True)
+    cidade = models.CharField(max_length=50, blank=False)
+    cep = models.CharField(max_length=8, blank=False, validators=[RegexValidator(r'^\d{8}$')])
+    usuario = models.ForeignKey('Usuario', on_delete=models.DO_NOTHING)
+
+    class Meta:
+        db_table = 'endereco'
+        verbose_name = 'Endereço'
+        verbose_name_plural = 'Endereços'
 
 
 class UsuarioManager(BaseUserManager):
