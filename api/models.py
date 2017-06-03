@@ -313,7 +313,7 @@ class Estudante(models.Model):
     cpf = models.IntegerField(primary_key=True, auto_created=False)
     nome_completo = models.CharField(max_length=255, blank=False)
     estudante_regular = models.BooleanField(null=False)
-    matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^d{9}$'),], blank=False)
+    matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^d{9}$')], blank=False)
     semestre = models.IntegerField(null=False)
     universidade = models.CharField(max_length=45, blank=False)
     curso = models.ForeignKey('Curso', on_delete=models.DO_NOTHING)
@@ -420,16 +420,25 @@ class Vaga(models.Model):
     descricao = models.TextField(max_length=500, blank=False)
     criada_em = models.DateTimeField(auto_now_add=True)
     atualizada_em = models.DateTimeField(auto_now=True)
-    carga_horaria = models.IntegerField()
-    semestre_minimo = models.IntegerField()
+    carga_horaria = models.IntegerField(null=False)
+    semestre_minimo = models.IntegerField(null=False)
     estudante = models.OneToOneField('Estudante', on_delete=models.DO_NOTHING)
     empresa = models.ForeignKey('Empresa', on_delete=models.DO_NOTHING)
     turno = models.OneToOneField('Turno', on_delete=models.DO_NOTHING)
+    cursos = models.ManyToManyField('Curso', through='VagaTemCurso')
 
     class Meta:
         db_table = 'vaga'
         verbose_name = 'Vaga'
         verbose_name_plural = 'Vagas'
+
+
+class VagaTemCurso(models.Model):
+    vaga = models.ForeignKey('Vaga', on_delete=models.CASCADE)
+    curso = models.ForeignKey('Curso', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'vaga_tem_curso'
 
 
 # class VacantJob(models.Model):
