@@ -229,6 +229,39 @@ from django.db import models
 #         unique_together = (('student', 'phone'),)
 
 
+class Arquivo(models.Model):
+    nome_arquivo = models.CharField(max_length=255, unique=True, blank=False)
+    path_arquivo = models.CharField(max_length=255, unique=True, blank=False)
+
+
+class Banco(models.Model):
+    nome = models.CharField(max_length=100, unique=True, blank=False)
+
+
+class ContaBancaria(models.Model):
+    numero_conta = models.IntegerField(null=False)
+    numero_agencia = models.IntegerField(null=False)
+    banco = models.ForeignKey('Banco', on_delete=models.DO_NOTHING)
+
+    class Meta:
+        db_table = 'conta_bancaria'
+        verbose_name = 'Conta Bancária'
+        verbose_name_plural = 'Contas Bancárias'
+
+
+class Curso(models.Model):
+    nome = models.CharField(max_length=100, blank=False)
+    sigla = models.CharField(max_length=10, blank=False)
+
+
+class Empresa(models.Model):
+    cnpj = models.IntegerField(primary_key=True, auto_created=False)
+    nome = models.CharField(max_length=100, blank=False)
+    nome_fantasia = models.CharField(max_length=100, blank=False)
+    conveniada = models.BooleanField(default=True, null=False)
+    usuario = models.OneToOneField('Usuario', on_delete=models.CASCADE)
+
+
 class UsuarioManager(BaseUserManager):
 
     def create_user(self, email, password=None, **kwargs):
@@ -280,7 +313,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['is_estudante', 'is_empresa']
 
     def save(self, *args, **kwargs):
-        """Evita que usuário seja empresa e aluno ao mesmo tempo."""
+        """Salva o usuário e evita que seja empresa e estudante ao mesmo tempo."""
 
         if self.is_estudante and self.is_empresa:
             raise ValueError('Usuário deve ser estudante ou empresa.')
@@ -299,6 +332,17 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         db_table = 'usuario'
         verbose_name = 'Usuário'
         verbose_name_plural = 'Usuários'
+
+
+class Telefone(models.Model):
+    numero_telefone = models.CharField(max_length=9, blank=False)
+    usuario = models.ForeignKey('Usuario', on_delete=models.DO_NOTHING)
+
+
+class Turno(models.Model):
+    turno = models.CharField(max_length=20, blank=False)
+
+
 
 
 # class VacantJob(models.Model):
