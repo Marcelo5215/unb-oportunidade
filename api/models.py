@@ -255,6 +255,16 @@ class Curso(models.Model):
     sigla = models.CharField(max_length=10, blank=False)
 
 
+class CV(models.Model):
+    info_adicional = models.TextField(max_length=500)
+    arquivo = models.OneToOneField('Arquivo', on_delete=models.CASCADE)
+    turno = models.OneToOneField('Turno', on_delete=models.DO_NOTHING)
+
+    class Meta:
+        verbose_name = 'Currículo'
+        verbose_name_plural = 'Currículos'
+
+
 class Empresa(models.Model):
     cnpj = models.IntegerField(primary_key=True, auto_created=False)
     nome = models.CharField(max_length=100, blank=False)
@@ -263,7 +273,7 @@ class Empresa(models.Model):
     usuario = models.OneToOneField('Usuario', on_delete=models.CASCADE)
 
 
-class Endereço(models.Model):
+class Endereco(models.Model):
     endereço = models.CharField(max_length=100, blank=False)
     bairro = models.CharField(max_length=25, blank=False)
     numero = models.CharField(max_length=5, blank=False, validators=[RegexValidator(r'^\d$')])
@@ -276,6 +286,25 @@ class Endereço(models.Model):
         db_table = 'endereco'
         verbose_name = 'Endereço'
         verbose_name_plural = 'Endereços'
+
+
+class Estudante(models.Model):
+    cpf = models.IntegerField(primary_key=True, auto_created=False)
+    nome_completo = models.CharField(max_length=255, blank=False)
+    estudante_regular = models.BooleanField(null=False)
+    matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^d{9}$'),], blank=False)
+    semestre = models.IntegerField(null=False)
+    universidade = models.CharField(max_length=45, blank=False)
+    curso = models.ForeignKey('Curso', on_delete=models.DO_NOTHING)
+
+
+class Telefone(models.Model):
+    numero_telefone = models.CharField(max_length=9, blank=False)
+    usuario = models.ForeignKey('Usuario', on_delete=models.DO_NOTHING)
+
+
+class Turno(models.Model):
+    turno = models.CharField(max_length=20, blank=False)
 
 
 class UsuarioManager(BaseUserManager):
@@ -348,17 +377,6 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         db_table = 'usuario'
         verbose_name = 'Usuário'
         verbose_name_plural = 'Usuários'
-
-
-class Telefone(models.Model):
-    numero_telefone = models.CharField(max_length=9, blank=False)
-    usuario = models.ForeignKey('Usuario', on_delete=models.DO_NOTHING)
-
-
-class Turno(models.Model):
-    turno = models.CharField(max_length=20, blank=False)
-
-
 
 
 # class VacantJob(models.Model):
