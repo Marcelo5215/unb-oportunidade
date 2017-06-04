@@ -18,6 +18,7 @@ from django.contrib import admin
 from api.views import (
 # #     ExampleView,
      ListCourses,
+     ListCompanies,
 # #     SearchCompany,
 # #     SearchVacancy,
 # #     SearchOpportunity
@@ -26,7 +27,8 @@ from api.views import (
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('api.urls')),
-    url(r'^api/busca/ListCourses/$', ListCourses.as_view())
+    url(r'^api/busca/ListCourses/$', ListCourses.as_view()),
+    url(r'^api/busca/ListCompanies/$', ListCompanies.as_view())
 ]
 
 # # from unb_oportunidade_src.views import IndexView

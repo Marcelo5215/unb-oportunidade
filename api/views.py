@@ -4,50 +4,6 @@
 
 
 # Create your views here.
-
-#
-# # Lista Todas as empresas presentes na base de dados
-# class ListCompanies(APIView):
-#     def get(self, request, format=None):
-#         companies = [Company.name for Company in Company.objects.all()]
-#         return Response(companies)
-#
-# #Busca se uma determinada empresa existe na base de dados
-# class SearchCompany(APIView):
-#     def get(self, request, name=None):
-#         #Parametro name: Nome da Empresa
-#         try:
-#             company = [Company.name for Company in Company.objects.filter(name=name)]
-#         except Company.DoesNotExist:
-#             company = None
-#
-#         return Response(company)
-#
-# #A empresa logada pode listar as vagas de estagio que criou
-# class SearchOpportunity(APIView):
-#     def get(self, request, id=None):
-#         #Parametro id: id de ususario da empresa
-#         cnpj = list(Company.objects.filter(iduser=id))
-#         if not cnpj:
-#             raise Http404("User does not exist.")
-#
-#         try:
-#             company = [Company.cnpj for Company in Company.objects.filter(iduser=id)]
-#         except ValueError:
-#                 return Response("Nao e um usuario")
-#
-#         try:
-#             vacancy_id = [Hiring.id_vacancy_id for Hiring in Hiring.objects.filter(id_company_id=company[0])]
-#         except Hiring.DoesNotExist:
-#             vacancy_id = None
-#
-#         try:
-#             vacant_job_name = [VacantJob.role  for VacantJob in VacantJob.objects.filter(id_vacancy=vacancy_id[0])]
-#         except VacantJob.DoesNotExist:
-#             vacant_job_name = None
-#
-#         return Response(vacant_job_name)
-#
 # class SearchVacancy(APIView):
 #     def get(self, request, format=None):
 #         vacancy = VacantJob.objects.all()
@@ -128,6 +84,12 @@ class ListCourses(APIView):
     def get(self, request, format=None):
         curso = [models.Curso.nome for models.Curso in models.Curso.objects.all()]
         return Response(curso)
+
+# Lista Todas as empresas presentes na base de dados 
+class ListCompanies(APIView):
+    def get(self, request, format=None):
+        empresas = [models.Empresa.nome for models.Empresa in models.Empresa.objects.all()]
+        return Response(empresas)
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()
