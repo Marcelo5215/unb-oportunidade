@@ -120,7 +120,7 @@ class Estudante(models.Model):
     cpf = models.IntegerField(primary_key=True, auto_created=False)
     nome_completo = models.CharField(max_length=255, blank=False)
     estudante_regular = models.BooleanField(null=False)
-    matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^d{9}$')], blank=False)
+    matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^\d{9}$')], unique=True, blank=False)
     semestre = models.IntegerField(null=False)
     universidade = models.CharField(max_length=45, blank=False)
     curso = models.ForeignKey('Curso', on_delete=models.PROTECT)
