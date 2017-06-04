@@ -54,18 +54,6 @@
 
 
 # from .serializers import UserSerializer, StudentSerializer, CompanySerializer
-
-# from api.models import (
-#     # Company,
-#     # Course,
-#     # Curriculum,
-#     # Hiring,
-#     # Student,
-#     # VacantJob,
-#     # VacantJobHasCourse,
-#     # User,
-# )
-
 # import datetime
 
 from rest_framework import viewsets, filters
@@ -77,19 +65,40 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+# foi necessario importar cada nome da tabela usada nas querys de busca
+# porque caso eu nao fizesse isso, teria que acessar as tabelas por: models.Empresa . 
+# Só que dessa forma dá o seguinte erro: Manager isn't accessible via topic instance
+# Quando tento fazer a mesma query duas vezes seguidas.
+from api.models import (
+     Empresa,
+     Curso,
+)
+
+
 # Create your views here.
 
 # Lista Todos os cursos presentes na base de dados
 class ListCourses(APIView):
     def get(self, request, format=None):
-        curso = [models.Curso.nome for models.Curso in models.Curso.objects.all()]
+        curso = [Curso.nome for Curso in Curso.objects.all()]
         return Response(curso)
 
 # Lista Todas as empresas presentes na base de dados 
 class ListCompanies(APIView):
     def get(self, request, format=None):
-        empresas = [models.Empresa.nome for models.Empresa in models.Empresa.objects.all()]
+        empresas = [Empresa.nome for Empresa in Empresa.objects.all()]
         return Response(empresas)
+
+#Busca se uma determinada empresa existe na base de dados
+class SearchCompany(APIView):
+    def get(self, request, nome=None):
+        #Parametro name: Nome da Empresa
+        try:  
+            empresa = [Empresa.nome for Empresa in Empresa.objects.filter(nome=nome)]
+        except Empresa.DoesNotExist:
+            empresa = None
+                            
+        return Response(empresa)
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()

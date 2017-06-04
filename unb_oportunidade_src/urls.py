@@ -19,7 +19,7 @@ from api.views import (
 # #     ExampleView,
      ListCourses,
      ListCompanies,
-# #     SearchCompany,
+     SearchCompany,
 # #     SearchVacancy,
 # #     SearchOpportunity
 )
@@ -28,7 +28,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('api.urls')),
     url(r'^api/busca/ListCourses/$', ListCourses.as_view()),
-    url(r'^api/busca/ListCompanies/$', ListCompanies.as_view())
+    url(r'^api/busca/ListCompanies/$', ListCompanies.as_view()),
+    url(r'^api/busca/SearchCompany/(?P<nome>[\w\- ]+)/$', SearchCompany.as_view()),
 ]
 
 # # from unb_oportunidade_src.views import IndexView
@@ -37,15 +38,6 @@ urlpatterns = [
 # # router = DefaultRouter()
 # # router.register('user', views.UserViewSet)
 #
-# #
-# # from api.views import (
-# #     StudentListAPIView,
-# #     UserListAPIView,
-# #     StudentCreateAPIView,
-# #     StudentDetailAPIView,
-# #     CompanyCreateAPIView,
-# #     CompanyListAPIView
-# # )
 #
 # from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 #
