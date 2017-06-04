@@ -58,7 +58,7 @@ class ContratoInfo(models.Model):
     orientador_dois = models.CharField(max_length=100)
     vaga = models.ForeignKey('Vaga', on_delete=models.CASCADE)
     criado_em = models.DateTimeField(auto_now_add=True)
-    atualizada_em = models.DateTimeField(auto_now=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'contrato_info'
@@ -123,6 +123,7 @@ class Estudante(models.Model):
     semestre = models.IntegerField(null=False)
     universidade = models.CharField(max_length=45, blank=False)
     curso = models.ForeignKey('Curso', on_delete=models.CASCADE)
+    usuario = models.OneToOneField('Usuario', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'estudante'
