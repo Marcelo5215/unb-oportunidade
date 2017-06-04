@@ -1,15 +1,10 @@
 # from django.core.validators import validate_email
-# from django.http import HttpResponse, Http404, JsonResponse
 # from django.shortcuts import render
 # from django.views.decorators.csrf import csrf_exempt
 
+
 # Create your views here.
 
-# Lista Todos os cursos presentes na base de dados
-# class ListCourses(APIView):
-#     def get(self, request, format=None):
-#         course = [Course.name for Course in Course.objects.all()]
-#         return Response(course)
 #
 # # Lista Todas as empresas presentes na base de dados
 # class ListCompanies(APIView):
@@ -119,9 +114,20 @@
 
 from rest_framework import viewsets, filters
 from api import models, serializers, permissions
+from django_filters.rest_framework import DjangoFilterBackend
+from django.http import HttpResponse, Http404, JsonResponse
+
+from rest_framework.renderers import JSONRenderer
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 # Create your views here.
 
+# Lista Todos os cursos presentes na base de dados
+class ListCourses(APIView):
+    def get(self, request, format=None):
+        curso = [models.Curso.nome for models.Curso in models.Curso.objects.all()]
+        return Response(curso)
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()

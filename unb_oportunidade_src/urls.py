@@ -15,10 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from api.views import (
+# #     ExampleView,
+     ListCourses,
+# #     SearchCompany,
+# #     SearchVacancy,
+# #     SearchOpportunity
+)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include('api.urls'))
+    url(r'^api/', include('api.urls')),
+    url(r'^api/busca/ListCourses/$', ListCourses.as_view())
 ]
 
 # # from unb_oportunidade_src.views import IndexView
@@ -27,13 +35,6 @@ urlpatterns = [
 # # router = DefaultRouter()
 # # router.register('user', views.UserViewSet)
 #
-# # from api.views import (
-# #     ExampleView,
-# #     ListCourses,
-# #     SearchCompany,
-# #     SearchVacancy,
-# #     SearchOpportunity
-# # )
 # #
 # # from api.views import (
 # #     StudentListAPIView,
