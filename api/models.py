@@ -80,6 +80,7 @@ class CV(models.Model):
     info_adicional = models.TextField(max_length=500)
     arquivo = models.OneToOneField('Arquivo', on_delete=models.PROTECT)
     turno = models.OneToOneField('Turno', on_delete=models.PROTECT)
+    estudante = models.OneToOneField('Estudante', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'cv'
@@ -122,8 +123,9 @@ class Estudante(models.Model):
     matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^d{9}$')], blank=False)
     semestre = models.IntegerField(null=False)
     universidade = models.CharField(max_length=45, blank=False)
-    curso = models.ForeignKey('Curso', on_delete=models.CASCADE)
+    curso = models.ForeignKey('Curso', on_delete=models.PROTECT)
     usuario = models.OneToOneField('Usuario', on_delete=models.CASCADE)
+    conta_bancaria = models.OneToOneField('ContaBancaria', on_delete=models.PROTECT)
 
     class Meta:
         db_table = 'estudante'
@@ -132,7 +134,8 @@ class Estudante(models.Model):
 
 
 class Telefone(models.Model):
-    numero_telefone = models.CharField(max_length=9, blank=False)
+    ddd = models.CharField(max_length=2, validators=[RegexValidator(r'^\d{2}')], blank=False)
+    numero_telefone = models.CharField(max_length=9, validators=[RegexValidator(r'^\d{9}$')], blank=False)
     usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
 
     class Meta:
@@ -229,8 +232,8 @@ class Vaga(models.Model):
     atualizada_em = models.DateTimeField(auto_now=True)
     carga_horaria = models.IntegerField(null=False)
     semestre_minimo = models.IntegerField(null=False)
-    estudante = models.OneToOneField('Estudante', on_delete=models.PROTECT)
-    empresa = models.ForeignKey('Empresa', on_delete=models.PROTECT)
+    estudante = models.OneToOneField('Estudante', on_delete=models.CASCADE)
+    empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE)
     turno = models.OneToOneField('Turno', on_delete=models.PROTECT)
     cursos = models.ManyToManyField('Curso', through='VagaTemCurso')
 
