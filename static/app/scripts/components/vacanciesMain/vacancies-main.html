@@ -3,53 +3,20 @@
     <h2>Vagas</h2>
     <h4>Encontre aquela vaga de estágio dos sonhos</h4>
   </div>
-  <div class="row slideanim">
+  <div class="row slideanim" ng-repeat="vaga in vagas">
     <div class="col-sm-12 col-xs-12">
       <div class="panel panel-default">
-        <table class="table">
-          <tbody>
-            <tr>
-              <td class="col_empresa"><img class="img_empresa" src ="http://www.belasartes.br/images/destaques/novo/1451.jpg"></td>
-              <td class="col_descricao">
-                <h3><a href="">Administração</a></h3>
-                <p>
-                  Vaga: 1 /TAGUATINGA/ Sem.: 4º ao 6° / Bolsa: R$ 800,00+benefícios / Período: 09:00 12:00 13:00 16:00 /
-                  Requisitos: Carteira de Habilitação, Windows, Word, Excel e internet.
-                </p>
-              </td>
-              <td class="col_contato">
-                <p class="email_contato">
-                  20/06/2017
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  <div class="row slideanim">
-    <div class="col-sm-12 col-xs-12">
-      <div class="panel panel-default">
-        <table class="table">
-          <tbody>
-            <tr>
-              <td class="col_empresa"><img class="img_empresa" src ="http://www.belasartes.br/images/destaques/novo/1451.jpg"></td>
-              <td class="col_descricao">
-                <h3><a href="">Administração</a></h3>
-                <p>
-                  Vaga: 1 /TAGUATINGA/ Sem.: 4º ao 6° / Bolsa: R$ 800,00+benefícios / Período: 09:00 12:00 13:00 16:00 /
-                  Requisitos: Carteira de Habilitação, Windows, Word, Excel e internet.
-                </p>
-              </td>
-              <td class="col_contato">
-                <p class="email_contato">
-                  20/06/2017
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <img style="width: 80%;" src ="http://www.belasartes.br/images/destaques/novo/1451.jpg" />
+            </div>
+            <div class="col-md-6">
+              <h3>{{vaga.titulo}}</h3>
+              <p>{{vaga.descricao}}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
