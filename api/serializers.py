@@ -41,6 +41,23 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
         return instance
 
+class CursoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Curso
+        fields = ('nome', )
+
+class EmpresaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Empresa
+        fields = ('nome', )
+
+class VagaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Vaga
+        fields = ('titulo', )
+
 
 # class AddressSerializer(serializers.ModelSerializer):
 #     class Meta:

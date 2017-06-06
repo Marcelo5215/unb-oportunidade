@@ -16,12 +16,10 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from api.views import (
-# #     ExampleView,
      ListCourses,
      ListCompanies,
-     SearchCompany,
-# #     SearchVacancy,
-# #     SearchOpportunity
+     ListVacantJob,
+     SearchCompany
 )
 
 urlpatterns = [
@@ -29,6 +27,7 @@ urlpatterns = [
     url(r'^api/', include('api.urls')),
     url(r'^api/busca/ListCourses/$', ListCourses.as_view()),
     url(r'^api/busca/ListCompanies/$', ListCompanies.as_view()),
+    url(r'^api/busca/ListVacantJob/$', ListVacantJob.as_view()),
     url(r'^api/busca/SearchCompany/(?P<nome>[\w\- ]+)/$', SearchCompany.as_view()),
 ]
 
