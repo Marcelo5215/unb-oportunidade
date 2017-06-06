@@ -5,70 +5,73 @@ from django.core.validators import RegexValidator, MaxValueValidator, MinValueVa
 from django.db import models
 
 
-class Avaliacao(models.Model):
-    nota = models.IntegerField(null=False, validators=[MaxValueValidator(10), MinValueValidator(1)])
-    feedback = models.TextField(max_length=500, blank=True)
-    empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE)
+# class Avaliacao(models.Model):
+#     nota = models.IntegerField(null=False, validators=[MaxValueValidator(10), MinValueValidator(1)])
+#     feedback = models.TextField(max_length=500, blank=True)
+#     empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE)
 
-    class Meta:
-        db_table = 'avaliacao'
-        verbose_name = 'Avaliação'
-        verbose_name_plural = 'Avaliações'
-
-
-class Arquivo(models.Model):
-    nome_arquivo = models.CharField(max_length=255, unique=True, blank=False)
-    path_arquivo = models.CharField(max_length=255, unique=True, blank=False)
-
-    class Meta:
-        db_table = 'arquivo'
-        verbose_name = 'Arquivo'
-        verbose_name_plural = 'Arquivos'
+#     class Meta:
+#         db_table = 'avaliacao'
+#         verbose_name = 'Avaliação'
+#         verbose_name_plural = 'Avaliações'
 
 
-class Banco(models.Model):
-    nome = models.CharField(max_length=100, unique=True, blank=False)
+# class Arquivo(models.Model):
+#     nome_arquivo = models.CharField(max_length=255, unique=True, blank=False)
+#     path_arquivo = models.CharField(max_length=255, unique=True, blank=False)
 
-    class Meta:
-        db_table = 'banco'
-        verbose_name = 'Banco'
-        verbose_name_plural = 'Bancos'
-
-
-class ContaBancaria(models.Model):
-    numero_conta = models.IntegerField(null=False)
-    numero_agencia = models.IntegerField(null=False)
-    banco = models.ForeignKey('Banco', on_delete=models.PROTECT)
-
-    class Meta:
-        db_table = 'conta_bancaria'
-        verbose_name = 'Conta Bancária'
-        verbose_name_plural = 'Contas Bancárias'
+#     class Meta:
+#         db_table = 'arquivo'
+#         verbose_name = 'Arquivo'
+#         verbose_name_plural = 'Arquivos'
 
 
-class ContratoInfo(models.Model):
-    inicio_contrato = models.DateTimeField(null=False)
-    fim_contrato = models.DateTimeField(null=False)
-    is_ativo = models.BooleanField(verbose_name='está ativo?', null=False)
-    aditivo_primeiro = models.DateTimeField()
-    aditivo_segundo = models.DateTimeField()
-    aditivo_terceiro = models.DateTimeField()
-    aditivo_quarto = models.DateTimeField()
-    orientador_um = models.CharField(max_length=100)
-    orientador_dois = models.CharField(max_length=100)
-    vaga = models.ForeignKey('Vaga', on_delete=models.CASCADE)
-    criado_em = models.DateTimeField(auto_now_add=True)
-    atualizado_em = models.DateTimeField(auto_now=True)
+# class Banco(models.Model):
+#     nome = models.CharField(max_length=100, unique=True, blank=False)
 
-    class Meta:
-        db_table = 'contrato_info'
-        verbose_name = 'Informações do Contrato'
-        verbose_name_plural = 'Informações dos Contratos'
+#     class Meta:
+#         db_table = 'banco'
+#         verbose_name = 'Banco'
+#         verbose_name_plural = 'Bancos'
+
+
+# class ContaBancaria(models.Model):
+#     numero_conta = models.IntegerField(null=False)
+#     numero_agencia = models.IntegerField(null=False)
+#     banco = models.ForeignKey('Banco', on_delete=models.PROTECT)
+
+#     class Meta:
+#         db_table = 'conta_bancaria'
+#         verbose_name = 'Conta Bancária'
+#         verbose_name_plural = 'Contas Bancárias'
+
+
+# class ContratoInfo(models.Model):
+#     inicio_contrato = models.DateTimeField(null=False)
+#     fim_contrato = models.DateTimeField(null=False)
+#     is_ativo = models.BooleanField(verbose_name='está ativo?', null=False)
+#     aditivo_primeiro = models.DateTimeField()
+#     aditivo_segundo = models.DateTimeField()
+#     aditivo_terceiro = models.DateTimeField()
+#     aditivo_quarto = models.DateTimeField()
+#     orientador_um = models.CharField(max_length=100)
+#     orientador_dois = models.CharField(max_length=100)
+#     vaga = models.ForeignKey('Vaga', on_delete=models.CASCADE)
+#     criado_em = models.DateTimeField(auto_now_add=True)
+#     atualizado_em = models.DateTimeField(auto_now=True)
+
+#     class Meta:
+#         db_table = 'contrato_info'
+#         verbose_name = 'Informações do Contrato'
+#         verbose_name_plural = 'Informações dos Contratos'
 
 
 class Curso(models.Model):
     nome = models.CharField(max_length=100, blank=False)
     sigla = models.CharField(max_length=10, blank=False)
+
+    def __str__(self):
+        return self.nome
 
     class Meta:
         db_table = 'curso'
@@ -76,24 +79,28 @@ class Curso(models.Model):
         verbose_name_plural = 'Cursos'
 
 
-class CV(models.Model):
-    info_adicional = models.TextField(max_length=500)
-    arquivo = models.OneToOneField('Arquivo', on_delete=models.PROTECT)
-    turno = models.OneToOneField('Turno', on_delete=models.PROTECT)
-    estudante = models.OneToOneField('Estudante', on_delete=models.CASCADE)
+# class CV(models.Model):
+#     info_adicional = models.TextField(max_length=500)
+#     arquivo = models.OneToOneField('Arquivo', on_delete=models.PROTECT)
+#     turno = models.OneToOneField('Turno', on_delete=models.PROTECT)
+#     estudante = models.OneToOneField('Estudante', on_delete=models.CASCADE)
 
-    class Meta:
-        db_table = 'cv'
-        verbose_name = 'Currículo'
-        verbose_name_plural = 'Currículos'
+#     class Meta:
+#         db_table = 'cv'
+#         verbose_name = 'Currículo'
+#         verbose_name_plural = 'Currículos'
 
 
 class Empresa(models.Model):
     cnpj = models.IntegerField(primary_key=True, auto_created=False)
-    nome = models.CharField(max_length=100, blank=False)
+    razao_social = models.CharField(max_length=100, blank=False)
     nome_fantasia = models.CharField(max_length=100, blank=False)
-    conveniada = models.BooleanField(default=True, null=False)
+    conveniada = models.BooleanField(verbose_name='é conveniada com a UnB?',default=True, null=False)
     usuario = models.OneToOneField('Usuario', on_delete=models.CASCADE)
+    imagem = models.ImageField(null=True, blank=True)
+
+    def __str__(self):
+        return self.nome_fantasia
 
     class Meta:
         db_table = 'empresa'
@@ -101,51 +108,69 @@ class Empresa(models.Model):
         verbose_name_plural = 'Empresas'
 
 
-class Endereco(models.Model):
-    endereco = models.CharField(max_length=100, blank=False)
-    bairro = models.CharField(max_length=25, blank=False)
-    numero = models.CharField(max_length=5, blank=False, validators=[RegexValidator(r'^\d$')])
-    complemento = models.CharField(max_length=25, blank=True)
-    cidade = models.CharField(max_length=50, blank=False)
-    cep = models.CharField(max_length=8, blank=False, validators=[RegexValidator(r'^\d{8}$')])
-    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+# class Endereco(models.Model):
+#     endereco = models.CharField(max_length=100, blank=False)
+#     bairro = models.CharField(max_length=25, blank=False)
+#     numero = models.CharField(max_length=5, blank=False, validators=[RegexValidator(r'^\d$')])
+#     complemento = models.CharField(max_length=25, blank=True)
+#     cidade = models.CharField(max_length=50, blank=False)
+#     cep = models.CharField(max_length=8, blank=False, validators=[RegexValidator(r'^\d{8}$')])
+#     usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+
+#     class Meta:
+#         db_table = 'endereco'
+#         verbose_name = 'Endereço'
+#         verbose_name_plural = 'Endereços'
+
+
+# class Estudante(models.Model):
+#     cpf = models.IntegerField(primary_key=True, auto_created=False)
+#     nome_completo = models.CharField(max_length=255, blank=False)
+#     estudante_regular = models.BooleanField(null=False)
+#     matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^\d{9}$')], unique=True, blank=False)
+#     semestre = models.IntegerField(null=False)
+#     universidade = models.CharField(max_length=45, blank=False)
+#     curso = models.ForeignKey('Curso', on_delete=models.PROTECT)
+#     usuario = models.OneToOneField('Usuario', on_delete=models.CASCADE)
+#     conta_bancaria = models.OneToOneField('ContaBancaria', on_delete=models.PROTECT)
+
+#     class Meta:
+#         db_table = 'estudante'
+#         verbose_name = 'Estudante'
+#         verbose_name_plural = 'Estudantes'
+
+
+# class Telefone(models.Model):
+#     ddd = models.CharField(max_length=2, validators=[RegexValidator(r'^\d{2}')], blank=False)
+#     numero_telefone = models.CharField(max_length=9, validators=[RegexValidator(r'^\d{9}$')], blank=False)
+#     usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+
+#     class Meta:
+#         db_table = 'telefone'
+#         verbose_name = 'Telefone'
+#         verbose_name_plural = 'Telefones'
+
+class InteresseEmVaga(models.Model):
+    vaga = models.OneToOneField('Vaga', on_delete=models.CASCADE)  #???
+    nome_completo = models.CharField(max_length=100, blank=False)
+    matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^\d{9}$')], blank=False)
+    semestre = models.CharField(max_length=2, validators=[RegexValidator(r'^\d')], blank=False)
+    CV = models.FileField(null=False, blank=False)  
+    email = models.EmailField(blank=False)
+    DDD = models.CharField(max_length=2, validators=[RegexValidator(r'^\d{2}')], blank=False)
+    telefone = models.CharField(max_length=9, validators=[RegexValidator(r'^\d{9}$')], blank=False)
 
     class Meta:
-        db_table = 'endereco'
-        verbose_name = 'Endereço'
-        verbose_name_plural = 'Endereços'
-
-
-class Estudante(models.Model):
-    cpf = models.IntegerField(primary_key=True, auto_created=False)
-    nome_completo = models.CharField(max_length=255, blank=False)
-    estudante_regular = models.BooleanField(null=False)
-    matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^\d{9}$')], unique=True, blank=False)
-    semestre = models.IntegerField(null=False)
-    universidade = models.CharField(max_length=45, blank=False)
-    curso = models.ForeignKey('Curso', on_delete=models.PROTECT)
-    usuario = models.OneToOneField('Usuario', on_delete=models.CASCADE)
-    conta_bancaria = models.OneToOneField('ContaBancaria', on_delete=models.PROTECT)
-
-    class Meta:
-        db_table = 'estudante'
-        verbose_name = 'Estudante'
-        verbose_name_plural = 'Estudantes'
-
-
-class Telefone(models.Model):
-    ddd = models.CharField(max_length=2, validators=[RegexValidator(r'^\d{2}')], blank=False)
-    numero_telefone = models.CharField(max_length=9, validators=[RegexValidator(r'^\d{9}$')], blank=False)
-    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
-
-    class Meta:
-        db_table = 'telefone'
-        verbose_name = 'Telefone'
-        verbose_name_plural = 'Telefones'
+        db_table = 'InteresseEmVaga'
+        verbose_name = 'InteresseEmVaga'
+        verbose_name_plural = 'InteressesEmVagas'
 
 
 class Turno(models.Model):
     turno = models.CharField(max_length=20, blank=False)
+
+    def __str__(self):
+        return self.turno
 
     class Meta:
         db_table = 'turno'
@@ -232,10 +257,9 @@ class Vaga(models.Model):
     atualizada_em = models.DateTimeField(auto_now=True)
     carga_horaria = models.IntegerField(null=False)
     semestre_minimo = models.IntegerField(null=False)
-    estudante = models.OneToOneField('Estudante', on_delete=models.CASCADE)
     empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE)
     turno = models.OneToOneField('Turno', on_delete=models.PROTECT)
-    cursos = models.ManyToManyField('Curso', through='VagaTemCurso')
+    is_ativa = models.BooleanField(verbose_name='está ativa?', null=False)
 
     class Meta:
         db_table = 'vaga'

@@ -58,7 +58,7 @@
 
 from rest_framework import viewsets, filters
 from api import models, serializers, permissions
-from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.DjangoFilterBackend import DjangoFilterBackend
 from django.http import HttpResponse, Http404, JsonResponse
 
 from rest_framework.renderers import JSONRenderer
@@ -116,12 +116,44 @@ class SearchCompany(generics.ListAPIView):
                             
         return Response(empresa)
 
+
+class CursoViewSet(viewsets.ModelViewSet):
+    queryset = models.Curso.objects.all()
+    serializer_class = serializers.CursoSerializer
+
+
+class EmpresaViewSet(viewsets.ModelViewSet):
+    queryset = models.Empresa.objects.all()
+    serializer_class = serializers.EmpresaSerializer
+    
+    # Para encontrar dados de determinada empresa basta acrescentar /?search=nome_fantasia
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('nome_fantasia',)
+
+
+class InteresseEmVagaViewSet(viewsets.ModelViewSet):
+    queryset = models.InteresseEmVaga.objects.all()
+    serializer_class = serializers.InteresseEmVagaSerializer
+
+
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()
     serializer_class = serializers.UsuarioSerializer
     # permission_classes = (permissions.UpdateOwnProfile,)
     filter_backends = (filters.SearchFilter,)
     search_fields = ('email',)
+
+
+class TurnoViewSet(viewsets.ModelViewSet):
+    queryset = models.Turno.objects.all()
+    serializer_class = serializers.TurnoSerializer
+
+
+# Para encontrar dados de determinada empresa basta acrescentar /id
+class VagaViewSet(viewsets.ModelViewSet):
+    queryset = models.Vaga.objects.all()
+    serializer_class = serializers.VagaSerializer
+
 
     # def get_permissions(self):
     #     if self.request.method in permissions.SAFE_METHODS:
