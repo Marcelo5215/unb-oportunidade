@@ -15,20 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from api.views import (
-     ListCourses,
-     ListCompanies,
-     ListVacantJob,
-     SearchCompany
-)
+# from api.views import (
+#      ListCourses,
+#      ListCompanies,
+#      ListVacantJob,
+#      SearchCompany
+# )
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('api.urls')),
-    url(r'^api/busca/ListCourses/$', ListCourses.as_view()),
-    url(r'^api/busca/ListCompanies/$', ListCompanies.as_view()),
-    url(r'^api/busca/ListVacantJob/$', ListVacantJob.as_view()),
-    url(r'^api/busca/SearchCompany/(?P<nome>[\w\- ]+)/$', SearchCompany.as_view()),
+    # url(r'^api/busca/ListCourses/$', ListCourses.as_view()),
+    # url(r'^api/busca/ListCompanies/$', ListCompanies.as_view()),
+    # url(r'^api/busca/ListVacantJob/$', ListVacantJob.as_view()),
+    # url(r'^api/busca/SearchCompany/(?P<nome>[\w\- ]+)/$', SearchCompany.as_view()),
 ]
 
 # # from unb_oportunidade_src.views import IndexView

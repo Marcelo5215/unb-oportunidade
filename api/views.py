@@ -58,63 +58,63 @@
 
 from rest_framework import viewsets, filters
 from api import models, serializers, permissions
-from rest_framework.DjangoFilterBackend import DjangoFilterBackend
-from django.http import HttpResponse, Http404, JsonResponse
-
-from rest_framework.renderers import JSONRenderer
-from rest_framework import generics
-from rest_framework.response import Response
+# from rest_framework.DjangoFilterBackend import DjangoFilterBackend
+# from django.http import HttpResponse, Http404, JsonResponse
+#
+# from rest_framework.renderers import JSONRenderer
+# from rest_framework import generics
+# from rest_framework.response import Response
 
 # foi necessario importar cada nome da tabela usada nas querys de busca
 # porque caso eu nao fizesse isso, teria que acessar as tabelas por: models.Empresa . 
 # Só que dessa forma dá o seguinte erro: Manager isn't accessible via topic instance
 # Quando tento fazer a mesma query duas vezes seguidas.
-from api.models import (
-     Empresa,
-     Curso,
-     Vaga,
-)
+# from api.models import (
+#      Empresa,
+#      Curso,
+#      Vaga,
+# )
 
-from api.serializers import (
-     CursoSerializer,
-     EmpresaSerializer,
-     VagaSerializer,
-)
+# from api.serializers import (
+#      CursoSerializer,
+#      EmpresaSerializer,
+#      VagaSerializer,
+# )
 
 
 # Create your views here.
 
 # Lista Todos os cursos presentes na base de dados
-class ListCourses(generics.ListAPIView):
-    queryset = Curso.objects.all()
-    serializer_class = CursoSerializer
-    filter_backends = (DjangoFilterBackend,)
-    search_fields = ('nome')
-   
-# Lista Todas as empresas presentes na base de dados 
-class ListCompanies(generics.ListAPIView):
-    queryset = Empresa.objects.all()
-    serializer_class = EmpresaSerializer
-    filter_backends = (DjangoFilterBackend,)
-    search_fields = ('nome')
-
-# Lista Todas as empresas presentes na base de dados 
-class ListVacantJob(generics.ListAPIView):
-    queryset = Vaga.objects.all()
-    serializer_class = VagaSerializer
-    filter_backends = (DjangoFilterBackend,)
-    search_fields = ('titulo')
-
-#Busca se uma determinada empresa existe na base de dados
-class SearchCompany(generics.ListAPIView):
-    def get(self, request, nome=None):
-        #Parametro name: Nome da Empresa
-        try:  
-            empresa = [Empresa.nome for Empresa in Empresa.objects.filter(nome=nome)]
-        except Empresa.DoesNotExist:
-            empresa = None
-                            
-        return Response(empresa)
+# class ListCourses(generics.ListAPIView):
+#     queryset = Curso.objects.all()
+#     serializer_class = CursoSerializer
+#     filter_backends = (DjangoFilterBackend,)
+#     search_fields = ('nome')
+#
+# # Lista Todas as empresas presentes na base de dados
+# class ListCompanies(generics.ListAPIView):
+#     queryset = Empresa.objects.all()
+#     serializer_class = EmpresaSerializer
+#     filter_backends = (DjangoFilterBackend,)
+#     search_fields = ('nome')
+#
+# # Lista Todas as empresas presentes na base de dados
+# class ListVacantJob(generics.ListAPIView):
+#     queryset = Vaga.objects.all()
+#     serializer_class = VagaSerializer
+#     filter_backends = (DjangoFilterBackend,)
+#     search_fields = ('titulo')
+#
+# #Busca se uma determinada empresa existe na base de dados
+# class SearchCompany(generics.ListAPIView):
+#     def get(self, request, nome=None):
+#         #Parametro name: Nome da Empresa
+#         try:
+#             empresa = [Empresa.nome for Empresa in Empresa.objects.filter(nome=nome)]
+#         except Empresa.DoesNotExist:
+#             empresa = None
+#
+#         return Response(empresa)
 
 
 class CursoViewSet(viewsets.ModelViewSet):

@@ -9,8 +9,8 @@ router.register('usuarios', views.UsuarioViewSet)   # ModelViewSet não precisa 
 router.register('empresas', views.EmpresaViewSet)
 router.register('vagas', views.VagaViewSet)
 router.register('cursos', views.CursoViewSet)
-router.register('interessevaga', views.InteresseEmVagaViewSet)
-router.register('turno',views.TurnoViewSet) 
+router.register('interesses_vagas', views.InteresseEmVagaViewSet)
+router.register('turnos', views.TurnoViewSet)
 
 urlpatterns = [
     url(r'', include(router.urls))

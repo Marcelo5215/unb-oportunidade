@@ -9,15 +9,16 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Usuario
-        fields = ('id', 'email', 'password', 'is_estudante', 'is_empresa')
+        # fields = ('id', 'email', 'password', 'is_estudante', 'is_empresa')
+        fields = ('id', 'email', 'password')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
 
         user = models.Usuario(
             email=validated_data['email'],
-            is_estudante=validated_data['is_estudante'],
-            is_empresa=validated_data['is_empresa']
+            # is_estudante=validated_data['is_estudante'],
+            # is_empresa=validated_data['is_empresa']
         )
 
         user.set_password(validated_data['password'])
@@ -26,8 +27,8 @@ class UsuarioSerializer(serializers.ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
-        instance.is_empresa = validated_data.get('is_empresa', instance.is_empresa)
-        instance.is_estudante = validated_data.get('is_estudante', instance.is_estudante)
+        # instance.is_empresa = validated_data.get('is_empresa', instance.is_empresa)
+        # instance.is_estudante = validated_data.get('is_estudante', instance.is_estudante)
 
         instance.save()
 
