@@ -1,25 +1,23 @@
-# from api.models import Company, Address, Phone, Student
-
 from django.contrib.auth import update_session_auth_hash
 from rest_framework import serializers
+
 from . import models
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
+    confirm_password = serializers.CharField(allow_blank=False, write_only=True)
 
     class Meta:
         model = models.Usuario
-        # fields = ('id', 'email', 'password', 'is_estudante', 'is_empresa')
-        fields = ('id', 'email', 'password')
-        extra_kwargs = {'password': {'write_only': True}}
+        fields = ('id', 'email', 'password', 'confirm_password')
+        extra_kwargs = {'password': {'write_only': True}, 'confirm_password': {'write_only': True}}
 
     def create(self, validated_data):
 
-        user = models.Usuario(
-            email=validated_data['email'],
-            # is_estudante=validated_data['is_estudante'],
-            # is_empresa=validated_data['is_empresa']
-        )
+        user = models.Usuario(email=validated_data['email'])
+
+        if validated_data['password'] != validated_data['confirm_password']:
+            raise ValueError('Senha e confirmação não conferem.')
 
         user.set_password(validated_data['password'])
         user.save()
@@ -27,16 +25,17 @@ class UsuarioSerializer(serializers.ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
-        # instance.is_empresa = validated_data.get('is_empresa', instance.is_empresa)
-        # instance.is_estudante = validated_data.get('is_estudante', instance.is_estudante)
 
         instance.save()
 
         password = validated_data.get('password', None)
+        confirm_password = validated_data.get('confirm_password', None)
 
-        if password:
+        if password and confirm_password and password == confirm_password:
             instance.set_password(password)
             instance.save()
+        elif password != confirm_password:
+            raise ValueError('Senha e confirmação não conferem.')
 
         update_session_auth_hash(self.context.get('request'), instance)
 

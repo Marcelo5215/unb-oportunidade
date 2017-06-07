@@ -57,6 +57,8 @@
 # import datetime
 
 from rest_framework import viewsets, filters
+from rest_framework.permissions import IsAuthenticated
+
 from api import models, serializers, permissions
 # from rest_framework.DjangoFilterBackend import DjangoFilterBackend
 # from django.http import HttpResponse, Http404, JsonResponse
@@ -116,39 +118,54 @@ from api import models, serializers, permissions
 #
 #         return Response(empresa)
 
-
+# GET: qualquer um
+# POST, PATCH, PUT: ninguém
 class CursoViewSet(viewsets.ModelViewSet):
     queryset = models.Curso.objects.all()
     serializer_class = serializers.CursoSerializer
 
 
+# GET: qualquer um
+# POST: qualquer um
+# PATCH, PUT: própria empresa, apenas o próprio perfil
 class EmpresaViewSet(viewsets.ModelViewSet):
     queryset = models.Empresa.objects.all()
     serializer_class = serializers.EmpresaSerializer
-    
+    permission_classes = (permissions.UpdateCompanyProfile, IsAuthenticated)
     # Para encontrar dados de determinada empresa basta acrescentar /?search=nome_fantasia
     filter_backends = (filters.SearchFilter,)
     search_fields = ('nome_fantasia',)
 
 
+# GET: empresa dona da vaga
+# POST: qualquer um
+# PATCH, PUT: ninguém
 class InteresseEmVagaViewSet(viewsets.ModelViewSet):
     queryset = models.InteresseEmVaga.objects.all()
     serializer_class = serializers.InteresseEmVagaSerializer
 
 
+# GET: ninguém
+# POST: qualquer um
+# PATCH, PUT: próprio usuário no seu perfil
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()
     serializer_class = serializers.UsuarioSerializer
-    # permission_classes = (permissions.UpdateOwnProfile,)
+    permission_classes = (permissions.UpdateOwnProfile, IsAuthenticated)
     filter_backends = (filters.SearchFilter,)
     search_fields = ('email',)
 
 
+# GET: qualquer um
+# POST, PATCH, PUT: ninguém
 class TurnoViewSet(viewsets.ModelViewSet):
     queryset = models.Turno.objects.all()
     serializer_class = serializers.TurnoSerializer
 
 
+# GET: qualquer um
+# POST: só empresas
+# PATCH, PUT: só empresa dona da vaga
 # Para encontrar dados de determinada empresa basta acrescentar /id
 class VagaViewSet(viewsets.ModelViewSet):
     queryset = models.Vaga.objects.all()
