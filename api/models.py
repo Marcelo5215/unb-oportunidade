@@ -17,17 +17,20 @@ def caminho_arquivo_estudante(instance, filename):
 class ContratoInfo(models.Model):
     nome = models.CharField(verbose_name='Nome do aluno', max_length=255, blank=False)
     matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^\d{9}$')], unique=True, blank=False)
-    inicio_contrato = models.DateTimeField(null=False)
-    fim_contrato = models.DateTimeField(null=False)
+    inicio_contrato = models.DateField(null=False)
+    fim_contrato = models.DateField(null=False)
     is_ativo = models.BooleanField(verbose_name='está ativo?', null=False)
-    aditivo_primeiro = models.DateTimeField()
-    aditivo_segundo = models.DateTimeField()
-    aditivo_terceiro = models.DateTimeField()
-    aditivo_quarto = models.DateTimeField()
+    aditivo_primeiro = models.DateField(null=True, blank=True)
+    aditivo_segundo = models.DateField(null=True, blank=True)
+    aditivo_terceiro = models.DateField(null=True, blank=True)
+    aditivo_quarto = models.DateField(null=True, blank=True)
     orientador_um = models.CharField(max_length=100)
     orientador_dois = models.CharField(max_length=100)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'Aluno: ' + self.nome + ' | Matrícula: ' + self.matricula + ' | Início do Contrato: ' + self.inicio_contrato.__str__() + ' | Fim do Contrato: ' + self.fim_contrato.__str__()
 
     class Meta:
         db_table = 'contrato_info'
