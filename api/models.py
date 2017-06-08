@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.core.validators import RegexValidator
 from django.db import models
 
+from api.validators import validate_file_extension
+
 
 def caminho_imagem_empresa(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
@@ -72,7 +74,7 @@ class InteresseEmVaga(models.Model):
     nome_completo = models.CharField(max_length=100, blank=False)
     matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^\d{9}$')], blank=False)
     semestre = models.IntegerField(null=False)
-    CV = models.FileField(null=False, upload_to=caminho_arquivo_estudante)
+    CV = models.FileField(null=False, upload_to=caminho_arquivo_estudante, validators=[validate_file_extension])
     email = models.EmailField(blank=False)
     telefone = models.CharField(verbose_name='(xx) xxxxx-xxxx', max_length=11, validators=[RegexValidator(r'^\d{11}$')], blank=False)
 

@@ -19,6 +19,6 @@ from src.views import IndexView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', IndexView.as_view()),
     url(r'^api/', include('api.urls')),
+    url(r'', IndexView.as_view()),
 ]
