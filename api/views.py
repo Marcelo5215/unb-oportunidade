@@ -121,9 +121,8 @@ from api import models, serializers, permissions
 
 # GET: qualquer um
 # POST, PATCH, PUT: ninguém
-class CursoViewSet(viewsets.ModelViewSet):
+class CursoViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Curso.objects.all()
-    permission_classes = (permissions.ReadOnly,)
     serializer_class = serializers.CursoSerializer
 
 
