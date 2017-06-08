@@ -21,8 +21,18 @@
 > Use a senha do 'root' que está no Canal de Anúncios do grupo, assim como as configurações extras descritas lá.
 
 Instalar o driver mysqlclient:
-1. sudo apt-get install libmysqlclient-dev
-2. sudo pip3 install mysqlclient (caso não funcione, use pip)
+1. ```sudo apt-get install libmysqlclient-dev```
+2. ```sudo pip3 install mysqlclient``` (caso não funcione, use pip)
+
+Instalar DjangoFilterBackend:
+```
+sudo pip3 install django-filter
+```
+
+Instalar REST Condition:
+```
+sudo pip3 install rest_condition
+```
 
 ### Branches:
 

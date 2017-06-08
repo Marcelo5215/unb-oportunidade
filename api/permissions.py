@@ -1,28 +1,6 @@
 from rest_framework import permissions
 
-from api.models import InteresseEmVaga, Usuario
-
-
-class ChecarInteressesEmVaga(permissions.BasePermission):
-
-    def has_permission(self, request, view):
-        return InteresseEmVaga.objects.filter(vaga__empresa__usuario=request.user.id)
-
-    # def has_object_permission(self, request, view, obj):
-    #     if request.method in permissions.SAFE_METHODS:
-    #         return obj.vaga.empresa.usuario_id == request.user.id
-    #     elif request.method == 'POST' or request.method == 'DELETE':
-    #         return True
-    #     return False
-
-
-class ManageVacancyInterest(permissions.BasePermission):
-
-    def has_object_permission(self, request, view, obj):
-        if request.method in permissions.SAFE_METHODS:
-            return obj.vaga.empresa.usuario_id == request.user.id
-        else:
-            return True
+from api.models import Usuario
 
 
 class WriteOnly(permissions.BasePermission):
@@ -60,11 +38,3 @@ class ManageVacancy(permissions.BasePermission):
             return obj.empresa.usuario == request.user
         return True
 
-# class UpdateCompanyProfile(permissions.BasePermission):
-#
-#     def has_object_permission(self, request, view, obj):
-#
-#         if request.method in permissions.SAFE_METHODS:
-#             return True
-#
-#         return obj.usuario_id == request.user.id
