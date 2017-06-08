@@ -1,0 +1,13 @@
+.detalhes-vaga{
+	text-decoration: none;
+	margin-left: 10px;
+	list-style-type: none;
+}
+.imagem-vaga{
+	margin: 10px;
+	padding: 10px;
+}
+body{
+	background-image: url("http://www.designbolts.com/wp-content/uploads/2014/03/Sea-green-blur-background1.jpg");
+	background-size: cover;
+}
