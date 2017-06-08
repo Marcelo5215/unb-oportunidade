@@ -8,20 +8,25 @@
 
   function NavbarController($scope, $state, store, jwtService) {
 
-    $scope.isUserLoggedIn = isUserLoggedIn;
+    $scope.isUserLoggedIn = false;
+    $scope.logout = logout;
+
+    this.$onInit = function(){
+      jwtService.verifyAuth(getCurrentToken()).then(login, logout);
+    };
+
+    function login() {
+      $scope.isUserLoggedIn = true;
+    }
+
+    function logout() {
+      store.set('token', null);
+      $scope.isUserLoggedIn = false;
+      $state.go('home');
+    }
 
     function getCurrentToken() {
       return store.get('token');
-    }
-
-    function isUserLoggedIn() {
-      var currentToken = getCurrentToken();
-      if (currentToken) {
-        jwtService.verifyAuth(currentToken).then(function() {
-          return true;
-        });
-      }
-      return false;
     }
 
   }
