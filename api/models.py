@@ -160,7 +160,7 @@ class Vaga(models.Model):
     is_ativa = models.BooleanField(verbose_name='está ativa?', null=False)
     semestre_minimo = models.IntegerField(null=False)
     titulo = models.CharField(max_length=100, blank=False)
-    turno = models.OneToOneField('Turno', on_delete=models.PROTECT)
+    turno = models.ForeignKey('Turno', on_delete=models.PROTECT)
 
     def __str__(self):
         return self.titulo

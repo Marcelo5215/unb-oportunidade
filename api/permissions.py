@@ -1,30 +1,35 @@
 from rest_framework import permissions
 
-
-class ReadOnly(permissions.BasePermission):
-
-    def has_permission(self, request, view):
-        if request.method in permissions.SAFE_METHODS:
-            return True
-        else:
-            return False
+from api.models import InteresseEmVaga, Usuario
 
 
 class ChecarInteressesEmVaga(permissions.BasePermission):
 
+    def has_permission(self, request, view):
+        return InteresseEmVaga.objects.filter(vaga__empresa__usuario=request.user.id)
+
+    # def has_object_permission(self, request, view, obj):
+    #     if request.method in permissions.SAFE_METHODS:
+    #         return obj.vaga.empresa.usuario_id == request.user.id
+    #     elif request.method == 'POST' or request.method == 'DELETE':
+    #         return True
+    #     return False
+
+
+class ManageVacancyInterest(permissions.BasePermission):
+
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
             return obj.vaga.empresa.usuario_id == request.user.id
-        elif request.method == 'POST':
+        else:
             return True
-        return False
 
 
-class IsOwner(permissions.BasePermission):
+class WriteOnly(permissions.BasePermission):
 
-    def has_object_permission(self, request, view, usuario):
-        if request.user:
-            return usuario == request.user
+    def has_permission(self, request, view):
+        if request.method == 'POST':
+            return True
         return False
 
 
@@ -41,6 +46,19 @@ class UpdateOwnProfile(permissions.BasePermission):
         else:
             return obj.usuario_id == request.user.id
 
+
+class ManageVacancy(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        if request.method == 'POST':
+            # Caso exista usuário de estudante, é preciso fazer 'return request.user.is_empresa'
+            return isinstance(request.user, Usuario)
+        return True
+
+    def has_object_permission(self, request, view, obj):
+        if request.method not in permissions.SAFE_METHODS:
+            return obj.empresa.usuario == request.user
+        return True
 
 # class UpdateCompanyProfile(permissions.BasePermission):
 #
