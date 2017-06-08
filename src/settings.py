@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'unb_oportunidade_src.wsgi.application'
+WSGI_APPLICATION = 'src.wsgi.application'
 
 DATABASES = {
     'default': {

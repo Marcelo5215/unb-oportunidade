@@ -32,7 +32,7 @@ urlpatterns = [
     # url(r'^api/busca/SearchCompany/(?P<nome>[\w\- ]+)/$', SearchCompany.as_view()),
 ]
 
-# # from unb_oportunidade_src.views import IndexView
+# # from src.views import IndexView
 # # from rest_framework.routers import DefaultRouter
 # # from api import views
 # # router = DefaultRouter()
