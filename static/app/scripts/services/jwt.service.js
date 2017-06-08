@@ -1,16 +1,14 @@
 angular.module('unbOportunidade')
-  .service('jwtService', ['$http', JWTService])
+  .service('jwtService', ['$http', 'store', JWTService])
 
-function JWTService($http) {
+function JWTService($http, store) {
 
   this.auth = function(username, password) {
     $http.post('api/api-token-auth/', { username: username, password: password })
-      .then(function(data) {
-        store.set('token', data.token);
-        // $state.go('somewhere')
+      .then(function(response) {
+        store.set('token', response.data.token);
       })
       .catch(function(fallback) {
-        // Msg de falha de login para usuário
       });
   };
 
