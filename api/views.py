@@ -58,6 +58,7 @@
 
 from rest_framework import viewsets, filters
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework import mixins
 
 from api import models, serializers, permissions
 # from rest_framework.DjangoFilterBackend import DjangoFilterBackend
@@ -150,10 +151,19 @@ class InteresseEmVagaViewSet(viewsets.ModelViewSet):
 # GET: ninguém
 # POST: qualquer um
 # PATCH, PUT: próprio usuário no seu perfil
-class UsuarioViewSet(viewsets.ModelViewSet):
+# class UsuarioViewSet(viewsets.ModelViewSet):
+#     queryset = models.Usuario.objects.all()
+#     serializer_class = serializers.UsuarioSerializer
+#     permission_classes = (permissions.UpdateOwnProfile,)
+#     filter_backends = (filters.SearchFilter,)
+#     search_fields = ('email',)
+class UsuarioViewSet(mixins.CreateModelMixin,
+                     mixins.UpdateModelMixin,
+                     mixins.DestroyModelMixin,
+                     viewsets.GenericViewSet):
     queryset = models.Usuario.objects.all()
     serializer_class = serializers.UsuarioSerializer
-    permission_classes = (permissions.UpdateOwnProfile,)
+    permission_classes = (permissions.UpdateOwnProfile, IsAuthenticated)
     filter_backends = (filters.SearchFilter,)
     search_fields = ('email',)
 
