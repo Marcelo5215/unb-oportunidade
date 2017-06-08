@@ -1,361 +1,173 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
 from __future__ import unicode_literals
 
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.core.validators import RegexValidator
 from django.db import models
 
-
-class Address(models.Model):
-    id = models.IntegerField(primary_key=True)
-    city = models.CharField(max_length=100, blank=True, null=True)
-    neighborhood = models.CharField(max_length=100, blank=True, null=True)
-    public_place = models.CharField(db_column='public place', max_length=45, blank=True, null=True)  # Field renamed to remove unsuitable characters.
-    number = models.CharField(max_length=4, blank=False, null=False)
-    complement = models.CharField(max_length=100, blank=True, null=True)
-    cep = models.CharField(max_length=8, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'address'
+from api.validators import validate_file_extension
 
 
-class Advisor(models.Model):
-    advisor_id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=200)
-    curso = models.ForeignKey('Course', models.DO_NOTHING, db_column='curso', blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'advisor'
+def caminho_imagem_empresa(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'media/user_{0}/{1}'.format(instance.usuario_id, filename)
 
 
-class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=80)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group'
+def caminho_arquivo_estudante(instance, filename):
+    return 'files/vaga_{0}/{1}_{2}'.format(instance.vaga_id, instance.email, filename)
 
 
-class AuthGroupPermissions(models.Model):
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+class ContratoInfo(models.Model):
+    nome = models.CharField(verbose_name='Nome do aluno', max_length=255, blank=False)
+    matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^\d{9}$')], unique=True, blank=False)
+    inicio_contrato = models.DateField(null=False)
+    fim_contrato = models.DateField(null=False)
+    is_ativo = models.BooleanField(verbose_name='está ativo?', null=False)
+    aditivo_primeiro = models.DateField(null=True, blank=True)
+    aditivo_segundo = models.DateField(null=True, blank=True)
+    aditivo_terceiro = models.DateField(null=True, blank=True)
+    aditivo_quarto = models.DateField(null=True, blank=True)
+    orientador_um = models.CharField(max_length=100)
+    orientador_dois = models.CharField(max_length=100)
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'Aluno: ' + self.nome + ' | Matrícula: ' + self.matricula + ' | Início do Contrato: ' + self.inicio_contrato.__str__() + ' | Fim do Contrato: ' + self.fim_contrato.__str__()
 
     class Meta:
-        managed = False
-        db_table = 'auth_group_permissions'
-        unique_together = (('group', 'permission'),)
+        db_table = 'contrato_info'
+        verbose_name = 'Informações do Contrato'
+        verbose_name_plural = 'Informações dos Contratos'
 
 
-class AuthPermission(models.Model):
-    name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
-    codename = models.CharField(max_length=100)
+class Curso(models.Model):
+    nome = models.CharField(max_length=100, blank=False)
 
-    class Meta:
-        managed = False
-        db_table = 'auth_permission'
-        unique_together = (('content_type', 'codename'),)
-
-
-class AuthUser(models.Model):
-    password = models.CharField(max_length=128)
-    last_login = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.IntegerField()
-    username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    email = models.CharField(max_length=254)
-    is_staff = models.IntegerField()
-    is_active = models.IntegerField()
-    date_joined = models.DateTimeField()
+    def __str__(self):
+        return self.nome
 
     class Meta:
-        managed = False
-        db_table = 'auth_user'
+        db_table = 'curso'
+        verbose_name = 'Curso'
+        verbose_name_plural = 'Cursos'
 
 
-class AuthUserGroups(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+class Empresa(models.Model):
+    cnpj = models.IntegerField(primary_key=True, auto_created=False)
+    razao_social = models.CharField(max_length=100, blank=False)
+    nome_fantasia = models.CharField(max_length=100, blank=False)
+    conveniada = models.BooleanField(verbose_name='é conveniada com a UnB?',default=True, null=False)
+    usuario = models.OneToOneField('Usuario', on_delete=models.CASCADE)
+    imagem = models.ImageField(upload_to=caminho_imagem_empresa, default='media/unb.jpg')
 
-    class Meta:
-        managed = False
-        db_table = 'auth_user_groups'
-        unique_together = (('user', 'group'),)
-
-
-class AuthUserUserPermissions(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+    def __str__(self):
+        return self.nome_fantasia
 
     class Meta:
-        managed = False
-        db_table = 'auth_user_user_permissions'
-        unique_together = (('user', 'permission'),)
+        db_table = 'empresa'
+        verbose_name = 'Empresa'
+        verbose_name_plural = 'Empresas'
 
 
-class BankAccounts(models.Model):
-    idbank_accounts = models.IntegerField(primary_key=True)
-    account_number = models.CharField(max_length=20, blank=True, null=True)
-    agency_number = models.CharField(max_length=10, blank=True, null=True)
-    bank_names_bank_number = models.ForeignKey('BankNames', models.DO_NOTHING, db_column='bank_names_bank_number')
-    student_cpf = models.ForeignKey('Student', models.DO_NOTHING, db_column='student_cpf')
+class InteresseEmVaga(models.Model):
+    vaga = models.ForeignKey('Vaga', on_delete=models.CASCADE)
+    nome_completo = models.CharField(max_length=100, blank=False)
+    matricula = models.CharField(max_length=9, validators=[RegexValidator(r'^\d{9}$')], blank=False)
+    semestre = models.IntegerField(null=False)
+    CV = models.FileField(null=False, upload_to=caminho_arquivo_estudante, validators=[validate_file_extension])
+    email = models.EmailField(blank=False)
+    telefone = models.CharField(verbose_name='(xx) xxxxx-xxxx', max_length=11, validators=[RegexValidator(r'^\d{11}$')], blank=False)
 
-    class Meta:
-        managed = False
-        db_table = 'bank_accounts'
-
-
-class BankNames(models.Model):
-    bank_number = models.IntegerField(primary_key=True)
-    bank_name = models.CharField(max_length=100, blank=True, null=True)
+    def __str__(self):
+        return self.nome_completo
 
     class Meta:
-        managed = False
-        db_table = 'bank_names'
+        db_table = 'interesse_em_vaga'
+        verbose_name = 'Interesse em Vaga'
+        verbose_name_plural = 'Interesses em Vagas'
+        unique_together = (('vaga', 'email'),)
 
 
-class Company(models.Model):
-    name = models.CharField(max_length=45, blank=True, null=True)
-    cnpj = models.IntegerField(primary_key=True)
-    corporate_name = models.CharField(max_length=45, blank=True, null=True)
-    createdat = models.DateTimeField(db_column='createdAt', blank=True, null=True)  # Field name made lowercase.
-    updateat = models.DateTimeField(db_column='updateAt', blank=True, null=True)  # Field name made lowercase.
-    address = models.ForeignKey(Address, models.DO_NOTHING, db_column='address', blank=True, null=True)
-    iduser = models.ForeignKey('User', models.DO_NOTHING, db_column='idUser', blank=True, null=True)  # Field name made lowercase.
-    agreement = models.IntegerField(blank=True, null=True)
-    intermediate = models.CharField(max_length=100, blank=True, null=True)
+class Turno(models.Model):
+    turno = models.CharField(max_length=20, blank=False)
+
+    def __str__(self):
+        return self.turno
 
     class Meta:
-        managed = False
-        db_table = 'company'
+        db_table = 'turno'
+        verbose_name = 'Turno'
+        verbose_name_plural = 'Turnos'
 
 
-class CompanyHasPhone(models.Model):
-    company_cnpj = models.ForeignKey(Company, models.DO_NOTHING, db_column='company_cnpj', primary_key=True)
-    phone = models.ForeignKey('Phone', models.DO_NOTHING)
+class UsuarioManager(BaseUserManager):
 
-    class Meta:
-        managed = False
-        db_table = 'company_has_phone'
-        unique_together = (('company_cnpj', 'phone'),)
+    def create_user(self, email, password=None):
 
+        if not email:
+            raise ValueError('Usuários devem ter um email válido.')
 
-class Course(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
-    abbreviation = models.CharField(max_length=10, blank=True, null=True)
+        email = self.normalize_email(email)
+        usuario = self.model(email=email)
 
-    class Meta:
-        managed = False
-        db_table = 'course'
+        usuario.set_password(password)
+        usuario.save(using=self._db)
 
+        return usuario
 
-class Curriculum(models.Model):
-    cpf = models.ForeignKey('Student', models.DO_NOTHING, db_column='cpf', primary_key=True)
-    time_desired = models.IntegerField(blank=True, null=True)
-    work_shift = models.CharField(max_length=20, blank=True, null=True)
-    file = models.ForeignKey('File', models.DO_NOTHING, blank=True, null=True)
-    university = models.CharField(max_length=45, blank=True, null=True)
-    aditional_info = models.CharField(max_length=900, blank=True, null=True)
-    semester = models.IntegerField(blank=True, null=True)
-    course = models.ForeignKey(Course, models.DO_NOTHING, blank=True, null=True)
+    def create_superuser(self, email, password):
 
-    class Meta:
-        managed = False
-        db_table = 'curriculum'
+        user = self.create_user(email, password)
+
+        user.is_superuser = True
+        user.is_staff = True
+
+        user.save(using=self._db)
+
+        return user
 
 
-class DjangoAdminLog(models.Model):
-    action_time = models.DateTimeField()
-    object_id = models.TextField(blank=True, null=True)
-    object_repr = models.CharField(max_length=200)
-    action_flag = models.SmallIntegerField()
-    change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+class Usuario(AbstractBaseUser, PermissionsMixin):
 
-    class Meta:
-        managed = False
-        db_table = 'django_admin_log'
+    email = models.EmailField(unique=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
 
+    objects = UsuarioManager()
 
-class DjangoContentType(models.Model):
-    app_label = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
+    USERNAME_FIELD = 'email'
+
+    def get_full_name(self):
+        return self.email
+
+    def get_short_name(self):
+        return self.email
+
+    def __str__(self):
+        return self.email
 
     class Meta:
-        managed = False
-        db_table = 'django_content_type'
-        unique_together = (('app_label', 'model'),)
+        db_table = 'usuario'
+        verbose_name = 'Usuário'
+        verbose_name_plural = 'Usuários'
 
 
-class DjangoMigrations(models.Model):
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
+class Vaga(models.Model):
+    atualizada_em = models.DateTimeField(auto_now=True)
+    carga_horaria = models.IntegerField(null=False)
+    criada_em = models.DateTimeField(auto_now_add=True)
+    curso = models.ManyToManyField('Curso')
+    descricao = models.TextField(max_length=500, blank=False)
+    empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE)
+    is_ativa = models.BooleanField(verbose_name='está ativa?', null=False)
+    semestre_minimo = models.IntegerField(null=False)
+    titulo = models.CharField(max_length=100, blank=False)
+    turno = models.ForeignKey('Turno', on_delete=models.PROTECT)
 
-    class Meta:
-        managed = False
-        db_table = 'django_migrations'
-
-
-class DjangoSession(models.Model):
-    session_key = models.CharField(primary_key=True, max_length=40)
-    session_data = models.TextField()
-    expire_date = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_session'
-
-
-class File(models.Model):
-    id = models.IntegerField(primary_key=True)
-    filename = models.CharField(max_length=500, blank=True, null=True)
-    filepath = models.CharField(max_length=500, blank=True, null=True)
+    def __str__(self):
+        return self.titulo
 
     class Meta:
-        managed = False
-        db_table = 'file'
-
-
-class Hiring(models.Model):
-    id_hiring = models.IntegerField(primary_key=True)
-    contractedat = models.DateTimeField(db_column='contractedAt', blank=True, null=True)  # Field name made lowercase.
-    contratactend = models.DateTimeField(db_column='contratactEnd', blank=True, null=True)  # Field name made lowercase.
-    active = models.IntegerField(blank=True, null=True)
-    id_student = models.ForeignKey('Student', models.DO_NOTHING, db_column='id_student', blank=True, null=True)
-    id_company = models.ForeignKey(Company, models.DO_NOTHING, db_column='id_company', blank=True, null=True)
-    id_vacant_job = models.ForeignKey('VacantJob', models.DO_NOTHING, db_column='id_vacant_job', blank=True, null=True)
-    additive_first = models.DateTimeField(blank=True, null=True)
-    additive_second = models.DateTimeField(blank=True, null=True)
-    additive_third = models.DateTimeField(blank=True, null=True)
-    additive_fourth = models.DateTimeField(blank=True, null=True)
-    document_enter = models.DateTimeField(blank=True, null=True)
-    advisor_first = models.ForeignKey(Advisor, models.DO_NOTHING, db_column='advisor_first', blank=True, null=True, related_name='%(class)s_advisor_first')
-    advisor_second = models.ForeignKey(Advisor, models.DO_NOTHING, db_column='advisor_second', blank=True, null=True, related_name='%(class)s_advisor_second')
-    broken_contract = models.DateTimeField(blank=True, null=True)
-    document_left = models.DateTimeField(blank=True, null=True)
-    comments = models.CharField(max_length=1000, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'hiring'
-
-
-class Phone(models.Model):
-    id = models.IntegerField(primary_key=True)
-    phone = models.CharField(max_length=15, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'phone'
-
-
-class Requirement(models.Model):
-    id = models.IntegerField(primary_key=True)
-    workload = models.IntegerField(blank=True, null=True)
-    work_shift = models.CharField(max_length=20, blank=True, null=True)
-    additional_information = models.CharField(max_length=500, blank=True, null=True)
-    minimun_period = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'requirement'
-
-
-class Review(models.Model):
-    id = models.IntegerField(primary_key=True)
-    destiny = models.IntegerField(blank=True, null=True)
-    stars = models.IntegerField(blank=True, null=True)
-    feedback = models.CharField(max_length=500, blank=True, null=True)
-    company_cnpj = models.ForeignKey(Company, models.DO_NOTHING, db_column='company_cnpj', blank=True, null=True)
-    hiring = models.ForeignKey(Hiring, models.DO_NOTHING, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'review'
-
-
-class Role(models.Model):
-    id = models.IntegerField(primary_key=True)
-    label = models.CharField(max_length=45, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'role'
-
-
-class Student(models.Model):
-    cpf = models.IntegerField(primary_key=True)
-    first_name = models.CharField(max_length=45, blank=True, null=True)
-    email = models.EmailField()  
-    full_name = models.CharField(max_length=200, blank=True, null=True)
-    regular_student = models.IntegerField(blank=True, null=True)
-    address = models.ForeignKey(Address, models.DO_NOTHING, blank=True, null=True)
-    registration_number = models.CharField(max_length=20, blank=True, null=True)
-    course = models.ForeignKey(Course, models.DO_NOTHING, db_column='course', blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'student'
-
-
-class StudentHasPhone(models.Model):
-    student = models.ForeignKey(Student, models.DO_NOTHING, primary_key=True)
-    phone = models.ForeignKey(Phone, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'student_has_phone'
-        unique_together = (('student', 'phone'),)
-
-
-class User(models.Model):
-    id = models.IntegerField(primary_key=True)
-    email = models.CharField(max_length=45, blank=True, null=True)
-    password = models.CharField(max_length=45, blank=True, null=True)
-    tp_user = models.ForeignKey(Role, models.DO_NOTHING, db_column='tp_user', blank=True, null=True)
-    #student_cpf = models.ForeignKey(Student, models.DO_NOTHING, db_column='student_cpf')
-
-    class Meta:
-        managed = False
-        db_table = 'user'
-
-
-class VacantJob(models.Model):
-    id = models.IntegerField(primary_key=True)
-    role = models.CharField(max_length=200, blank=True, null=True)
-    createdat = models.DateTimeField(db_column='createdAt', blank=True, null=True)  # Field name made lowercase.
-    updateat = models.DateTimeField(db_column='updateAt', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'vacant_job'
-
-
-class VacantJobHasCourse(models.Model):
-    vacant_job = models.ForeignKey(VacantJob, models.DO_NOTHING, primary_key=True)
-    course = models.ForeignKey(Course, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'vacant_job_has_course'
-        unique_together = (('vacant_job', 'course'),)
-
-
-class VacantJobHasRequirement(models.Model):
-    vacant_job = models.ForeignKey(VacantJob, models.DO_NOTHING, primary_key=True)
-    requirement = models.ForeignKey(Requirement, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'vacant_job_has_requirement'
-        unique_together = (('vacant_job', 'requirement'),)
+        db_table = 'vaga'
+        verbose_name = 'Vaga'
+        verbose_name_plural = 'Vagas'
