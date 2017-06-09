@@ -53,7 +53,7 @@ class Curso(models.Model):
 
 
 class Empresa(models.Model):
-    cnpj = models.IntegerField(primary_key=True, auto_created=False)
+    cnpj = models.CharField(primary_key=True, auto_created=False, max_length=14, validators=[RegexValidator(r'^\d{14}$')])
     razao_social = models.CharField(max_length=100, blank=False)
     nome_fantasia = models.CharField(max_length=100, blank=False)
     conveniada = models.BooleanField(verbose_name='é conveniada com a UnB?',default=True, null=False)
