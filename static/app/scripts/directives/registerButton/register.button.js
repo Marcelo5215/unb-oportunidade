@@ -4,6 +4,24 @@ angular.module('unbOportunidade')
       restrict: 'A',
       link: function(scope, element, attr) {
 
+        function Usuario() {
+          return {
+            email: null,
+            password: null
+          }
+        }
+
+        function Empresa(){
+          return {
+            cnpj: null,
+            razao_social: null,
+            nome_fantasia: null,
+            conveniada: null,
+            usuario_id: null,
+            imagem: null
+          }
+        }
+
         scope.$on('toggleRegisterModal', function () {
           modalInitialization();
         });
@@ -21,6 +39,7 @@ angular.module('unbOportunidade')
               function closeModal() {
                 $uibModalInstance.close();
               }
+
             }
           });
         }
