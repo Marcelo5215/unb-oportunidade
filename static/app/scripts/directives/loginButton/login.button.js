@@ -1,5 +1,5 @@
 angular.module('unbOportunidade')
-  .directive('loginButton', function($uibModal) {
+  .directive('loginButton', function($uibModal, $state, $window, store) {
     return {
       restrict: 'A',
       link: function(scope, element, attr) {
@@ -22,7 +22,12 @@ angular.module('unbOportunidade')
               $scope.closeModal = closeModal;
 
               function login(user) {
-                jwtService.auth(user.username, user.password);
+                jwtService.auth(user.username, user.password)
+                  .then(function successCallback(response) {
+                    store.set('token', response.data.token);
+                    closeModal();
+                    $window.location.reload();
+                  });
               }
 
               function closeModal() {

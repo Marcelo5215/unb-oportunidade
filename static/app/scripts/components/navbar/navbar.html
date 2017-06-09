@@ -9,8 +9,9 @@
       <li><a href="#">Vagas</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#" login-button>Login</a></li>
-      <li><a href="#" register-button>Cadastro</a></li>
+      <li><a href="#" ng-hide="isUserLoggedIn" login-button>Login</a></li>
+      <li><a href="#" ng-hide="isUserLoggedIn" register-button>Cadastro</a></li>
+      <li><a href="#" ng-show="isUserLoggedIn" ng-click="logout()">Sair</a></li>
     </ul>
   </div>
 </nav>

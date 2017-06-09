@@ -6,24 +6,26 @@
       controller: NavbarController
     });
 
-  function NavbarController($scope, $state) {
+  function NavbarController($scope, $state, store, jwtService) {
 
-    $scope.login = login;
-    $scope.register = register;
+    $scope.isUserLoggedIn = false;
+    $scope.logout = logout;
+
+    this.$onInit = function(){
+      jwtService.verifyAuth(getCurrentToken()).then(login, logout);
+    };
 
     function login() {
-      // $state.go('login');
+      $scope.isUserLoggedIn = true;
     }
 
-    function register() {
-      // $state.go('register');
+    function logout() {
+      store.set('token', null);
+      $scope.isUserLoggedIn = false;
     }
 
-    function home() {
-      $state.go('home');
+    function getCurrentToken() {
+      return store.get('token');
     }
-
   }
-
-
 })();
