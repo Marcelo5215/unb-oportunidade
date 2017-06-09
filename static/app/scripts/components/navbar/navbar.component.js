@@ -22,12 +22,10 @@
     function logout() {
       store.set('token', null);
       $scope.isUserLoggedIn = false;
-      $state.go('home');
     }
 
     function getCurrentToken() {
       return store.get('token');
     }
-
   }
 })();
