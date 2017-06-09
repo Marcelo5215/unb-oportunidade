@@ -33,7 +33,7 @@ class EmpresaViewSet(mixins.CreateModelMixin,
     search_fields = ('nome_fantasia',)
 
 
-#Definição do filtro para URL de InteresseEmVaga. Basta acrescentar /?empresa=<cnpj>
+# Definição do filtro para URL de InteresseEmVaga. Basta acrescentar /?empresa=<cnpj>
 class InteresseEmVagaFilter(django_filters.FilterSet):
     empresa = django_filters.CharFilter(name="vaga__empresa")
 
