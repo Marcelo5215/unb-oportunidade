@@ -13,7 +13,7 @@ def caminho_imagem_empresa(instance, filename):
 
 
 def caminho_arquivo_estudante(instance, filename):
-    return 'files/vaga_{0}/{1}_{2}'.format(instance.vaga_id, instance.email, filename)
+    return 'files/vaga_{0}/{1}_{2}'.format(instance.vaga_id, instance.matricula, filename)
 
 
 class ContratoInfo(models.Model):
@@ -53,7 +53,7 @@ class Curso(models.Model):
 
 
 class Empresa(models.Model):
-    cnpj = models.IntegerField(primary_key=True, auto_created=False)
+    cnpj = models.CharField(primary_key=True, auto_created=False, max_length=14, validators=[RegexValidator(r'^\d{14}$')])
     razao_social = models.CharField(max_length=100, blank=False)
     nome_fantasia = models.CharField(max_length=100, blank=False)
     conveniada = models.BooleanField(verbose_name='é conveniada com a UnB?',default=True, null=False)
@@ -76,7 +76,7 @@ class InteresseEmVaga(models.Model):
     semestre = models.IntegerField(null=False)
     CV = models.FileField(null=False, upload_to=caminho_arquivo_estudante, validators=[validate_file_extension])
     email = models.EmailField(blank=False)
-    telefone = models.CharField(verbose_name='(xx) xxxxx-xxxx', max_length=11, validators=[RegexValidator(r'^\d{11}$')], blank=False)
+    telefone = models.CharField(max_length=11, blank=False)
 
     def __str__(self):
         return self.nome_completo
@@ -85,7 +85,7 @@ class InteresseEmVaga(models.Model):
         db_table = 'interesse_em_vaga'
         verbose_name = 'Interesse em Vaga'
         verbose_name_plural = 'Interesses em Vagas'
-        unique_together = (('vaga', 'email'),)
+        unique_together = (('vaga', 'matricula'),)
 
 
 class Turno(models.Model):
