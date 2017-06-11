@@ -42,15 +42,15 @@ angular.module('unbOportunidade')
               function submitForm() {
 
                 enterpriseService.createUser(JSON.stringify($scope.usuario), function (response) {
-
                   $scope.empresa.usuario = response.data.id;
-                  console.log($scope.empresa.usuario);
 
-                  enterpriseService.createEnterprise(JSON.stringify($scope.empresa), function (response) {
-                    console.log('CRIADO');
-                    console.log(response);
-                    closeModal();
-                  });
+                  // TODO fechar modal de usuario, logar e mostrar o form pra empresa
+
+                  // enterpriseService.createEnterprise(JSON.stringify($scope.empresa), function (response) {
+                  //   console.log('CRIADO');
+                  //   console.log(response);
+                  //   closeModal();
+                  // });
 
                 });
 
