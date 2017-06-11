@@ -6,7 +6,7 @@ function enterpriseService($http) {
   this.createUser = function (userData, callback) {
     $http({
       method: 'POST',
-      url: 'usuarios',
+      url: 'usuarios/',
       data: JSON.stringify({
         email: 'email@email.com',
         password: '123456'
@@ -17,7 +17,7 @@ function enterpriseService($http) {
   this.getAllEnterprises = function(callback) {
     $http({
       method: 'GET',
-      url: 'empresas'
+      url: 'empresas/'
     }).then(callback);
   }
 
@@ -31,7 +31,7 @@ function enterpriseService($http) {
   this.createEnterprise = function(enterpriseData, callback) {
     $http({
       method: 'ṔOST',
-      url: 'empresas',
+      url: 'empresa/s',
       data: enterpriseData
     }).then(callback);
   }

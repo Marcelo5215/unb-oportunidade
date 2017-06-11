@@ -2,11 +2,16 @@ angular.module('unbOportunidade', [
     'ui.router',
     'ui.bootstrap',
     'angular-storage',
-    'angular-jwt'
+    'angular-jwt',
+    'ngCookies'
   ])
+  .run(function run($http, $cookies) {
+    $http.defaults.headers.post['X-CSRFToken'] = $cookies.get('csrftoken');
+  })
   .config(
     ['$httpProvider', '$urlRouterProvider', '$stateProvider',
-    'jwtInterceptorProvider', appConfig]);
+      'jwtInterceptorProvider', appConfig
+    ]);
 
 function appConfig(
   $httpProvider, $urlRouterProvider, $stateProvider, jwtInterceptorProvider) {
@@ -18,12 +23,12 @@ function appConfig(
       url: '/',
       views: {
         'content@': {
-            templateUrl: 'static/app/scripts/index.html'
+          templateUrl: 'static/app/scripts/index.html'
         }
       }
     });
 
-  jwtInterceptorProvider.tokenGetter = function (store) {
+  jwtInterceptorProvider.tokenGetter = function(store) {
     return store.get('token');
   }
 
