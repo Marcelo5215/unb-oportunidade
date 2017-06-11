@@ -4,14 +4,14 @@ angular.module('unbOportunidade')
 function JWTService($http, store) {
 
   this.auth = function(username, password) {
-    return $http.post('api/api-token-auth/', { username: username, password: password });
+    return $http.post('login/', { username: username, password: password });
   };
 
   this.verifyAuth = function(token) {
-    return $http.post('api/api-token-verify/', { token: token });
+    return $http.post('token-verify/', { token: token });
   };
 
   this.refreshAuth = function(token) {
-    return $http.post('api/api-token-refresh/', { token: token });
+    return $http.post('token-refresh/', { token: token });
   };
 }

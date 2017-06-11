@@ -4,23 +4,19 @@ angular.module('unbOportunidade')
       restrict: 'A',
       link: function(scope, element, attr) {
 
-        function Usuario() {
-          return {
-            email: null,
-            password: null
-          }
-        }
+        scope.usuario = {
+          email: null,
+          password: null
+        };
 
-        function Empresa(){
-          return {
-            cnpj: null,
-            razao_social: null,
-            nome_fantasia: null,
-            conveniada: null,
-            usuario_id: null,
-            imagem: null
-          }
-        }
+        scope.empresa = {
+          cnpj: null,
+          razao_social: null,
+          nome_fantasia: null,
+          conveniada: null,
+          usuario_id: null,
+          imagem: null
+        };
 
         scope.$on('toggleRegisterModal', function () {
           modalInitialization();
@@ -33,11 +29,26 @@ angular.module('unbOportunidade')
         function modalInitialization(){
           $uibModal.open({
             templateUrl: 'static/app/scripts/directives/registerButton/register-modal.html',
-            controller: function ($scope, $uibModalInstance) {
+            controller: function ($scope, $uibModalInstance, enterpriseService) {
               $scope.closeModal = closeModal;
+              $scope.submitForm = submitForm;
 
               function closeModal() {
                 $uibModalInstance.close();
+              }
+
+              function submitForm() {
+
+                enterpriseService.createUser(JSON.stringify(scope.usuario), function (reseponse) {
+
+                  console.log(reseponse);
+
+                  // enterpriseService.createEnterprise(scope.empresa, function functionName() {
+                  //   console.log('CRIADO');
+                  // });
+
+                });
+
               }
 
             }

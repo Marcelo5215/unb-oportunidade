@@ -3,24 +3,35 @@ angular.module('unbOportunidade')
 
 function enterpriseService($http) {
 
+  this.createUser = function (userData, callback) {
+    $http({
+      method: 'POST',
+      url: 'usuarios',
+      data: JSON.stringify({
+        email: 'email@email.com',
+        password: '123456'
+      })
+    }).then(callback);
+  }
+
   this.getAllEnterprises = function(callback) {
     $http({
       method: 'GET',
-      url: '/api/empresas'
+      url: 'empresas'
     }).then(callback);
   }
 
   this.getEnterprise = function(id, callback) {
     $http({
       method: 'GET',
-      url: '/api/empresas' + id
+      url: 'empresas/' + id
     }).then(callback);
   }
 
   this.createEnterprise = function(enterpriseData, callback) {
     $http({
       method: 'ṔOST',
-      url: '/api/empresas',
+      url: 'empresas',
       data: enterpriseData
     }).then(callback);
   }
@@ -28,7 +39,7 @@ function enterpriseService($http) {
   this.updateEnterprise = function(enterpriseData, callback) {
     $http({
       method: 'PATCH',
-      url: '/api/empresas/' + enterpriseData.id,
+      url: 'empresas/' + enterpriseData.id,
       data: enterpriseData,
     }).then(callback);
   }

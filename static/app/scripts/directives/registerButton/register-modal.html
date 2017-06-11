@@ -4,29 +4,29 @@
       <h3>Registrar</h3>
     </div>
     <div class="panel-body">
-      <form id="register-form" action="" method="post" role="form">
+      <form id="register-form" ng-submit="submitForm()">
         <div class="form-group">
-          <input type="email" name="email" tabindex="1" class="form-control" placeholder="E-mail" value="">
+          <input ng-model="usuario.email" type="email" name="email" tabindex="1" class="form-control" placeholder="E-mail" value="" required="required">
         </div>
         <div class="form-group">
-          <input type="text" name="cnpj" tabindex="1" class="form-control" placeholder="CNPJ" value="">
+          <input ng-model="empresa.cnpj" type="text" name="cnpj" tabindex="1" class="form-control" placeholder="CNPJ" value="" required="required">
         </div>
         <div class="form-group">
-          <input type="text" name="razao_social" tabindex="1" class="form-control" placeholder="Razão Social" value="">
+          <input ng-model="empresa.razao_social" type="text" name="razao_social" tabindex="1" class="form-control" placeholder="Razão Social" value="" required="required">
         </div>
         <div class="form-group">
-          <input type="text" name="nome_fantasia" tabindex="1" class="form-control" placeholder="Nome Fantasia" value="">
+          <input ng-model="empresa.nome_fantasia" type="text" name="nome_fantasia" tabindex="1" class="form-control" placeholder="Nome Fantasia" value="" required="required">
         </div>
         <div class="form-group">
           <label for="conveniada">Conveniada</label>
-          <input type="checkbox" name="conveniada" tabindex="1" placeholder="conveniada" value="">
+          <input ng-model="empresa.conveniada" type="checkbox" name="conveniada" tabindex="1" placeholder="conveniada" value="">
         </div>
         <div class="form-group">
-          <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Senha">
+          <input ng-model="empresa.password" type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Senha" required="required">
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirmar senha">
-        </div>
+        </div> -->
         <div class="form-group">
           <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
