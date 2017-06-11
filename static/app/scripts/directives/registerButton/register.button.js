@@ -4,20 +4,6 @@ angular.module('unbOportunidade')
       restrict: 'A',
       link: function(scope, element, attr) {
 
-        scope.usuario = {
-          email: null,
-          password: null
-        };
-
-        scope.empresa = {
-          cnpj: null,
-          razao_social: null,
-          nome_fantasia: null,
-          conveniada: null,
-          usuario_id: null,
-          imagem: null
-        };
-
         scope.$on('toggleRegisterModal', function () {
           modalInitialization();
         });
@@ -33,19 +19,38 @@ angular.module('unbOportunidade')
               $scope.closeModal = closeModal;
               $scope.submitForm = submitForm;
 
+              $scope.usuario = {
+                email: null,
+                password: null,
+                confirm_password: null
+              };
+
+              $scope.empresa = {
+                cnpj: null,
+                razao_social: null,
+                nome_fantasia: null,
+                conveniada: false,
+                imagem: 'exemplo.png',
+                usuario: null
+              };
+
+
               function closeModal() {
                 $uibModalInstance.close();
               }
 
               function submitForm() {
 
-                enterpriseService.createUser(JSON.stringify(scope.usuario), function (reseponse) {
+                enterpriseService.createUser(JSON.stringify($scope.usuario), function (response) {
 
-                  console.log(reseponse);
+                  $scope.empresa.usuario = response.data.id;
+                  console.log($scope.empresa.usuario);
 
-                  // enterpriseService.createEnterprise(scope.empresa, function functionName() {
-                  //   console.log('CRIADO');
-                  // });
+                  enterpriseService.createEnterprise(JSON.stringify($scope.empresa), function (response) {
+                    console.log('CRIADO');
+                    console.log(response);
+                    closeModal();
+                  });
 
                 });
 
