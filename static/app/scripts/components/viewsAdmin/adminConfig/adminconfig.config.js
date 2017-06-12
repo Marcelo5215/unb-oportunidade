@@ -3,7 +3,7 @@ angular.module('unbOportunidade')
 
     $stateProvider
       .state('enterpriseData', {
-        url: '/admin/enterprise',
+        url: '/admin/empresa',
         views: {
           'content@' : {
             template: '<enterprise-data></enterprise-data>'
@@ -13,7 +13,7 @@ angular.module('unbOportunidade')
 
     $stateProvider
       .state('financialData', {
-        url: '/admin/financial',
+        url: '/admin/financeiro',
         views: {
           'content@' : {
             template: '<financial-data></financial-data>'

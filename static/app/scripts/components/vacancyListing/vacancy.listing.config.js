@@ -2,7 +2,7 @@ angular.module('unbOportunidade')
   .config(function($stateProvider) {
 
     $stateProvider.state('vacancyListing', {
-      url: '/listing',
+      url: '/listagem',
       views: {
         'content@': {
           template: '<vacancy-listing> </vacancy-listing>'

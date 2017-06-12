@@ -3,7 +3,7 @@ angular.module('unbOportunidade')
 
     $stateProvider
       .state('candidateList', {
-        url: '/admin/candidates',
+        url: '/admin/candidatos',
         views: {
           'content@' : {
             template: '<candidate-list><candidate-list>'
@@ -13,7 +13,7 @@ angular.module('unbOportunidade')
 
     $stateProvider
       .state('vacancyList', {
-        url: '/admin/vacancies',
+        url: '/admin/vagas',
         views: {
           'content@' : {
             template: '<vacancy-list><vacancy-list>'

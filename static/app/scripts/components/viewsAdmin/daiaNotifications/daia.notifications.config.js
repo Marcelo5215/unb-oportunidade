@@ -3,7 +3,7 @@ angular.module('unbOportunidade')
 
     $stateProvider
       .state('virtualQueue', {
-        url: '/admin/queue',
+        url: '/admin/fila',
         views: {
           'content@' : {
             template: '<virtual-queue></virtual-queue>'
