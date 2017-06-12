@@ -15,7 +15,7 @@ angular.module('unbOportunidade')
         function modalInitialization(){
           $uibModal.open({
             templateUrl: 'static/app/scripts/directives/registerButton/register-modal.html',
-            controller: function ($scope, $uibModalInstance, enterpriseService) {
+            controller: function ($scope, $uibModalInstance, enterpriseService, jwtService, $window, store) {
               $scope.closeModal = closeModal;
               $scope.submitForm = submitForm;
 
@@ -34,6 +34,15 @@ angular.module('unbOportunidade')
                 usuario: null
               };
 
+              isUserRegistered();
+
+              function isUserRegistered(){
+                if (store.get('token')){
+                  $scope.registerUser = false;
+                } else {
+                  $scope.registerUser = true;
+                }
+              }
 
               function closeModal() {
                 $uibModalInstance.close();
@@ -43,6 +52,9 @@ angular.module('unbOportunidade')
 
                 enterpriseService.createUser(JSON.stringify($scope.usuario), function (response) {
                   $scope.empresa.usuario = response.data.id;
+                  $scope.registerUser = false;
+                  login($scope.usuario);
+
 
                   // TODO fechar modal de usuario, logar e mostrar o form pra empresa
 
@@ -54,6 +66,14 @@ angular.module('unbOportunidade')
 
                 });
 
+              }
+
+              function login(user) {
+                jwtService.auth(user.email, user.password)
+                  .then(function(response) {
+                    store.set('token', response.data.token);
+                    $window.location.reload();
+                  });
               }
 
             }

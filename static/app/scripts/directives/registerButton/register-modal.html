@@ -5,26 +5,26 @@
     </div>
     <div class="panel-body">
       <form id="register-form" act ng-submit="submitForm()">
-        <div class="form-group">
+        <div ng-if="registerUser" class="form-group">
           <input ng-model="usuario.email" type="email" name="email" tabindex="1" class="form-control" placeholder="E-mail" value="" required="required">
         </div>
-        <!-- <div class="form-group">
+        <div ng-if="!registerUser" class="form-group">
           <input ng-model="empresa.cnpj" type="text" name="cnpj" tabindex="1" class="form-control" placeholder="CNPJ" value="" required="required">
         </div>
-        <div class="form-group">
+        <div ng-if="!registerUser" class="form-group">
           <input ng-model="empresa.razao_social" type="text" name="razao_social" tabindex="1" class="form-control" placeholder="Razão Social" value="" required="required">
         </div>
-        <div class="form-group">
+        <div ng-if="!registerUser" class="form-group">
           <input ng-model="empresa.nome_fantasia" type="text" name="nome_fantasia" tabindex="1" class="form-control" placeholder="Nome Fantasia" value="" required="required">
         </div>
-        <div class="form-group">
+        <div ng-if="!registerUser" class="form-group">
           <label for="conveniada">Conveniada</label>
           <input ng-model="empresa.conveniada" type="checkbox" name="conveniada" tabindex="1" placeholder="conveniada" value="">
-        </div> -->
-        <div class="form-group">
+        </div>
+        <div ng-if="registerUser" class="form-group">
           <input ng-model="usuario.password" type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Senha" required="required">
         </div>
-        <div class="form-group">
+        <div ng-if="registerUser" class="form-group">
           <input ng-model="usuario.confirm_password" type="password" name="confirm-password" tabindex="2" class="form-control" placeholder="Confirmar senha">
         </div>
         <div class="form-group">
