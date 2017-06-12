@@ -72,7 +72,7 @@ angular.module('unbOportunidade')
                 jwtService.auth(user.email, user.password)
                   .then(function(response) {
                     store.set('token', response.data.token);
-                    $window.location.reload();
+                    var token = store.get('token');
                   });
               }
 

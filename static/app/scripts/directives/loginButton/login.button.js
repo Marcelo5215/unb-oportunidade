@@ -24,6 +24,7 @@ angular.module('unbOportunidade')
               function login(user) {
                 jwtService.auth(user.username, user.password)
                   .then(function successCallback(response) {
+                    console.log(response);
                     store.set('token', response.data.token);
                     closeModal();
                     $window.location.reload();
