@@ -8,6 +8,10 @@
 
   function InputSearchController($scope, $state) {
 
+    $scope.search = function() {
+      $state.go('vacancyListing');
+    }
+
     $scope.cursos = {
       curso1: {
         nome: 'Ciência da Computção',

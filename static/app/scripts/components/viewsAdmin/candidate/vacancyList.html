@@ -21,12 +21,12 @@
               Meus candidatos:
             </h4>
           <div id="group-1" class="list-group collapse in">
-            <a class="list-group-item tablinks" ng-click="vacancyListState()">
-                Ver candidatos
-              </a>
             <a class="list-group-item tablinks" ng-click="candidateListState()">
-                Gerenciar vagas
-              </a>
+                  Ver candidatos
+                </a>
+            <a class="list-group-item tablinks" ng-click="vacancyListState()">
+                  Gerenciar vagas
+                </a>
           </div>
         </div>
         <div>
@@ -57,7 +57,7 @@
             <a class="list-group-item tablinks" ng-click="financialDataState()">
                 Dados financeiros
               </a>
-            <a class="list-group-item tablinks" >
+            <a class="list-group-item tablinks">
                 Opções de lorem ipsum
               </a>
           </div>
@@ -65,6 +65,9 @@
       </div>
 
       <div class="col-xs-10 table-responsive">
+        <div class="btn-group">
+          <button ng-click="vacancyRegisterState()" type="button" name="button" class="btn btn-success">Cadastrar vaga</button>
+        </div>
         <table class="table table-striped tabcontent" id="vacancies">
           <thead>
             <tr>
@@ -73,6 +76,7 @@
               <th>Remuneração</th>
               <th>Carga Horaria</th>
               <th>Turno</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -82,6 +86,12 @@
               <td>R$ 1000,00</td>
               <td>30</td>
               <td>Matutino</td>
+              <td>
+                <div class="btn-group">
+                  <button ng-click="vacancyRegisterState(1)" ng-click="" type="button" name="button" class="btn btn-sm btn-warning">Editar</button>
+                  <button ng-click="candidateListState(1)" ng-click="" type="button" name="button" class="btn btn-sm btn-primary">Candidatos</button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>Programador</td>
@@ -89,6 +99,12 @@
               <td>R$ 800,00</td>
               <td>20</td>
               <td>Noturno</td>
+              <td>
+                <div class="btn-group">
+                  <button ng-click="vacancyRegisterState(2)" ng-click="" type="button" name="button" class="btn btn-sm btn-warning">Editar</button>
+                  <button ng-click="candidateListState(2)" ng-click="" type="button" name="button" class="btn btn-sm btn-primary">Candidatos</button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>Tecnico de farmacos</td>
@@ -96,6 +112,12 @@
               <td>R$ 1000,00</td>
               <td>30</td>
               <td>Noturno</td>
+              <td>
+                <div class="btn-group">
+                  <button ng-click="vacancyRegisterState(3)" ng-click="" type="button" name="button" class="btn btn-sm btn-warning">Editar</button>
+                  <button ng-click="candidateListState(3)" ng-click="" type="button" name="button" class="btn btn-sm btn-primary">Candidatos</button>
+                </div>
+              </td>
             </tr>
             <tr>
               <td>Gestão de Pol. Publicas</td>
@@ -103,6 +125,12 @@
               <td>R$ 800,00</td>
               <td>20</td>
               <td>Vespertino</td>
+              <td>
+                <div class="btn-group">
+                  <button ng-click="vacancyRegisterState(4)" ng-click="" type="button" name="button" class="btn btn-sm btn-warning">Editar</button>
+                  <button ng-click="candidateListState(4)" ng-click="" type="button" name="button" class="btn btn-sm btn-primary">Candidatos</button>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
