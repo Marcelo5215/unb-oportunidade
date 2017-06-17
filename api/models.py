@@ -56,7 +56,7 @@ class Empresa(models.Model):
     cnpj = models.CharField(primary_key=True, auto_created=False, max_length=14, validators=[RegexValidator(r'^\d{14}$')])
     razao_social = models.CharField(max_length=100, blank=False)
     nome_fantasia = models.CharField(max_length=100, blank=False)
-    conveniada = models.BooleanField(verbose_name='é conveniada com a UnB?',default=True, null=False)
+    conveniada = models.BooleanField(verbose_name='É conveniada com a UnB?', default=False, null=False)
     usuario = models.OneToOneField('Usuario', on_delete=models.CASCADE)
     imagem = models.ImageField(upload_to=caminho_imagem_empresa, default='media/unb.jpg')
 
