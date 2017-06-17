@@ -6,11 +6,12 @@
       controller: VacancyListingController
     });
 
-  function VacancyListingController($scope) {
+  function VacancyListingController($scope, $state) {
     $scope.vacancies = [];
     $scope.areas = [];
     $scope.getVacancies = getVacancies;
     $scope.getAreas = getAreas;
+    $scope.vacancyDetail = vacancyDetail;
 
 
     function getVacancies() {
@@ -19,6 +20,10 @@
 
     function getAreas() {
       $scope.areas = apiCallToGetAreas();
+    }
+
+    function vacancyDetail(id) {
+      $state.go('vacancyDetail', { id: id });
     }
 
     /* This will be retrieved from an api */
