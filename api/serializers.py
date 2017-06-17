@@ -52,7 +52,7 @@ class EmpresaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Empresa
-        fields = '__all__'
+        fields = ('cnpj', 'razao_social', 'nome_fantasia', 'usuario', 'imagem')
 
 
 class InteresseEmVagaSerializer(serializers.ModelSerializer):
