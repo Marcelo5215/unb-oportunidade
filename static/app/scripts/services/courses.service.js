@@ -4,7 +4,7 @@ angular.module('unbOportunidade')
 function CoursesService($http) {
 
   this.all = function() {
-    return $http.get('api/cursos');
+    return $http.get('api/cursos/');
   };
 
   this.one = function(id) {

@@ -16,8 +16,8 @@ function SignupController($scope){
       $scope.data = {
         singleSelect: null,
         multipleSelect: [],
-        option1: 'adm'
-        option2: 'cic'
+        option1: 'adm',
+        option2: 'cic',
         option3 : 'bib'
        };
 
@@ -28,9 +28,10 @@ function SignupController($scope){
 
                     var data = e.target.result;
 
-              }
+              };
               r.readAsBinaryString(f);
             }
 
 
-}
+  }
+});

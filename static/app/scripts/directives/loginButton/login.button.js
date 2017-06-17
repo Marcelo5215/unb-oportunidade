@@ -22,7 +22,7 @@ angular.module('unbOportunidade')
               $scope.closeModal = closeModal;
 
               function login(user) {
-                jwtService.auth(user.username, user.password)
+                jwtService.auth(user.email, user.password)
                   .then(function successCallback(response) {
                     console.log(response);
                     store.set('token', response.data.token);
