@@ -17,3 +17,4 @@ api/migrations/
 
 # End of https://www.gitignore.io/api/django
 !/api/migrations/__init__.py
+!/media/unb.jpg
