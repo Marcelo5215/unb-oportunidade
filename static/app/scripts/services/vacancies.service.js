@@ -33,4 +33,20 @@ function VacanciesService($http) {
     return $http.get('api/vagas/?is_ativa=true&curso=' + course_id + '&empresa=' + enterprise_id);
   };
 
+  this.createVacancy = function(vacancyData, callback) {
+    $http({
+      method: 'POST',
+      url: 'api/vagas/',
+      data: vacancyData
+    }).then(callback);
+  };
+
+  this.updateVacancy = function(vacancyData, callback) {
+    $http({
+      method: 'PATCH',
+      url: 'api/vagas/' + vacancyData.id,
+      data: vacancyData
+    }).then(callback);
+  };
+
 }
