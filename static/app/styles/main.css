@@ -27,14 +27,15 @@
 
 
 footer{
-  background: #f7f7f7;
-  padding: 60px 20px;
+  bottom: 0px;
+  
+  background-color: rgb(255,255,255) !important;
 }
 footer ul, footer p{
   margin-bottom: 0;
 }
 footer .footer-block{
-  margin-bottom: 30px;
+  
 }
 footer a{
   color: #188b87;
@@ -87,6 +88,8 @@ footer .social-icon a{
   padding: 16px;
   background-color: white;
   border-radius: 5px;
+
+  margin-bottom: 30px;
   b-webkit-box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
   -moz-box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);
   box-shadow: 9px 10px 69px -12px rgba(0,0,0,0.75);

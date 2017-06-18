@@ -1,15 +1,20 @@
-<div class="row">
-  <form class="busca-interesse col-sm-12">
-    <div class="input-group col-sm-6 col-sm-offset-3">
-      <button type="button" class="btn btn-secondary dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Area de interesse
-      </button>
-      <ul class="dropdown-menu" style="width: 93%">
-        <li ng-repeat="curso in cursos"><a href="#">{{curso.nome}}</a></li>
-      </ul>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-primary" ng-click="search()">Buscar</button>
-      </div>
+
+
+<div class="container">
+<form class="busca-interesse">
+  <div class="input-group col-md-6">
+    <button type="button" class="btn btn-secondary dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="pull-left">Pesquisar por area de interesse</span>
+
+    </button>
+    <ul class="dropdown-menu" style="width: 93%">
+      <li ng-repeat="curso in cursos"><a href="#">{{curso.nome}}</a></li>
+    </ul>
+    <div class="input-group-btn">
+      <button type="button" class="btn btn-primary" ng-click="search()">Buscar</button>
     </div>
-  </form>
+  </div>
+</form>
 </div>
+<br/>
+
