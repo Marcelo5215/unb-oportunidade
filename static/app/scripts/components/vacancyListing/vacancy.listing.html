@@ -23,28 +23,28 @@
     </div>
 
       <!-- Vacancy Listing -->
-  <div class="col-xs-9" ng-init="getVacancies()">
+  <div class="col-xs-9" ng-init="listVacancies()">
         <div class="row" ng-repeat="vacancy in vacancies">
           <div class="panel panel-primary">
                   <div class="panel-heading">{{vacancy.course}}</div>
-                  <div class="panel-body">     
+                  <div class="panel-body">
                   <div class="pull-left"><img width="300px" height="300px" class="img-thumbnail" src ="http://www.belasartes.br/images/destaques/novo/1451.jpg"></div>
-                                 
+
                     <ul class="detalhes-vaga">
                       <li><strong>Bolsa:</strong><span style="color:green"> {{vacancy.payment}} </span> </li>
                       <li><strong>Local: </strong>{{vacancy.localization}} / </li>
                       <li><strong>Semestres: </strong>{{vacancy.semester}} / </li>
-                      
+
                       <li><strong>Período: </strong>{{vacancy.period}} / </li>
                       <li><strong>Requisitos: </strong>{{vacancy.requirements}} </li>
                       <li><strong>Contato: </strong>{{vacancy.email}} </li>
                     </ul>
                   </div>
-                  
+
 
 
 
           </div>
         </div>
-  </div> 
+  </div>
 </section>

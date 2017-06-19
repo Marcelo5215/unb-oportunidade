@@ -1,7 +1,8 @@
 angular.module('unbOportunidade')
   .config(function($stateProvider) {
 
-    $stateProvider.state('vacancyDetail', {
+    $stateProvider
+      .state('vacancyDetail', {
         url: '/vagas/:id/detalhes',
         views: {
           'content@': {

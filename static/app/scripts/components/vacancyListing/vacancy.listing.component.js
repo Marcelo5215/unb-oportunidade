@@ -6,17 +6,12 @@
       controller: VacancyListingController
     });
 
-  function VacancyListingController($scope, $state) {
+  function VacancyListingController($scope, $state, vacanciesService) {
     $scope.vacancies = [];
     $scope.areas = [];
-    $scope.getVacancies = getVacancies;
+    $scope.listVacancies = listVacancies;
     $scope.getAreas = getAreas;
     $scope.vacancyDetail = vacancyDetail;
-
-
-    function getVacancies() {
-      $scope.vacancies = apiCallToGetVacancies();
-    }
 
     function getAreas() {
       $scope.areas = apiCallToGetAreas();
@@ -24,6 +19,13 @@
 
     function vacancyDetail(id) {
       $state.go('vacancyDetail', { id: id });
+    }
+
+    function listVacancies(){
+      vacanciesService.getAllActiveVacancies()
+        .then(function(response) {
+          $scope.vacancies = response.data;
+        });
     }
 
     /* This will be retrieved from an api */

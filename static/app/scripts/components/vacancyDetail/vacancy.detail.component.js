@@ -8,8 +8,6 @@
 
   function VacancyDetailController($scope) {
 
-
-
   }
 
 })();
