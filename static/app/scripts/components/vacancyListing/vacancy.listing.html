@@ -3,48 +3,55 @@
     <!-- Title -->
     <!-- Filter - Interest area -->
     <div class="row">
-    <div class="col-sm-3">
-      <div class="panel panel-info" ng-init="getAreas()">
-      <div class="panel-heading">
-        <h4 data-toggle="collapse" data-target="#group-1">
+      <div class="col-sm-3">
+        <div class="panel panel-info" ng-init="getAreas()">
+          <div class="panel-heading">
+            <h4 data-toggle="collapse" data-target="#group-1">
           <i class="fa fa-fw fa-caret-down parent-expanded"></i>
           <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
           Áreas de interesse <span class="pull-right glyphicon glyphicon-plus"></span>
         </h4>
-        </div>
-        <div class="panel-body" id="group-1">
-        <div class="list-group">
-          <a class="list-group-item" href="" ng-repeat="area in areas">
-            <span class="badge">{{area.numOffers}}</span> {{area.course}}
-          </a>
-        </div>
-        </div>
-      </div>
-    </div>
-
-      <!-- Vacancy Listing -->
-  <div class="col-xs-9" ng-init="listVacancies()">
-        <div class="row" ng-repeat="vacancy in vacancies">
-          <div class="panel panel-primary">
-                  <div class="panel-heading">{{vacancy.course}}</div>
-                  <div class="panel-body">
-                  <div class="pull-left"><img width="300px" height="300px" class="img-thumbnail" src ="http://www.belasartes.br/images/destaques/novo/1451.jpg"></div>
-
-                    <ul class="detalhes-vaga">
-                      <li><strong>Bolsa:</strong><span style="color:green"> {{vacancy.payment}} </span> </li>
-                      <li><strong>Local: </strong>{{vacancy.localization}} / </li>
-                      <li><strong>Semestres: </strong>{{vacancy.semester}} / </li>
-
-                      <li><strong>Período: </strong>{{vacancy.period}} / </li>
-                      <li><strong>Requisitos: </strong>{{vacancy.requirements}} </li>
-                      <li><strong>Contato: </strong>{{vacancy.email}} </li>
-                    </ul>
-                  </div>
-
-
-
-
+          </div>
+          <div class="panel-body" id="group-1">
+            <div class="list-group">
+              <a class="list-group-item" href="" ng-repeat="area in areas">
+                <span class="badge">{{area.numOffers}}</span> {{area.course}}
+              </a>
+            </div>
           </div>
         </div>
-  </div>
+      </div>
+
+      <!-- Vacancy Listing -->
+      <div class="col-xs-9" ng-init="listVacancies()">
+        <div class="row" ng-repeat="vacancy in vacancies">
+          <div class="panel panel-primary">
+            <div class="panel-heading">{{vacancy.course}}</div>
+            <div class="panel-body">
+              <div class="pull-left">
+                <img width="300px" height="300px" class="img-thumbnail" src="http://www.belasartes.br/images/destaques/novo/1451.jpg">
+              </div>
+              <ul class="detalhes-vaga">
+                <li>
+                  <strong>Local: </strong>
+                  {{vacancy.titulo}}
+                </li>
+                <li>
+                  <strong>Descrição: </strong>
+                  {{vacancy.descricao}}
+                </li>
+                <li>
+                  <strong>Semestre mínimo: </strong>
+                  {{vacancy.semestre_minimo}}
+                </li>
+                <li>
+                  <strong>Empresa: </strong>
+                  {{vacancy.empresa}}
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
 </section>

@@ -25,6 +25,7 @@
       vacanciesService.getAllActiveVacancies()
         .then(function(response) {
           $scope.vacancies = response.data;
+          console.log(response);
         });
     }
 
