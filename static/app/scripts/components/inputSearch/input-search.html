@@ -1,19 +1,26 @@
-
-
-<div class="container">
-  <form class="busca-interesse">
-    <div class="input-group">
-      <button type="button" class="btn btn-secondary dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="pull-left">Pesquisar por area de interesse</span>
-
-      </button>
-      <ul class="dropdown-menu" style="width: 93%">
-        <li ng-repeat="curso in cursos"><a href="#">{{curso.nome}}</a></li>
-      </ul>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-primary" ng-click="search()">Buscar</button>
-      </div>
+<div class="container" ng-init="listCourses()">
+  <div class="row">
+    <div class="col-md-11">
+      <select class="form-control" name="" ng-model="selectedCourse">
+        <option value="">-- Pesquisar por area de interesse --</option>
+        <option value="{{course}}" ng-repeat="course in courses">{{course.nome}}</option>
+      </select>
     </div>
-  </form>
+    <div class="col-md-1">
+      <button class="btn btn-primary" type="button" name="button" ng-click="search()">Buscar</button>
+    </div>
+  </div>
+  <!-- <div class="input-group" ng-init="listCourses()">
+    <button type="button" class="btn btn-secondary dropdown-toggle form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span>Pesquisar por area de interesse</span>
+    </button>
+    <ul class="dropdown-menu" style="width: 93%">
+      <li ng-repeat="course in courses">
+        <a ng-click="search(course.id)">{{course.nome}}</a>
+      </li>
+    </ul> -->
+    <!-- <div class="input-group-btn">
+      <button type="button" class="btn btn-primary" ng-click="search()">Buscar</button>
+    </div> -->
 </div>
 <br/>

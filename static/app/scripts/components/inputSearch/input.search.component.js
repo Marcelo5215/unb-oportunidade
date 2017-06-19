@@ -6,25 +6,22 @@
       controller: InputSearchController
     });
 
-  function InputSearchController($scope, $state) {
+  function InputSearchController($scope, $state, coursesService) {
 
-    $scope.search = function() {
-      $state.go('vacancyListing');
+    $scope.listCourses = listCourses;
+    $scope.search = search;
+    $scope.selectedCourse;
+
+    function search() {
+      var course =  JSON.parse($scope.selectedCourse);
+      $state.go('vacancyListing', { curso: course.id });
     }
 
-    $scope.cursos = {
-      curso1: {
-        nome: 'Ciência da Computção',
-        sigla: 'CIC'
-      },
-      curso2: {
-        nome: 'Psicologia',
-        sigla: 'PSI'
-      },
-      curso3: {
-        nome: 'Engenharia da Computação',
-        sigla: 'ENC'
-      }
+    function listCourses() {
+      coursesService.all()
+        .then(function(response) {
+          $scope.courses = response.data;
+        });
     }
 
   }
